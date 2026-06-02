@@ -1,6 +1,6 @@
 #Write a Python program to create a calculator using functions.
 
-# Calculator functions
+
 def add(a, b):
     return a + b
 
@@ -14,13 +14,25 @@ def divide(a, b):
     if b != 0:
         return a / b
     else:
-        return "Cannot divide by zero"
+        return "Error: Division by zero is not allowed."
+    
+# Get user input for the operation and numbers
 
-# Example usage
-num1 = 15
-num2 = 3
+num1 = float(input("Enter the first number: "))
+operation = input("Enter the operation (+, -, *, /): ")
+num2 = float(input("Enter the second number: "))
 
-print("Add:", add(num1, num2))
-print("Subtract:", subtract(num1, num2))
-print("Multiply:", multiply(num1, num2))
-print("Divide:", divide(num1, num2))
+# Perform the selected operation
+if operation == "+":
+    result = add(num1, num2)
+elif operation == "-":
+    result = subtract(num1, num2)   
+elif operation == "*":
+    result = multiply(num1, num2)
+elif operation == "/":
+    result = divide(num1, num2)
+else:
+    result = "Invalid operation."
+
+# Print the result
+print("Result:", result)
