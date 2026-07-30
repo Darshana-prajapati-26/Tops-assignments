@@ -1,0 +1,62 @@
+<!-- Q3:  Create an HTML file named insta-bio.html and use the <script> tag to display an alert
+          with the message 'Welcome to your Insta Bio-Link Page!' when the page loads.
+
+     Q7 & Q8: Add a <button> to your HTML file labeled 'Show Bio', and use JavaScript inside a
+              <script> tag to display an alert with your name and favorite app when the button is clicked.
+
+     Q9:  Modify your insta-bio.html file to add a <button> labeled 'Show Greeting'.
+          When the button is clicked, use JavaScript to show an alert that says 'Hello from JS!'.
+          Hint: Use document.querySelector and addEventListener to connect the button with your JS code.
+
+     Q10 & Q11: Edit your HTML file to include a <h2> tag with the text 'Top 3 Food Apps'.
+                Use JavaScript in a <script> tag to change the color of this heading to green when the page loads.
+                Hint: Use document.querySelector to select the heading and style.color to change its color.
+
+     Q12: Use VS Code Live Server to open your insta-bio.html file, then change the alert
+          message to include your own name and refresh to see the update. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta Bio-Link Page</title>
+</head>
+<body>
+
+    <h1>Insta Bio-Link Page</h1>
+
+    <!-- Q7 & Q8: Button labeled 'Show Bio' -->
+    <button id="showBioBtn">Show Bio</button>
+
+    <br><br>
+
+    <!-- Q9: Button labeled 'Show Greeting' -->
+    <button id="showGreetingBtn">Show Greeting</button>
+
+    <br><br>
+
+    <!-- Q10 & Q11: h2 heading - color changed to green by JavaScript on page load -->
+    <h2 id="foodHeading">Top 3 Food Apps</h2>
+
+    <script>
+        // Q3: Alert when the page loads
+        // Q12: Change the message below to include your own name and save to see the update via Live Server
+        alert('Welcome to your Insta Bio-Link Page! My name is Darshana.');
+
+        // Q7 & Q8: Show Bio button - alert with name and favourite app
+        document.getElementById('showBioBtn').addEventListener('click', function() {
+            alert('My name is Darshana and my favourite app is Instagram!');
+        });
+
+        // Q9: Show Greeting button - using querySelector and addEventListener
+        document.querySelector('#showGreetingBtn').addEventListener('click', function() {
+            alert('Hello from JS!');
+        });
+
+        // Q10 & Q11: Change heading color to green when the page loads
+        document.querySelector('#foodHeading').style.color = 'green';
+    </script>
+
+</body>
+</html>
