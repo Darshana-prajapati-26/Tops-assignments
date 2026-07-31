@@ -1,0 +1,63 @@
+<!-- 
+15.
+Write a function displayProfile that takes a userName and
+followers as parameters and prints a formatted string like
+'Aarya has 1500 followers' to the console. Call this function with 
+ your own details.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Q15 - displayProfile Function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .output {
+            background: #fff;
+            border-left: 4px solid #009688;
+            padding: 12px 16px;
+            margin-top: 16px;
+            border-radius: 4px;
+        }
+
+        .output p {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Q15 - displayProfile Function</h2>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        function displayProfile(userName, followers) {
+            const message = `${userName} has ${followers} followers`;
+
+            // Display in console
+            console.log(message);
+
+            // Display on page
+            document.getElementById("output").innerHTML = `<p>${message}</p>`;
+        }
+
+        // Calling the function with custom details
+        displayProfile("Arya", 1500);
+        displayProfile("Darshana", 2000);
+    </script>
+</body>
+
+</html>

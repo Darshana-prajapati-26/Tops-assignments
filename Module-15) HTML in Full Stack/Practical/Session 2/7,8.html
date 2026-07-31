@@ -1,0 +1,73 @@
+<!-- 
+Q7: Use const to create favoriteSongs array, add a 4th song with push(), print the array.
+    Explain why this works with const.
+Q8: Same as Q7 — also shows what happens when you try to REASSIGN the const array (error).
+    Hint: const prevents reassignment, not mutation of array contents.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q7 & Q8 - const Array Mutation vs Reassignment</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #9C27B0; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .error { color: red; font-weight: bold; }
+        .note { color: #666; font-style: italic; }
+        .section { margin-top: 20px; }
+        h3 { color: #9C27B0; }
+    </style>
+</head>
+<body>
+    <h2>Q7 & Q8 - const with Arrays</h2>
+
+    <div class="section">
+        <h3>Q7 - const array + push()</h3>
+        <div class="output" id="q7output"></div>
+    </div>
+
+    <div class="section">
+        <h3>Q8 - Attempting Reassignment of const array</h3>
+        <div class="output" id="q8output"></div>
+    </div>
+
+    <script>
+        // ---- Q7: const array + push() ----
+        const favoriteSongs = ["Kesariya", "Tum Hi Ho", "Raataan Lambiyan"];
+        console.log("Q7 - Initial array:", favoriteSongs);
+
+        favoriteSongs.push("Tera Ban Jaunga");
+        console.log("Q7 - After push():", favoriteSongs);
+
+        // WHY does this work with const?
+        // const means the variable always points to the SAME array in memory.
+        // push() mutates the array contents — it does NOT reassign the variable.
+        // const only blocks REASSIGNMENT, not MUTATION.
+
+        document.getElementById("q7output").innerHTML = `
+            <p><span class="label">Initial songs:</span> Kesariya, Tum Hi Ho, Raataan Lambiyan</p>
+            <p><span class="label">After push():</span> ${favoriteSongs.join(", ")}</p>
+            <p class="note">Why it works: const prevents reassignment, not mutation. push() only adds to the existing array — it doesn't reassign the variable.</p>
+        `;
+
+        // ---- Q8: Attempting REASSIGNMENT of a const array ----
+        let errorMsg = "";
+        try {
+            favoriteSongs = ["New Song 1", "New Song 2"]; // TypeError
+        } catch (error) {
+            errorMsg = error.message;
+            console.error("Q8 - Error on reassignment:", errorMsg);
+        }
+
+        document.getElementById("q8output").innerHTML = `
+            <p class="error">Error on reassignment: ${errorMsg}</p>
+            <p><span class="label">Array after attempted reassignment:</span> ${favoriteSongs.join(", ")}</p>
+            <p class="note">const blocks reassignment — you cannot make the variable point to a new array.</p>
+        `;
+    </script>
+</body>
+</html>

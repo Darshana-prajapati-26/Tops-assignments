@@ -1,0 +1,60 @@
+<!-- 
+Q4: Declare a variable using var to store the name of your favorite food delivery app.
+    Reassign it and print both values to show var allows reassignment.
+Q5: Same as Q4 — also shows var allows redeclaration.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q4 & Q5 - var Reassignment & Redeclaration</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #FF9800; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .section { margin-top: 20px; }
+        h3 { color: #FF9800; }
+    </style>
+</head>
+<body>
+    <h2>Q4 & Q5 - var Reassignment & Redeclaration</h2>
+
+    <div class="section">
+        <h3>Q4 - var Reassignment</h3>
+        <div class="output" id="q4output"></div>
+    </div>
+
+    <div class="section">
+        <h3>Q5 - var Redeclaration</h3>
+        <div class="output" id="q5output"></div>
+    </div>
+
+    <script>
+        // ---- Q4: var REASSIGNMENT ----
+        var favoriteApp = "Zomato";
+        console.log("Q4 - Initial value:", favoriteApp);
+
+        favoriteApp = "Swiggy"; // reassigning to a new value
+        console.log("Q4 - After reassignment:", favoriteApp);
+
+        document.getElementById("q4output").innerHTML = `
+            <p><span class="label">Initial value:</span> Zomato</p>
+            <p><span class="label">After reassignment:</span> ${favoriteApp}</p>
+        `;
+
+        // ---- Q5: var REDECLARATION ----
+        var favoriteApp = "Blinkit"; // redeclaring the same variable — only var allows this
+        console.log("Q5 - After redeclaration:", favoriteApp);
+
+        // NOTE: let and const do NOT allow redeclaration — they would throw an error.
+        // var is function-scoped and allows both reassignment and redeclaration.
+        document.getElementById("q5output").innerHTML = `
+            <p><span class="label">After redeclaration:</span> ${favoriteApp}</p>
+            <p><em>Note: var allows redeclaration. let and const do not.</em></p>
+        `;
+    </script>
+</body>
+</html>

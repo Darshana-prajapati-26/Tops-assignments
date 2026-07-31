@@ -1,0 +1,78 @@
+<!-- 
+Q13 & Q14: Write a function showProfile that takes name, followers, and isPremium as arguments.
+Inside the function, use dynamic typing to assign a string to followers, then a number,
+and print the type of followers each time using typeof.
+Note: Q13 and Q14 are identical questions — same answer applies.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q13 & Q14 - Dynamic Typing with typeof</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2, h3 { color: #3F51B5; }
+        .output {
+            background: #fff;
+            border-left: 4px solid #3F51B5;
+            padding: 12px 16px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .type { color: #3F51B5; font-weight: bold; }
+        .note { color: #888; font-style: italic; margin-top: 8px; }
+        .section { margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <h2>Q13 & Q14 - Dynamic Typing with typeof</h2>
+
+    <div class="section">
+        <h3>Q13 — showProfile("Aryan", 5000, true)</h3>
+        <div class="output" id="q13output"></div>
+    </div>
+
+    <div class="section">
+        <h3>Q14 — Same function, same concept (duplicate of Q13)</h3>
+        <div class="output" id="q14output"></div>
+    </div>
+
+    <script>
+        function showProfile(name, followers, isPremium, outputId) {
+
+            // Step 1: print the original arguments
+            console.log("--- showProfile called ---");
+            console.log("Name:", name);
+            console.log("isPremium:", isPremium);
+            console.log("followers (initial):", followers, "| type:", typeof followers);
+
+            let result = `<p><span class="label">Name:</span> ${name}</p>`;
+            result += `<p><span class="label">isPremium:</span> ${isPremium}</p>`;
+            result += `<p><span class="label">followers (initial):</span> ${followers} &nbsp;|&nbsp; <span class="type">type: ${typeof followers}</span></p>`;
+
+            // Step 2: dynamic typing — reassign followers to a STRING
+            followers = "one thousand";
+            console.log("followers (string):", followers, "| type:", typeof followers);
+            result += `<p><span class="label">followers (string):</span> ${followers} &nbsp;|&nbsp; <span class="type">type: ${typeof followers}</span></p>`;
+
+            // Step 3: dynamic typing — reassign followers to a NUMBER
+            followers = 1000;
+            console.log("followers (number):", followers, "| type:", typeof followers);
+            result += `<p><span class="label">followers (number):</span> ${followers} &nbsp;|&nbsp; <span class="type">type: ${typeof followers}</span></p>`;
+
+            result += `<p class="note">JavaScript is dynamically typed — the same variable can hold different types at runtime.</p>`;
+
+            document.getElementById(outputId).innerHTML = result;
+        }
+
+        // Q13 — calling the function
+        showProfile("Aryan", 5000, true, "q13output");
+
+        // Q14 — same function call (identical question)
+        showProfile("darshana", 6000, false, "q14output");
+    </script>
+</body>
+</html>

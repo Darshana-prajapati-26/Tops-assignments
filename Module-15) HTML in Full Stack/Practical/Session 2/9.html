@@ -1,0 +1,49 @@
+<!-- 
+9.
+Build a JavaScript object called spotifyProfile with properties: 
+userName (string), playlists (array of strings), and isPremium (boolean). 
+Log the object and access the playlists property in the console.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q9 - Spotify Profile Object</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #1DB954; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        ul { margin: 4px 0 4px 20px; }
+    </style>
+</head>
+<body>
+    <h2>Q9 - Spotify Profile Object</h2>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        const spotifyProfile = {
+            userName: "Darshana",
+            playlists: ["Chill Vibes", "Workout Hits", "Late Night Feelings"],
+            isPremium: true
+        };
+
+        // Display in console
+        console.log("Spotify Profile:", spotifyProfile);
+        console.log("Playlists:", spotifyProfile.playlists);
+
+        // Display on page
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">Username:</span> ${spotifyProfile.userName}</p>
+            <p><span class="label">Is Premium:</span> ${spotifyProfile.isPremium}</p>
+            <p><span class="label">Playlists:</span></p>
+            <ul>
+                ${spotifyProfile.playlists.map(p => `<li>${p}</li>`).join("")}
+            </ul>
+        `;
+    </script>
+</body>
+</html>

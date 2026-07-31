@@ -1,0 +1,76 @@
+<!-- 
+10.
+Create two variables: let user1 = 'Priya' and let user2 = user1. Change user1 to 'Riya' and print both variables.
+Then, create two arrays: let favApps1 = ['Instagram', 'Spotify'] and let favApps2 = favApps1. Push 'Zomato' to favApps1 
+and print both arrays. Observe and comment on the difference in behavior between primitive and reference types.
+11.
+Create two variables: let user1 = 'Priya' and let user2 = user1.
+Change user1 to 'Riya' and print both variables.
+Then, create two arrays: let favApps1 = ['Instagram', 'Spotify'] and let favApps2 = favApps1.
+Push 'Zomato' to favApps1 and print both arrays.
+Observe and comment on the difference in behavior between primitive and reference types.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q10 & Q11 - Primitive vs Reference Types</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #F44336; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .note { color: #666; font-style: italic; }
+        .section { margin-top: 20px; }
+        h3 { color: #F44336; }
+    </style>
+</head>
+<body>
+    <h2>Q10 & Q11 - Primitive vs Reference Types</h2>
+
+    <div class="section">
+        <h3>Primitive Type (string)</h3>
+        <div class="output" id="primitiveOutput"></div>
+    </div>
+
+    <div class="section">
+        <h3>Reference Type (array)</h3>
+        <div class="output" id="referenceOutput"></div>
+    </div>
+
+    <script>
+        // --- PRIMITIVE TYPE (string) ---
+        let user1 = "Priya";
+        let user2 = user1; // copy by VALUE
+
+        user1 = "Riya"; // changing user1 does NOT affect user2
+
+        console.log("user1:", user1); // Riya
+        console.log("user2:", user2); // Priya
+
+        document.getElementById("primitiveOutput").innerHTML = `
+            <p><span class="label">user1 (after change):</span> ${user1}</p>
+            <p><span class="label">user2 (copy, unchanged):</span> ${user2}</p>
+            <p class="note">Primitives are copied by VALUE — each variable holds its own independent copy.</p>
+        `;
+
+        // --- REFERENCE TYPE (array) ---
+        let favApps1 = ["Instagram", "Spotify"];
+        let favApps2 = favApps1; // both point to the SAME array in memory
+
+        favApps1.push("Zomato"); // mutates the shared array
+
+        console.log("favApps1:", favApps1);
+        console.log("favApps2:", favApps2); // also changed!
+
+        document.getElementById("referenceOutput").innerHTML = `
+            <p><span class="label">favApps1 (after push):</span> ${favApps1.join(", ")}</p>
+            <p><span class="label">favApps2 (also changed!):</span> ${favApps2.join(", ")}</p>
+            <p class="note">Arrays are copied by REFERENCE — both variables point to the same memory location, so both reflect the change.</p>
+        `;
+    </script>
+</body>
+</html>

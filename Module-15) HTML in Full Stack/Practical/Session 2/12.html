@@ -1,0 +1,71 @@
+<!-- 
+12.
+Show the difference between primitive and reference types by creating a variable favFood = 'pizza' 
+and another variable favFoodCopy = favFood. Change favFood to 'burger' and log both variables.
+Then, create an object zomatoUser with a property city, assign it to another variable, change the city in one,
+and log both objects.<br><br><em><strong>Hint:</strong> Observe how changes affect primitives vs objects.</em>
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q12 - Primitive vs Reference Types</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #FF5722; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .note { color: #666; font-style: italic; }
+        .section { margin-top: 20px; }
+        h3 { color: #FF5722; }
+    </style>
+</head>
+<body>
+    <h2>Q12 - Primitive vs Reference Types</h2>
+
+    <div class="section">
+        <h3>Primitive (string)</h3>
+        <div class="output" id="primitiveOutput"></div>
+    </div>
+
+    <div class="section">
+        <h3>Reference (object)</h3>
+        <div class="output" id="referenceOutput"></div>
+    </div>
+
+    <script>
+        // --- PRIMITIVE (string) ---
+        let favFood = "pizza";
+        let favFoodCopy = favFood; // copy by VALUE
+
+        favFood = "burger"; // original changes, copy stays the same
+
+        console.log("favFood:", favFood);         // burger
+        console.log("favFoodCopy:", favFoodCopy); // pizza
+
+        document.getElementById("primitiveOutput").innerHTML = `
+            <p><span class="label">favFood (after change):</span> ${favFood}</p>
+            <p><span class="label">favFoodCopy (unchanged):</span> ${favFoodCopy}</p>
+            <p class="note">Changing favFood did NOT affect favFoodCopy — primitives are independent copies.</p>
+        `;
+
+        // --- REFERENCE (object) ---
+        let zomatoUser = { city: "Mumbai" };
+        let anotherUser = zomatoUser; // both point to the SAME object
+
+        anotherUser.city = "Delhi"; // changing through anotherUser affects zomatoUser too
+
+        console.log("zomatoUser:", zomatoUser);
+        console.log("anotherUser:", anotherUser);
+
+        document.getElementById("referenceOutput").innerHTML = `
+            <p><span class="label">zomatoUser.city:</span> ${zomatoUser.city}</p>
+            <p><span class="label">anotherUser.city:</span> ${anotherUser.city}</p>
+            <p class="note">Both variables reference the same object — changing one changes the other.</p>
+        `;
+    </script>
+</body>
+</html>

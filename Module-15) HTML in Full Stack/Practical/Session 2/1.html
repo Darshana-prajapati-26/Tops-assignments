@@ -1,0 +1,42 @@
+<!-- 
+Q1: Create three variables using let to represent an Instagram user's profile: 
+userName, followers, and isVerified. Display all three in the console.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q1 - Instagram Profile Variables</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #4CAF50; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+    <h2>Q1 - Instagram Profile Variables</h2>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        let userName = "Aryan";
+        let followers = 12500;
+        let isVerified = true;
+
+        // Display in console
+        console.log("Username:", userName);
+        console.log("Followers:", followers);
+        console.log("Is Verified:", isVerified);
+
+        // Display on page
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">Username:</span> ${userName}</p>
+            <p><span class="label">Followers:</span> ${followers}</p>
+            <p><span class="label">Is Verified:</span> ${isVerified}</p>
+        `;
+    </script>
+</body>
+</html>

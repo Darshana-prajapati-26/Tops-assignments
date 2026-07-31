@@ -1,0 +1,50 @@
+<!-- 
+Q6: Declare a constant called MAX_POSTS with value 100 and try to reassign it to 200.
+    Observe what error appears in the console.
+    Hint: Use const for MAX_POSTS and see what happens when you attempt reassignment.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q6 - const Reassignment Error</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #2196F3; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Q6 - const Reassignment Error</h2>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        const MAX_POSTS = 100;
+        console.log("MAX_POSTS:", MAX_POSTS);
+
+        let errorMsg = "";
+
+        // Attempting to reassign a const variable
+        try {
+            MAX_POSTS = 200; // This will throw a TypeError
+        } catch (error) {
+            errorMsg = error.message;
+            console.error("Error:", errorMsg);
+        }
+
+        // Display on page
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">MAX_POSTS initial value:</span> 100</p>
+            <p><span class="label">Attempted reassignment to:</span> 200</p>
+            <p class="error">Error: ${errorMsg}</p>
+            <p><span class="label">MAX_POSTS after attempted reassignment:</span> ${MAX_POSTS}</p>
+            <p><em>const prevents reassignment — the value stays 100.</em></p>
+        `;
+    </script>
+</body>
+</html>
