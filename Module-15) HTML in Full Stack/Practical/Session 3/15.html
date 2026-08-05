@@ -1,0 +1,56 @@
+<!-- 
+15.
+Create a function canOrderFood(isLoggedIn, hasPaymentMethod) that returns true only if both isLoggedIn and hasPaymentMethod are true, using logical operators. Test your function with all possible combinations of true/false.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q15 - canOrderFood</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #1DB954; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .true  { color: #4CAF50; font-weight: bold; }
+        .false { color: #F44336; font-weight: bold; }
+        .note  { color: #888; font-style: italic; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Q15 - canOrderFood(isLoggedIn, hasPaymentMethod)</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        function canOrderFood(isLoggedIn, hasPaymentMethod) {
+            return isLoggedIn && hasPaymentMethod;
+        }
+
+        // All 4 possible combinations of true/false
+        let cases = [
+            [true,  true ],
+            [true,  false],
+            [false, true ],
+            [false, false],
+        ];
+
+        let html = "";
+
+        cases.forEach(([loggedIn, payment]) => {
+            let result = canOrderFood(loggedIn, payment);
+            console.log(`canOrderFood(${loggedIn}, ${payment}):`, result);
+
+            let css = result ? "true" : "false";
+            html += `<p>
+                <span class="label">canOrderFood(${loggedIn}, ${payment}):</span>
+                <span class="${css}">${result}</span>
+            </p>`;
+        });
+
+        html += `<p class="note">Using && operator — returns true only when BOTH arguments are true.</p>`;
+        document.getElementById("output").innerHTML = html;
+    </script>
+</body>
+</html>

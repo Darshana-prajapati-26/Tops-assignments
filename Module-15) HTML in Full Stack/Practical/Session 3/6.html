@@ -1,0 +1,44 @@
+<!-- 
+6.
+Write a function isEligibleForDiscount(totalAmount) that returns true 
+if the totalAmount is greater than or equal to 500, otherwise false. 
+Test it with values 300 and 700.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q6 - isEligibleForDiscount</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #2196F3; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .true  { color: #4CAF50; font-weight: bold; }
+        .false { color: #F44336; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Q6 - isEligibleForDiscount(totalAmount)</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        function isEligibleForDiscount(totalAmount) {
+            return totalAmount >= 500;   // comparison operator >=
+        }
+
+        let r1 = isEligibleForDiscount(300);  // false
+        let r2 = isEligibleForDiscount(700);  // true
+
+        console.log("isEligibleForDiscount(300):", r1);
+        console.log("isEligibleForDiscount(700):", r2);
+
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">isEligibleForDiscount(300):</span> <span class="${r1}">${r1}</span></p>
+            <p><span class="label">isEligibleForDiscount(700):</span> <span class="${r2}">${r2}</span></p>
+        `;
+    </script>
+</body>
+</html>

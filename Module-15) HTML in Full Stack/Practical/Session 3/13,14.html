@@ -1,0 +1,53 @@
+<!-- 
+13.
+Write a function isTruthy(input) that takes any value and returns 'Truthy' or 'Falsy' based on JavaScript's truthy/falsy evaluation. Test it with '', 0, null, 'hello', and 42.<br><br><em><strong>Constraint:</strong> Do not use if-else; use the ternary operator.</em>
+14.
+Write a function isTruthy(input) that takes any value and returns 'Truthy' or 'Falsy' based on JavaScript's truthy/falsy evaluation. Test it with '', 0, null, 'hello', and 42.<br><br><em><strong>Constraint:</strong> Do not use if-else; use the ternary operator.</em>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q13 & Q14 - isTruthy</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #FF5722; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label  { font-weight: bold; color: #555; }
+        .truthy { color: #4CAF50; font-weight: bold; }
+        .falsy  { color: #F44336; font-weight: bold; }
+        .note   { color: #888; font-style: italic; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Q13 & Q14 - isTruthy(input)</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        // Constraint: use ternary operator only — no if-else
+        function isTruthy(input) {
+            return input ? "Truthy" : "Falsy";
+        }
+
+        // Test values as specified in the question
+        let testValues = ["", 0, null, "hello", 42];
+        let html = "";
+
+        testValues.forEach(val => {
+            let result = isTruthy(val);
+            console.log(`isTruthy(${JSON.stringify(val)}):`, result);
+
+            let css = result === "Truthy" ? "truthy" : "falsy";
+            html += `<p>
+                <span class="label">isTruthy(${JSON.stringify(val)}):</span>
+                <span class="${css}">${result}</span>
+            </p>`;
+        });
+
+        html += `<p class="note">Falsy values: false, 0, '', null, undefined, NaN — everything else is Truthy.</p>`;
+        document.getElementById("output").innerHTML = html;
+    </script>
+</body>
+</html>

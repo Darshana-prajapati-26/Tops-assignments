@@ -1,0 +1,67 @@
+<!-- 
+10.
+Given a variable isPremiumUser and hasActiveSubscription, use logical operators to check if both are true. If so, print 'Access Granted'; otherwise, print 'Upgrade Needed'.<br><br><em><strong>Hint:</strong> Use the && operator for this check.</em>
+11.
+Given a variable isPremiumUser and hasActiveSubscription, use logical operators to check if both are true. If so, print 'Access Granted'; otherwise, print 'Upgrade Needed'.<br><br><em><strong>Hint:</strong> Use the && operator for this check.</em>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q10 & Q11 - Logical Operators</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #009688; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label   { font-weight: bold; color: #555; }
+        .granted { color: #4CAF50; font-weight: bold; }
+        .denied  { color: #F44336; font-weight: bold; }
+        .note    { color: #888; font-style: italic; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Q10 & Q11 - Access Check with &amp;&amp; Operator</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        // Q10 — both true
+        let isPremiumUser = true;
+        let hasActiveSubscription = true;
+
+        // Use && (logical AND) — both must be true for Access Granted
+        if (isPremiumUser && hasActiveSubscription) {
+            console.log("Access Granted");
+        } else {
+            console.log("Upgrade Needed");
+        }
+
+        // Q11 — same logic, testing with false values
+        let isPremiumUser2 = true;
+        let hasActiveSubscription2 = false;
+
+        if (isPremiumUser2 && hasActiveSubscription2) {
+            console.log("Access Granted");
+        } else {
+            console.log("Upgrade Needed");
+        }
+
+        // Display on page
+        let result1 = isPremiumUser && hasActiveSubscription ? "Access Granted" : "Upgrade Needed";
+        let result2 = isPremiumUser2 && hasActiveSubscription2 ? "Access Granted" : "Upgrade Needed";
+
+        document.getElementById("output").innerHTML = `
+            <p>
+                <span class="label">Q10 → isPremiumUser: ${isPremiumUser} &amp;&amp; hasActiveSubscription: ${hasActiveSubscription}</span><br>
+                Output: <span class="granted">${result1}</span>
+            </p>
+            <p>
+                <span class="label">Q11 → isPremiumUser: ${isPremiumUser2} &amp;&amp; hasActiveSubscription: ${hasActiveSubscription2}</span><br>
+                Output: <span class="denied">${result2}</span>
+            </p>
+            <p class="note">Hint: && returns true only when BOTH values are true.</p>
+        `;
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!-- 
+4.
+Write a function showDiscountTag(price) that checks if a product's price is less than 500 using a comparison operator. 
+If true, print 'Special Discount!'; otherwise, print 'Regular Price'.
+5.
+Write a function showDiscountTag(price) that checks if a product's price is less than 500 using a comparison operator. If true, print 'Special Discount!'; otherwise, print 'Regular Price'.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q4 & Q5 - showDiscountTag</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #FF9800; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .special { color: #4CAF50; font-weight: bold; }
+        .regular { color: #F44336; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Q4 & Q5 - showDiscountTag(price)</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        function showDiscountTag(price) {
+            if (price < 500) {
+                console.log("Special Discount!");
+                return "Special Discount!";
+            } else {
+                console.log("Regular Price");
+                return "Regular Price";
+            }
+        }
+
+        let r1 = showDiscountTag(350);   // less than 500
+        let r2 = showDiscountTag(650);   // greater than 500
+        let r3 = showDiscountTag(499);   // just under 500
+        let r4 = showDiscountTag(500);   // exactly 500
+
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">showDiscountTag(350):</span> <span class="special">${r1}</span></p><br>
+            <p><span class="label">showDiscountTag(650):</span> <span class="regular">${r2}</span></p><br>
+            <p><span class="label">showDiscountTag(499):</span> <span class="special">${r3}</span></p><br>
+            <p><span class="label">showDiscountTag(500):</span> <span class="regular">${r4}</span></p>
+        `;
+    </script>
+</body>
+</html>

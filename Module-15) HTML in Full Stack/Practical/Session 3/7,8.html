@@ -1,0 +1,47 @@
+<!-- 
+7.
+Build a mini Instagram-style verification badge logic: 
+declare a variable followers and use a ternary operator to set a variable 
+badge to 'Verified Creator' if followers is more than 1000, 
+or 'Regular User' otherwise. Print the badge value.
+8.
+Build a mini Instagram-style verification badge logic: declare a variable followers and use a ternary operator to set a variable badge to 'Verified Creator' if followers is more than 1000, or 'Regular User' otherwise. Print the badge value.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q7 & Q8 - Verification Badge</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #9C27B0; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .verified { color: #1DA1F2; font-weight: bold; }
+        .regular  { color: #999; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Q7 & Q8 - Instagram Verification Badge (Ternary Operator)</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        // Test 1: followers > 1000
+        let followers = 1500;
+        let badge = followers > 1000 ? "Verified Creator" : "Regular User";
+        console.log("Followers:", followers, "→ Badge:", badge);
+
+        // Test 2: followers <= 1000
+        let followers2 = 800;
+        let badge2 = followers2 > 1000 ? "Verified Creator" : "Regular User";
+        console.log("Followers:", followers2, "→ Badge:", badge2);
+
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">followers = 1500:</span> <span class="verified">${badge} ✔</span></p>
+            <p><span class="label">followers = 800:</span> <span class="regular">${badge2}</span></p>
+        `;
+    </script>
+</body>
+</html>

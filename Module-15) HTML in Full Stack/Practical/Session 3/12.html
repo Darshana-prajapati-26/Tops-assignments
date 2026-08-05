@@ -1,0 +1,50 @@
+<!-- 
+12.
+Given a variable username, write a condition that checks if username is truthy, and if so, logs 'Welcome, [username]!', otherwise logs 'Guest Login'.<br><br><em><strong>Hint:</strong> Try with username = '', username = null, and username = 'Priya'.</em>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q12 - Truthy Username</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        h2 { color: #333; }
+        .output { background: #fff; border-left: 4px solid #3F51B5; padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+        .output p { margin: 6px 0; font-size: 15px; }
+        .label { font-weight: bold; color: #555; }
+        .welcome { color: #4CAF50; font-weight: bold; }
+        .guest   { color: #FF9800; font-weight: bold; }
+        .note    { color: #888; font-style: italic; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Q12 - Truthy Username Check</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        function checkUsername(username) {
+            if (username) {
+                console.log(`Welcome, ${username}!`);
+                return `Welcome, ${username}!`;
+            } else {
+                console.log("Guest Login");
+                return "Guest Login";
+            }
+        }
+
+        // Hint: test with '', null, and 'Priya'
+        let r1 = checkUsername('');       // falsy — empty string
+        let r2 = checkUsername(null);     // falsy — null
+        let r3 = checkUsername('Priya');  // truthy — non-empty string
+
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">username = '' :</span>      <span class="guest">${r1}</span></p>
+            <p><span class="label">username = null :</span>    <span class="guest">${r2}</span></p>
+            <p><span class="label">username = 'Priya' :</span> <span class="welcome">${r3}</span></p>
+            <p class="note">'' and null are falsy — they evaluate to false in a condition.</p>
+        `;
+    </script>
+</body>
+</html>
