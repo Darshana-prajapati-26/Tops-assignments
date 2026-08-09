@@ -1,0 +1,29 @@
+<!-- 7.
+Create an array called playlist with 4 song names (strings). Use a do-while loop to print each song name along with its index (e.g., '0: Kesariya') in the console.
+8.
+Create an array called playlist with 4 song names (strings). 
+Use a do-while loop to print each song name along with 
+its index (e.g., '0: Kesariya') in the console. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Playlist do-while loop</title>
+</head>
+<body>
+  <h2>Q7 & Q8: Playlist – do-while loop with index</h2>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // Q7 & Q8: Print each song with its index using a do-while loop
+    const playlist = ["Kesariya", "Tum Hi Ho", "Raataan Lambiyan", "Jai Ho"];
+
+    let i = 0;
+    do {
+      console.log(i + ": " + playlist[i]);
+      i++;
+    } while (i < playlist.length);
+  </script>
+</body>
+</html>

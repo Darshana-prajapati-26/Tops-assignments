@@ -1,0 +1,29 @@
+<!-- 9.
+Use a do-while loop to simulate a Zomato order tracker that prints 
+'Order status: Preparing', 'Order status: Out for delivery', 
+and 'Order status: Delivered' in sequence, stopping after the 
+last status. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - Zomato Order Tracker do-while</title>
+</head>
+<body>
+  <h2>Q9: Zomato Order Tracker – do-while loop</h2>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // Q9: Simulate a Zomato order tracker with a do-while loop
+    const statuses = ["Preparing", "Out for delivery", "Delivered"];
+
+    let i = 0;
+    do {
+      console.log("Order status: " + statuses[i]);
+      i++;
+    } while (i < statuses.length);
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- 12.
+Given an array of Flipkart product prices, use a for-of loop to 
+calculate and print the total price of all products. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Total Price for-of loop</title>
+</head>
+<body>
+  <h2>Q12: Total Price – for-of loop</h2>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // Q12: Calculate total price of all products using for-of loop
+    const prices = [45000, 15000, 2000, 8000, 1500];
+
+    let total = 0;
+    for (const price of prices) {
+      total += price;
+    }
+
+    console.log("Total price: ₹" + total);
+  </script>
+</body>
+</html>
