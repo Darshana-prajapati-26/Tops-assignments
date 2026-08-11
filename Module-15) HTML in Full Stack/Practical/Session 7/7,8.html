@@ -1,0 +1,71 @@
+<!--
+  Q7 & Q8:
+  Create a 'Like' button similar to Instagram's and use addEventListener to increment
+  and display the like count each time the button is clicked.
+  Hint: Use a variable to track the count and update the button text on each click.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Instagram Like Button</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #333; }
+    .post {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 340px;
+      background: #fff;
+    }
+    .post img {
+      width: 100%;
+      border-radius: 8px;
+      background: #e0e0e0;
+      height: 180px;
+      display: block;
+      object-fit: cover;
+    }
+    #like-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      margin-top: 12px;
+      padding: 0;
+    }
+    #like-count { font-size: 15px; color: #333; margin-left: 6px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>❤️ Instagram Like</h2>
+  <div class="post">
+    <div style="width:100%;height:180px;background:#e0e0e0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;">📷 Photo</div>
+    <div style="margin-top:12px;">
+      <button id="like-btn">🤍</button>
+      <span id="like-count">0 Likes</span>
+    </div>
+  </div>
+
+  <script>
+    // Q7 & Q8: addEventListener increments like count on each click
+    let likeCount = 0;
+    let liked = false;
+
+    document.getElementById("like-btn").addEventListener("click", function () {
+      if (!liked) {
+        likeCount++;
+        this.textContent = "❤️";
+        liked = true;
+      } else {
+        likeCount--;
+        this.textContent = "🤍";
+        liked = false;
+      }
+      document.getElementById("like-count").textContent = likeCount + " Likes";
+    });
+  </script>
+</body>
+</html>

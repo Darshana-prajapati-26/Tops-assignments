@@ -1,0 +1,76 @@
+<!--
+  Q9:
+  Write a function addToCart that adds a product name to a visible cart section when
+  a 'Add to Cart' button is clicked, but attach the click event using addEventListener
+  instead of the onclick attribute.
+  Hint: Use document.querySelector and addEventListener to connect the button and function.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - Add to Cart with addEventListener</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .product {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+    #add-cart-btn {
+      padding: 10px 22px;
+      background: #ff9f00;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #add-cart-btn:hover { background: #e68900; }
+    #cart {
+      background: #fff;
+      border: 1px solid #2874f0;
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 300px;
+    }
+    #cart h3 { color: #2874f0; margin-top: 0; }
+    #cart-items { padding-left: 18px; }
+    #cart-items li { margin: 6px 0; }
+  </style>
+</head>
+<body>
+
+  <h2>🛒 Flipkart Add to Cart</h2>
+
+  <div class="product">
+    <strong>Wireless Headphones</strong>
+    <p>₹1,999</p>
+    <button id="add-cart-btn">Add to Cart</button>
+  </div>
+
+  <div id="cart">
+    <h3>🛒 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p id="empty-msg" style="color:#aaa;">Cart is empty</p>
+  </div>
+
+  <script>
+    // Q9: addToCart function attached via addEventListener (not onclick attribute)
+    function addToCart() {
+      const productName = "Wireless Headphones";
+      const li = document.createElement("li");
+      li.textContent = productName;
+      document.getElementById("cart-items").appendChild(li);
+      document.getElementById("empty-msg").style.display = "none";
+    }
+
+    document.querySelector("#add-cart-btn").addEventListener("click", addToCart);
+  </script>
+</body>
+</html>

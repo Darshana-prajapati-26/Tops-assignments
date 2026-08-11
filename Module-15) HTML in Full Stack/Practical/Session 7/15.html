@@ -1,0 +1,65 @@
+<!-- 15.
+Briefly explain (in 2-3 sentences) what event flow is in 
+the DOM, and give one example of how event bubbling could 
+affect a shopping cart app like Flipkart. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q15 - Event Flow Explanation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 680px; background: #fafafa; }
+    h2 { color: #333; }
+    .card {
+      background: #fff;
+      border-left: 5px solid #2874f0;
+      border-radius: 8px;
+      padding: 20px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    h3 { color: #2874f0; margin-top: 0; }
+    p { line-height: 1.7; color: #444; }
+    .example {
+      background: #e3f2fd;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      color: #1a237e;
+    }
+    code {
+      background: #e8eaf6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q15: Event Flow in the DOM</h2>
+
+  <div class="card">
+    <h3>What is Event Flow?</h3>
+    <p>
+      Event flow describes the order in which events are received by elements in the DOM when an event occurs.
+      There are two phases: <strong>event capturing</strong> (the event travels from the root down to the target element)
+      and <strong>event bubbling</strong> (the event travels back up from the target to the root).
+      By default, most event listeners use the bubbling phase.
+    </p>
+
+    <div class="example">
+      <strong>🛒 Flipkart Example (Event Bubbling):</strong><br /><br />
+      Suppose you have a product card <code>&lt;div class="product-card"&gt;</code> with a listener for
+      <code>click</code> that opens the product detail page. Inside it there's an
+      <code>&lt;button&gt;Add to Cart&lt;/button&gt;</code>.
+      When the user clicks "Add to Cart", the click event first fires on the button, then
+      <em>bubbles up</em> to the parent <code>div</code> — accidentally triggering the
+      "open product detail" handler too.
+      The fix is to call <code>event.stopPropagation()</code> inside the button's handler
+      to prevent the event from bubbling further.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!--
+  Q3:
+  Create an HTML page with a button labeled 'Add Song' — when the button is clicked,
+  use onclick to instantly add a new card below showing a random song title from your
+  favorite playlist.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q3 - Add Random Song Card</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    #add-btn {
+      padding: 10px 24px;
+      background: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #add-btn:hover { background: #17a047; }
+    .song-card {
+      background: #282828;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      max-width: 320px;
+      font-size: 16px;
+    }
+    .song-card span { color: #1DB954; font-weight: bold; }
+    #song-list { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+  <h2>🎵 Playlist</h2>
+  <button id="add-btn" onclick="addSongCard()">Add Song</button>
+  <div id="song-list"></div>
+
+  <script>
+    // Q3: onclick adds a random song card from a predefined playlist
+    const songs = ["Kesariya", "Tum Hi Ho", "Raataan Lambiyan", "Jai Ho", "Chaiyya Chaiyya", "Dilbaro", "Kabira"];
+    let songCount = 0;
+
+    function addSongCard() {
+      const randomSong = songs[Math.floor(Math.random() * songs.length)];
+      songCount++;
+      const card = document.createElement("div");
+      card.classList.add("song-card");
+      card.innerHTML = `<span>#${songCount}</span> ${randomSong}`;
+      document.getElementById("song-list").appendChild(card);
+    }
+  </script>
+</body>
+</html>

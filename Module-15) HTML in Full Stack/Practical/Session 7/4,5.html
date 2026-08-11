@@ -1,0 +1,45 @@
+<!--
+  Q4 & Q5:
+  Build a mini form with an input for 'Username' and use the onchange event to log the
+  entered username to the console every time the input changes.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - onchange Username</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    h2 { color: #333; }
+    input {
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      width: 240px;
+    }
+    label { display: block; margin-bottom: 8px; font-weight: bold; }
+    #output { margin-top: 14px; color: #1565c0; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+  <h2>👤 Username Form</h2>
+  <label for="username">Username:</label>
+  <input
+    type="text"
+    id="username"
+    placeholder="Enter username..."
+    onchange="logUsername(this.value)"
+  />
+  <p id="output"></p>
+
+  <script>
+    // Q4 & Q5: onchange logs the username to console and shows it on the page
+    function logUsername(value) {
+      console.log("Username entered:", value);
+      document.getElementById("output").textContent = "Username: " + value;
+    }
+  </script>
+</body>
+</html>

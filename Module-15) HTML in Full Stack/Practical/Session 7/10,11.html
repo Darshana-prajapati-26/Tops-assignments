@@ -1,0 +1,72 @@
+<!--
+  Q10 & Q11:
+  Display a list of 3 movies (hardcoded) and add a 'Remove' button next to each.
+  Use addEventListener to remove the movie card from the DOM when its button is clicked.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Remove Movie Cards</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #1a1a2e; color: #fff; }
+    h2 { color: #e94560; }
+    .movie-card {
+      background: #16213e;
+      border: 1px solid #e94560;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      max-width: 340px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .movie-title { font-size: 17px; font-weight: bold; }
+    .remove-btn {
+      padding: 6px 14px;
+      background: #e94560;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .remove-btn:hover { background: #c73652; }
+  </style>
+</head>
+<body>
+
+  <h2>🎬 Movie List</h2>
+  <div id="movie-list"></div>
+
+  <script>
+    // Q10 & Q11: Render 3 movies with Remove buttons; addEventListener removes from DOM on click
+    const movies = ["Interstellar", "The Dark Knight", "Inception"];
+
+    const list = document.getElementById("movie-list");
+
+    movies.forEach((movie) => {
+      const card = document.createElement("div");
+      card.classList.add("movie-card");
+
+      const title = document.createElement("span");
+      title.classList.add("movie-title");
+      title.textContent = "🎥 " + movie;
+
+      const btn = document.createElement("button");
+      btn.classList.add("remove-btn");
+      btn.textContent = "Remove";
+
+      btn.addEventListener("click", function () {
+        card.remove();
+      });
+
+      card.appendChild(title);
+      card.appendChild(btn);
+      list.appendChild(card);
+    });
+  </script>
+</body>
+</html>
