@@ -1,0 +1,69 @@
+<!--
+  Q12:
+  Build a mini 'Now Playing' display like Spotify: show a song title in a
+  <span id="song-title"></span> and a button 'Change Song'; when the button is clicked,
+  update the innerHTML of the span to a new song name from a predefined array.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Now Playing (Spotify Style)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      padding: 40px;
+    }
+    h2 { color: #1DB954; }
+    .player {
+      background: #282828;
+      border-radius: 12px;
+      padding: 24px 30px;
+      display: inline-block;
+      min-width: 280px;
+      margin-top: 10px;
+    }
+    .label { font-size: 13px; color: #aaa; margin-bottom: 6px; }
+    #song-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #1DB954;
+    }
+    button {
+      margin-top: 18px;
+      padding: 10px 22px;
+      background: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      cursor: pointer;
+      display: block;
+    }
+    button:hover { background: #17a047; }
+  </style>
+</head>
+<body>
+
+  <h2>🎧 Now Playing</h2>
+
+  <div class="player">
+    <div class="label">NOW PLAYING</div>
+    <span id="song-title">Kesariya</span>
+    <button id="change-btn">Change Song</button>
+  </div>
+
+  <script>
+    // Q12: Cycle through a predefined song array on button click
+    const songs = ["Kesariya", "Tum Hi Ho", "Raataan Lambiyan", "Chaiyya Chaiyya", "Jai Ho"];
+    let currentIndex = 0;
+
+    document.getElementById("change-btn").addEventListener("click", function () {
+      currentIndex = (currentIndex + 1) % songs.length;
+      document.getElementById("song-title").innerHTML = songs[currentIndex];
+    });
+  </script>
+</body>
+</html>

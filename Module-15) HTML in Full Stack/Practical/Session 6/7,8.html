@@ -1,0 +1,28 @@
+<!--
+  Q7 & Q8:
+  Select an existing <h2> element with the id 'offer' and use JavaScript to change its
+  text to 'Flat 50% Off on Zomato Today!' and set its color to red using the style property.
+  Hint: Use getElementById to select and .style.color to update the color.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Zomato Offer Text & Color</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+  </style>
+</head>
+<body>
+
+  <h2 id="offer">Today's Special Deal</h2>
+
+  <script>
+    // Q7 & Q8: Select #offer h2, change text and color using getElementById
+    const offerEl = document.getElementById("offer");
+    offerEl.textContent = "Flat 50% Off on Zomato Today!";
+    offerEl.style.color = "red";
+    offerEl.style.fontSize = "28px";
+  </script>
+</body>
+</html>

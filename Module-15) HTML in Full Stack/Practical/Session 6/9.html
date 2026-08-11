@@ -1,0 +1,60 @@
+<!--
+  Q9:
+  Create a 'Dark Mode' toggle button that, when clicked, uses getElementById to change
+  the background color of the page and updates the button text to 'Light Mode'.
+  Hint: Use the style property to change document.body's background color.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - Dark Mode Toggle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #ffffff;
+      color: #000;
+      transition: background 0.3s, color 0.3s;
+    }
+    #toggle-btn {
+      padding: 10px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #333;
+      color: #fff;
+    }
+    h2 { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>🌗 Dark Mode Toggle</h2>
+  <button id="toggle-btn">Dark Mode</button>
+
+  <script>
+    // Q9: Toggle dark/light mode using getElementById and style property
+    const btn = document.getElementById("toggle-btn");
+    let isDark = false;
+
+    btn.addEventListener("click", function () {
+      if (!isDark) {
+        document.body.style.backgroundColor = "#121212";
+        document.body.style.color = "#ffffff";
+        btn.style.background = "#f0f0f0";
+        btn.style.color = "#000";
+        btn.textContent = "Light Mode";
+      } else {
+        document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#000000";
+        btn.style.background = "#333";
+        btn.style.color = "#fff";
+        btn.textContent = "Dark Mode";
+      }
+      isDark = !isDark;
+    });
+  </script>
+</body>
+</html>

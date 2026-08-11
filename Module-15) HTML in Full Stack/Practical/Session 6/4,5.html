@@ -1,0 +1,63 @@
+<!--
+  Q4 & Q5:
+  Build a small form with an input box and a button labeled 'Add Song'. When the button
+  is clicked, use querySelector to get the input value and dynamically add a new <li>
+  element with the song name to a <ul id="playlist"> on the page.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - Add Song Playlist</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    input {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 15px;
+      margin-right: 8px;
+      width: 220px;
+    }
+    button {
+      padding: 8px 18px;
+      background: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover { background: #17a047; }
+    #playlist { margin-top: 16px; padding-left: 20px; }
+    #playlist li { margin: 6px 0; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+  <h2>🎵 My Playlist</h2>
+
+  <input type="text" id="song-input" placeholder="Enter song name..." />
+  <button id="add-btn">Add Song</button>
+
+  <ul id="playlist"></ul>
+
+  <script>
+    // Q4 & Q5: Use querySelector to get input value and add <li> to <ul>
+    document.querySelector("#add-btn").addEventListener("click", function () {
+      const input = document.querySelector("#song-input");
+      const songName = input.value.trim();
+
+      if (songName === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = "🎵 " + songName;
+      document.querySelector("#playlist").appendChild(li);
+
+      input.value = "";
+      input.focus();
+    });
+  </script>
+</body>
+</html>
