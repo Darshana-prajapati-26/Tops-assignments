@@ -1,0 +1,42 @@
+<!-- 7.
+Rewrite the following function as an arrow function: function formatFollowers(count) { if(count >= 1000) { return (count/1000).toFixed(1) + 'K'; } return count; }
+8.
+Rewrite the following function as an arrow function: function 
+formatFollowers(count) { if(count >= 1000) { return (count/1000).
+toFixed(1) + 'K'; } return count; } -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Rewrite as Arrow Function</title>
+</head>
+<body>
+  <h2>Q7 & Q8: Rewrite formatFollowers as an Arrow Function</h2>
+
+  <script>
+    // Original function (for reference):
+    // function formatFollowers(count) {
+    //   if (count >= 1000) { return (count / 1000).toFixed(1) + 'K'; }
+    //   return count;
+    // }
+
+    // Q7 & Q8: Rewritten as an arrow function
+    const formatFollowers = (count) => {
+      if (count >= 1000) {
+        return (count / 1000).toFixed(1) + "K";
+      }
+      return count;
+    };
+
+    const testCounts = [800, 1500, 24000, 999];
+
+    testCounts.forEach((count) => {
+      const p = document.createElement("p");
+      p.textContent = `formatFollowers(${count}) → ${formatFollowers(count)}`;
+      document.body.appendChild(p);
+    });
+  </script>
+</body>
+</html>

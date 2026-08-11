@@ -1,0 +1,37 @@
+<!-- 9.
+Create a function declaration called createLikeButton(label, color) 
+that returns a styled HTML button element with the given label and 
+background color. Append the button to the document body. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - createLikeButton</title>
+</head>
+<body>
+  <h2>Q9: createLikeButton – Function Declaration</h2>
+
+  <script>
+    // Q9: Function declaration that creates a styled like button and appends it to the body
+    function createLikeButton(label, color) {
+      const btn = document.createElement("button");
+      btn.textContent = label;
+      btn.style.backgroundColor = color;
+      btn.style.color = "#fff";
+      btn.style.padding = "10px 24px";
+      btn.style.margin = "8px";
+      btn.style.border = "none";
+      btn.style.borderRadius = "6px";
+      btn.style.fontSize = "18px";
+      btn.style.cursor = "pointer";
+      document.body.appendChild(btn);
+    }
+
+    createLikeButton("❤️ Like", "#e0245e");
+    createLikeButton("👍 Thumbs Up", "#1877f2");
+    createLikeButton("🔥 Fire", "#ff6b35");
+  </script>
+</body>
+</html>

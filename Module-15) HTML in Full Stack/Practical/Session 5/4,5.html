@@ -1,0 +1,49 @@
+<!-- 4.
+Write a function expression named getDiscountedPrice that takes a price and a discount percent, and returns the final price after applying the discount (e.g., for Flipkart-style sale banners).
+5.
+Write a function expression named getDiscountedPrice that takes a price 
+and a discount percent, and returns the final price after applying the 
+discount (e.g., for Flipkart-style sale banners). -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - getDiscountedPrice</title>
+</head>
+<body>
+  <h2>Q4 & Q5: getDiscountedPrice – Function Expression</h2>
+
+  <script>
+    // Q4 & Q5: Function expression to calculate discounted price (Flipkart-style)
+    const getDiscountedPrice = function (price, discountPercent) {
+      const discount = (price * discountPercent) / 100;
+      const finalPrice = price - discount;
+      return finalPrice;
+    };
+
+    const items = [
+      { name: "Laptop", price: 60000, discount: 15 },
+      { name: "Headphones", price: 3000, discount: 20 },
+      { name: "Watch", price: 5000, discount: 10 },
+    ];
+
+    items.forEach((item) => {
+      const final = getDiscountedPrice(item.price, item.discount);
+      const div = document.createElement("div");
+      div.style.border = "1px solid #ccc";
+      div.style.padding = "10px";
+      div.style.margin = "8px 0";
+      div.style.borderRadius = "6px";
+      div.innerHTML = `
+        <strong>${item.name}</strong><br/>
+        Original: ₹${item.price} &nbsp;|&nbsp;
+        Discount: ${item.discount}% &nbsp;|&nbsp;
+        <span style="color:green;font-weight:bold;">Final: ₹${final}</span>
+      `;
+      document.body.appendChild(div);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+10.
+Build a mini Zomato-style feature: write a function showMenuItem(name, price) that returns a styled HTML div with the food item's name and price, then call it for three different items and display them on the page.<br><br><em><strong>Hint:</strong> Use template literals and document.body.appendChild or innerHTML to add the divs.</em>
+11.
+Build a mini Zomato-style feature: write a function showMenuItem
+(name, price) that returns a styled HTML div with the food item's name 
+and price, then call it for three different items and display them on 
+the page.<br><br><em><strong>Hint:</strong> Use template literals and 
+document.body.appendChild or innerHTML to add the divs.</em>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Zomato Menu Items</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #fff8f0;
+    }
+    h2 {
+      color: #e23744;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q10 & Q11: Zomato-style Menu Items</h2>
+
+  <script>
+    // Q10 & Q11: showMenuItem returns a styled div with food name and price
+    function showMenuItem(name, price) {
+      const div = document.createElement("div");
+      div.style.border = "1px solid #e23744";
+      div.style.borderRadius = "8px";
+      div.style.padding = "14px 18px";
+      div.style.margin = "10px 0";
+      div.style.backgroundColor = "#fff";
+      div.style.maxWidth = "320px";
+      div.innerHTML = `
+        <span style="font-size:18px;font-weight:bold;">${name}</span>
+        <span style="float:right;color:#e23744;font-weight:bold;">₹${price}</span>
+      `;
+      return div;
+    }
+
+    document.body.appendChild(showMenuItem("Butter Chicken", 320));
+    document.body.appendChild(showMenuItem("Paneer Tikka", 250));
+    document.body.appendChild(showMenuItem("Biryani", 180));
+  </script>
+</body>
+</html>

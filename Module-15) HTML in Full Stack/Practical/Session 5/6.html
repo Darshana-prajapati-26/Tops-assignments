@@ -1,0 +1,38 @@
+<!-- 6.
+Write an arrow function called formatFollowers that takes a number 
+and returns it formatted as '1.5K' for 1500 or '2M' for 2000000, 
+similar to how Instagram displays follower counts.<br><br><em>
+<strong>Hint:</strong> Use conditional logic to check the number's 
+size and format accordingly.</em> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - formatFollowers Arrow Function</title>
+</head>
+<body>
+  <h2>Q6: formatFollowers – Arrow Function (Instagram-style)</h2>
+
+  <script>
+    // Q6: Arrow function to format follower counts like Instagram
+    const formatFollowers = (count) => {
+      if (count >= 1_000_000) {
+        return (count / 1_000_000).toFixed(1) + "M";
+      } else if (count >= 1000) {
+        return (count / 1000).toFixed(1) + "K";
+      }
+      return count.toString();
+    };
+
+    const counts = [500, 1500, 25000, 1200000, 2000000];
+
+    counts.forEach((count) => {
+      const p = document.createElement("p");
+      p.textContent = `${count} → ${formatFollowers(count)}`;
+      document.body.appendChild(p);
+    });
+  </script>
+</body>
+</html>

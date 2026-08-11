@@ -1,0 +1,49 @@
+13.
+Build a reusable function called createPlaylistButton(songName, 
+themeColor) that returns a button element styled with the given color 
+and displaying the song name. Use this function to create and display 
+three buttons for your favorite Spotify tracks.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 - createPlaylistButton</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      padding: 30px;
+    }
+    h2 {
+      color: #1DB954;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q13: createPlaylistButton – Spotify Playlist Buttons</h2>
+
+  <script>
+    // Q13: Reusable function that creates a styled button for a Spotify track
+    function createPlaylistButton(songName, themeColor) {
+      const btn = document.createElement("button");
+      btn.textContent = "▶ " + songName;
+      btn.style.backgroundColor = themeColor;
+      btn.style.color = "#fff";
+      btn.style.padding = "12px 24px";
+      btn.style.margin = "10px 8px";
+      btn.style.border = "none";
+      btn.style.borderRadius = "30px";
+      btn.style.fontSize = "15px";
+      btn.style.cursor = "pointer";
+      btn.style.letterSpacing = "0.5px";
+      return btn;
+    }
+
+    document.body.appendChild(createPlaylistButton("jai hoo", "#1DB954"));
+    document.body.appendChild(createPlaylistButton("Tum Hi Ho", "#e91e63"));
+    document.body.appendChild(createPlaylistButton("Chaiyya Chaiyya", "#ff6d00"));
+  </script>
+</body>
+</html>
