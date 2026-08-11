@@ -1,0 +1,62 @@
+<!--
+  Q6:
+  Build a simple Zomato-style food order form with a dropdown for cuisine and an input
+  for quantity — use the onchange event on the dropdown to display a message showing
+  which cuisine was selected.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - Zomato Order Form onchange</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    label { font-weight: bold; display: block; margin-top: 14px; margin-bottom: 6px; }
+    select, input[type="number"] {
+      padding: 9px 12px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 220px;
+    }
+    #message {
+      margin-top: 18px;
+      font-size: 17px;
+      color: #e23744;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🍽️ Zomato Order Form</h2>
+
+  <label for="cuisine">Select Cuisine:</label>
+  <select id="cuisine" onchange="showSelectedCuisine(this.value)">
+    <option value="">-- Choose Cuisine --</option>
+    <option value="North Indian">North Indian</option>
+    <option value="South Indian">South Indian</option>
+    <option value="Chinese">Chinese</option>
+    <option value="Italian">Italian</option>
+    <option value="Fast Food">Fast Food</option>
+  </select>
+
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" min="1" value="1" />
+
+  <p id="message"></p>
+
+  <script>
+    // Q6: onchange on dropdown shows which cuisine was selected
+    function showSelectedCuisine(value) {
+      const msg = document.getElementById("message");
+      if (value) {
+        msg.textContent = `You selected: ${value} 🍴`;
+      } else {
+        msg.textContent = "";
+      }
+    }
+  </script>
+</body>
+</html>
