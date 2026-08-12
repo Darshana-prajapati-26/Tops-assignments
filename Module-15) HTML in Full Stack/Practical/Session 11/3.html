@@ -1,0 +1,38 @@
+<!--
+  Q3:
+  Create an HTML file with a <script> tag that logs 'Loading...' to the console,
+  then after 2 seconds logs 'Content loaded!' using setTimeout.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q3 - setTimeout Console Logs</title>
+  <style>
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;
+      max-width: 680px; font-family: Arial, sans-serif;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q3</h3>
+    <p>Create an HTML file with a <code>&lt;script&gt;</code> tag that logs <code>'Loading...'</code> to the console, then after 2 seconds logs <code>'Content loaded!'</code> using <code>setTimeout</code>.</p>
+  </div>
+  <h2>Q3: setTimeout – Loading Console Logs</h2>
+  <p>Open the browser console and wait 2 seconds to see the output.</p>
+
+  <script>
+    // Q3: Log 'Loading...' immediately, then 'Content loaded!' after 2 seconds
+    console.log("Loading...");
+
+    setTimeout(() => {
+      console.log("Content loaded!");
+    }, 2000);
+  </script>
+</body>
+</html>

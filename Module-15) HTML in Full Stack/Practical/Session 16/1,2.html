@@ -1,0 +1,76 @@
+<!--
+  Q1:
+  Given an array of Flipkart product objects with properties name, price, and isInStock,
+  use the filter() method to create a new array containing only the products that are in stock.
+
+  Q2:
+  Given an array of Flipkart product objects with properties name, price, and isInStock,
+  use the filter() method to create a new array containing only the products that are in stock.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - filter() In-Stock Products</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .product-card {
+      background: #fff; border-radius: 8px; padding: 12px 18px;
+      margin: 8px 0; max-width: 420px; display: flex;
+      justify-content: space-between; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .product-name { font-weight: bold; font-size: 15px; }
+    .product-price { color: #388e3c; font-weight: bold; }
+    .badge { background: #e8f5e9; color: #388e3c; border-radius: 4px; padding: 2px 8px; font-size: 13px; }
+    h3.section { color: #2874f0; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Q1 &amp; Q2: filter() – In-Stock Flipkart Products</h2>
+  <div class="question-box">
+    <h3>Q1 &amp; Q2</h3>
+    <p>Given an array of Flipkart product objects with properties <code>name</code>, <code>price</code>,
+    and <code>isInStock</code>, use the <code>filter()</code> method to create a new array containing
+    only the products that are in stock.</p>
+  </div>
+
+  <h3 class="section">✅ In-Stock Products:</h3>
+  <div id="product-list"></div>
+
+  <script>
+    // Q1 & Q2: filter() — keep only products where isInStock === true
+    const products = [
+      { name: "Redmi Note 12 Pro", price: 18999, isInStock: true },
+      { name: "Boat Rockerz 255", price: 1299, isInStock: false },
+      { name: "Samsung Galaxy Tab", price: 32999, isInStock: true },
+      { name: "Apple AirPods Pro", price: 24990, isInStock: false },
+      { name: "Noise Smartwatch", price: 3499, isInStock: true },
+      { name: "HP Laptop 15s", price: 45999, isInStock: true }
+    ];
+
+    const inStockProducts = products.filter(p => p.isInStock);
+
+    console.log("In-stock products:", inStockProducts);
+
+    const container = document.getElementById("product-list");
+    inStockProducts.forEach(p => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+      card.innerHTML = `
+        <span class="product-name">${p.name}</span>
+        <span class="product-price">₹${p.price}</span>
+        <span class="badge">In Stock</span>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

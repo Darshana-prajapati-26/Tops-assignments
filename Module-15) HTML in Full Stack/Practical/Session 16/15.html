@@ -1,0 +1,101 @@
+<!--
+  Q15:
+  Use ChatGPT to suggest a one-liner alternative using map() and reduce() for calculating
+  the total amount spent from an array of transactions (each with amount property), and
+  then implement that one-liner in your code.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q15 - map() + reduce() One-Liner Transactions</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f0f4ff; max-width: 720px; }
+    h2 { color: #3d5afe; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .card {
+      background: #fff; border-radius: 10px; padding: 18px 22px;
+      margin-bottom: 18px; border-left: 5px solid #3d5afe;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    .card h3 { margin-top: 0; color: #3d5afe; }
+    pre {
+      background: #f4f4f4; border-radius: 6px; padding: 12px;
+      font-size: 14px; overflow-x: auto;
+    }
+    .tx-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px;
+    }
+    .tx-row:last-child { border-bottom: none; }
+    .tx-desc { color: #333; }
+    .tx-amount { font-weight: bold; color: #e53935; }
+    .total-box {
+      background: #3d5afe; color: #fff; border-radius: 10px;
+      padding: 18px 24px; max-width: 300px; margin-top: 16px; text-align: center;
+    }
+    .total-num { font-size: 40px; font-weight: bold; }
+    .total-label { font-size: 14px; margin-top: 4px; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <h2>Q15: map() + reduce() One-Liner – Total Transactions</h2>
+  <div class="question-box">
+    <h3>Q15</h3>
+    <p>Use ChatGPT to suggest a one-liner alternative using <code>map()</code> and
+    <code>reduce()</code> for calculating the total amount spent from an array of transactions
+    (each with <code>amount</code> property), and then implement that one-liner in your code.</p>
+  </div>
+
+  <div class="card">
+    <h3>💡 ChatGPT Suggested One-Liner</h3>
+    <p>ChatGPT suggestion: chain <code>map()</code> to pull out amounts, then <code>reduce()</code>
+    to accumulate the total — all in one expression.</p>
+    <pre>const totalSpent = transactions.map(t => t.amount).reduce((sum, amt) => sum + amt, 0);</pre>
+  </div>
+
+  <div class="card">
+    <h3>💳 Transactions</h3>
+    <div id="tx-list"></div>
+  </div>
+
+  <div class="total-box" id="total-box"></div>
+
+  <script>
+    // Q15: One-liner — map() to extract amounts, reduce() to sum them
+    const transactions = [
+      { description: "Zomato - Biryani", amount: 450 },
+      { description: "Myntra - T-Shirt", amount: 999 },
+      { description: "Amazon - Earphones", amount: 1299 },
+      { description: "Uber - Cab Ride", amount: 280 },
+      { description: "Swiggy - Pizza", amount: 620 },
+      { description: "Netflix - Monthly", amount: 499 }
+    ];
+
+    // ChatGPT suggested one-liner
+    const totalSpent = transactions.map(t => t.amount).reduce((sum, amt) => sum + amt, 0);
+
+    console.log("Total amount spent:", totalSpent);
+
+    // Display transactions
+    const list = document.getElementById("tx-list");
+    transactions.forEach(t => {
+      const row = document.createElement("div");
+      row.classList.add("tx-row");
+      row.innerHTML = `<span class="tx-desc">💳 ${t.description}</span>
+                       <span class="tx-amount">-₹${t.amount}</span>`;
+      list.appendChild(row);
+    });
+
+    document.getElementById("total-box").innerHTML = `
+      <div class="total-num">₹${totalSpent.toLocaleString()}</div>
+      <div class="total-label">Total Amount Spent</div>
+    `;
+  </script>
+</body>
+</html>

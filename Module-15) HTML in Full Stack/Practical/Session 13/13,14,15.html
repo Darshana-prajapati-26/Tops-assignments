@@ -1,0 +1,117 @@
+<!--
+  Q13:
+  Copy an error stack trace from your browser's console when a thrown error occurs (for
+  example, from a failed JSON.parse or invalid URL check), and paste it into ChatGPT.
+  Ask ChatGPT to explain what the stack trace means and summarize the explanation in
+  your own words.
+
+  Q14:
+  Copy an error stack trace from your browser's console when a thrown error occurs (for
+  example, from a failed JSON.parse or invalid URL check), and paste it into ChatGPT.
+  Ask ChatGPT to explain what the stack trace means and summarize the explanation in
+  your own words.
+
+  Q15:
+  Copy a stack trace from a JavaScript error you encounter (for example, by calling a
+  function that throws a custom Error), and paste it into ChatGPT. Ask ChatGPT to explain
+  what the error means and which line caused the problem. Summarize ChatGPT's explanation
+  in your own words in a comment above the code.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13, Q14 & Q15 - Stack Trace Explanation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 720px; background: #fafafa; }
+    h2 { color: #333; }
+    .card {
+      background: #fff; border-left: 5px solid #2874f0; border-radius: 8px;
+      padding: 18px 22px; margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    h3 { color: #2874f0; margin-top: 0; }
+    pre {
+      background: #1e1e1e; color: #f8f8f2; padding: 14px; border-radius: 8px;
+      font-size: 13px; overflow-x: auto; line-height: 1.6;
+    }
+    p { line-height: 1.75; color: #444; }
+    code { background: #eef; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    button {
+      padding: 9px 20px; background: #c62828; color: #fff;
+      border: none; border-radius: 6px; font-size: 14px; cursor: pointer; margin-bottom: 12px;
+    }
+    button:hover { background: #a31f1f; }
+  </style>
+</head>
+<body>
+
+  <h2>Q13, Q14 & Q15: Stack Traces – Reading & Understanding</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:720px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q13, Q14 &amp; Q15</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Copy an error stack trace from your browser's console when a thrown error occurs (for example, from a failed <code>JSON.parse</code> or invalid URL check), and paste it into ChatGPT. Ask ChatGPT to explain what the stack trace means and summarize the explanation in your own words.<br><em style="font-size:14px;color:#555;"><strong>Q15 extra:</strong> Summarize ChatGPT's explanation in your own words in a comment above the code.</em></p>
+  </div>
+  <div class="card">
+    <h3>🔴 Generate a Stack Trace (open DevTools Console)</h3>
+    <button onclick="triggerError()">Trigger Error</button>
+    <pre id="stack-output">Click the button to generate a stack trace...</pre>
+  </div>
+
+  <div class="card">
+    <h3>📋 Sample Stack Trace (from a failed JSON.parse)</h3>
+    <pre>
+SyntaxError: Unexpected token 'N', "Not valid JSON" is not valid JSON
+    at JSON.parse (&lt;anonymous&gt;)
+    at validateProduct (13,14,15.html:72:18)
+    at triggerError (13,14,15.html:80:3)
+    at HTMLButtonElement.onclick (13,14,15.html:1:1)</pre>
+  </div>
+
+  <div class="card">
+    <h3>💬 Stack Trace Explanation (Q13 & Q14)</h3>
+    <p>
+      A <strong>stack trace</strong> shows the exact sequence of function calls that led
+      to an error. It is read <em>bottom-up</em> — the bottom line is where execution started
+      and the top line is where the error actually happened.
+    </p>
+    <p>
+      In the example above: the user clicked a button → <code>triggerError()</code> was called →
+      it called <code>validateProduct()</code> → which called <code>JSON.parse()</code> on
+      invalid data → <code>JSON.parse</code> threw a <code>SyntaxError</code>.
+      Each line in the trace includes the <strong>file name</strong>, <strong>line number</strong>,
+      and <strong>column number</strong>, pinpointing exactly where the error occurred.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>📝 Summary in Own Words (Q15)</h3>
+    <p>
+      <!-- Summary of ChatGPT explanation in own words -->
+      The stack trace is like a breadcrumb trail of function calls.
+      When an error occurs, JavaScript records every function that was active at that moment,
+      most recent first. The first line tells you <em>what went wrong</em> (e.g., SyntaxError),
+      and the lines below show <em>how the code got there</em> step by step.
+      The line number next to each function name takes you directly to the problematic code
+      in your file, making it much faster to find and fix bugs.
+    </p>
+  </div>
+
+  <script>
+    // Q13, 14, 15: Function that intentionally throws to generate a readable stack trace
+    function validateProduct(jsonStr) {
+      // This will throw a SyntaxError for invalid JSON
+      return JSON.parse(jsonStr);
+    }
+
+    function triggerError() {
+      const preEl = document.getElementById("stack-output");
+      try {
+        validateProduct("Not valid JSON");
+      } catch (e) {
+        console.error(e); // Inspect this in DevTools → Console
+        preEl.textContent = e.stack || e.toString();
+      }
+    }
+  </script>
+</body>
+</html>

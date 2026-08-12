@@ -1,0 +1,51 @@
+<!--
+  Q7:
+  Given an object representing a Zomato order: const order = { item: 'Pizza', price: 350,
+  user: 'Amit' }, use object destructuring to extract item and price into variables, then
+  log a message like 'Amit ordered Pizza for Rs.350'.
+
+  Q8:
+  Given an object representing a Zomato order: const order = { item: 'Pizza', price: 350,
+  user: 'Amit' }, use object destructuring to extract item and price into variables, then
+  log a message like 'Amit ordered Pizza for Rs.350'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Object Destructuring Zomato Order</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .order-card {
+      background: #fff;
+      border: 1px solid #e23744;
+      border-radius: 8px;
+      padding: 14px 18px;
+      max-width: 360px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q7 & Q8: Object Destructuring – Zomato Order</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q7 &amp; Q8</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Given an object representing a Zomato order: <code>const order = &#123; item: 'Pizza', price: 350, user: 'Amit' &#125;</code>, use object destructuring to extract <code>item</code> and <code>price</code> into variables, then log a message like <code>'Amit ordered Pizza for ₹350'</code>.</p>
+  </div>
+
+  <script>
+    // Q7 & Q8: Destructure item, price, user from order object
+    const order = { item: "Pizza", price: 350, user: "Amit" };
+
+    const { item, price, user } = order;
+
+    const message = `${user} ordered ${item} for ₹${price}`;
+    console.log(message);
+
+    document.getElementById("output").innerHTML =
+      `<div class="order-card">🍕 ${message}</div>`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!--
+  Q10:
+  Given an array of YouTube video objects with a views property, use the find() method
+  to get the first video that has more than 1 million views.
+
+  Q11:
+  Given an array of YouTube video objects with a views property, use the find() method
+  to get the first video that has more than 1 million views.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - find() First Video Over 1M Views</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff; }
+    h2 { color: #ff0000; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .video-row {
+      background: #f9f9f9; border-radius: 8px; padding: 10px 16px;
+      margin: 6px 0; max-width: 520px; display: flex;
+      justify-content: space-between; align-items: center;
+      border-left: 4px solid #ccc; font-size: 15px;
+    }
+    .video-row.found { border-left-color: #ff0000; background: #fff3f3; }
+    .views { color: #555; font-size: 14px; }
+    .found-card {
+      background: #ff0000; color: #fff; border-radius: 12px;
+      padding: 18px 22px; max-width: 400px; margin-top: 20px;
+    }
+    .found-card h3 { margin: 0 0 8px; font-size: 16px; }
+    .found-card p { margin: 4px 0; font-size: 15px; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <h2>Q10 &amp; Q11: find() – First Video with 1M+ Views</h2>
+  <div class="question-box">
+    <h3>Q10 &amp; Q11</h3>
+    <p>Given an array of YouTube video objects with a <code>views</code> property, use the
+    <code>find()</code> method to get the first video that has more than 1 million views.</p>
+  </div>
+
+  <h3 style="color:#ff0000;">All Videos:</h3>
+  <div id="video-list"></div>
+  <div id="found-box"></div>
+
+  <script>
+    // Q10 & Q11: find() — first video with views > 1,000,000
+    const videos = [
+      { title: "Learn JavaScript in 1 Hour", channel: "Fireship", views: 540000 },
+      { title: "CSS Tips and Tricks", channel: "Kevin Powell", views: 890000 },
+      { title: "React Full Course", channel: "Traversy Media", views: 2300000 },
+      { title: "Node.js Crash Course", channel: "Traversy Media", views: 1750000 },
+      { title: "Python for Beginners", channel: "freeCodeCamp", views: 320000 }
+    ];
+
+    const firstMillionVideo = videos.find(v => v.views > 1_000_000);
+
+    console.log("First video with 1M+ views:", firstMillionVideo);
+
+    // Display all videos, highlight the found one
+    const list = document.getElementById("video-list");
+    videos.forEach(v => {
+      const row = document.createElement("div");
+      row.classList.add("video-row");
+      if (v === firstMillionVideo) row.classList.add("found");
+      row.innerHTML = `
+        <span>▶ ${v.title}</span>
+        <span class="views">👁 ${v.views.toLocaleString()}</span>
+      `;
+      list.appendChild(row);
+    });
+
+    // Show result
+    const foundBox = document.getElementById("found-box");
+    if (firstMillionVideo) {
+      foundBox.innerHTML = `
+        <div class="found-card">
+          <h3>🎯 First video with 1M+ views:</h3>
+          <p>📹 <strong>${firstMillionVideo.title}</strong></p>
+          <p>📺 ${firstMillionVideo.channel}</p>
+          <p>👁 ${firstMillionVideo.views.toLocaleString()} views</p>
+        </div>
+      `;
+    } else {
+      foundBox.textContent = "No video found with more than 1 million views.";
+    }
+  </script>
+</body>
+</html>

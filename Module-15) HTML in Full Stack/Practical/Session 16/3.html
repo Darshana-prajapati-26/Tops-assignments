@@ -1,0 +1,68 @@
+<!--
+  Q3:
+  Given an array of playlists from a music app like Spotify, each with a name and isPublic
+  property, use filter() to create a new array containing only the public playlists.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q3 - filter() Public Playlists</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .playlist-card {
+      background: #282828; border-radius: 8px; padding: 12px 18px;
+      margin: 8px 0; max-width: 380px; display: flex;
+      justify-content: space-between; align-items: center;
+    }
+    .playlist-name { font-size: 15px; font-weight: bold; }
+    .badge { background: #1DB954; color: #000; border-radius: 4px; padding: 2px 8px; font-size: 13px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Q3: filter() – Public Spotify Playlists</h2>
+  <div class="question-box">
+    <h3>Q3</h3>
+    <p>Given an array of playlists from a music app like Spotify, each with a <code>name</code>
+    and <code>isPublic</code> property, use <code>filter()</code> to create a new array containing
+    only the public playlists.</p>
+  </div>
+
+  <h3 style="color:#1DB954;">🌍 Public Playlists:</h3>
+  <div id="playlist-list"></div>
+
+  <script>
+    // Q3: filter() — keep only playlists where isPublic === true
+    const playlists = [
+      { name: "Chill Vibes", isPublic: true },
+      { name: "My Secret Mix", isPublic: false },
+      { name: "Workout Beats", isPublic: true },
+      { name: "Late Night Drive", isPublic: true },
+      { name: "Private Feels", isPublic: false },
+      { name: "Bollywood Hits", isPublic: true }
+    ];
+
+    const publicPlaylists = playlists.filter(pl => pl.isPublic);
+
+    console.log("Public playlists:", publicPlaylists);
+
+    const container = document.getElementById("playlist-list");
+    publicPlaylists.forEach(pl => {
+      const card = document.createElement("div");
+      card.classList.add("playlist-card");
+      card.innerHTML = `
+        <span class="playlist-name">🎵 ${pl.name}</span>
+        <span class="badge">Public</span>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

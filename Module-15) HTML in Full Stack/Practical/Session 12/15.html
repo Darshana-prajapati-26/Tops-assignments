@@ -1,0 +1,64 @@
+<!--
+  Q15:
+  Fetch a list of albums from https://jsonplaceholder.typicode.com/albums, then filter
+  and display only those albums where the userId is 2. Show the filtered album titles
+  in the console.
+  Constraint: Use only fetch(), .then(), and array methods (no async/await).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q15 - Filter Albums by userId</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #333; }
+    .album-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin: 8px 0;
+      max-width: 520px;
+      font-size: 15px;
+    }
+    .album-num { color: #2874f0; font-weight: bold; margin-right: 8px; }
+    #count { color: #666; font-size: 14px; margin-bottom: 12px; }
+    #loading { color: #aaa; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <h2>Q15: Filter Albums – userId = 2</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q15</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Fetch a list of albums from <code>https://jsonplaceholder.typicode.com/albums</code>, then filter and display only those albums where the <code>userId</code> is 2. Show the filtered album titles in the console.<br><em style="font-size:14px;color:#555;"><strong>Constraint:</strong> Use only <code>fetch()</code>, <code>.then()</code>, and array methods (no async/await).</em></p>
+  </div>
+  <div id="albums-container"><p id="loading">Fetching albums...</p></div>
+
+  <script>
+    // Q15: fetch albums, filter by userId === 2, display titles
+    // Constraint: only fetch(), .then(), and array methods — no async/await
+    fetch("https://jsonplaceholder.typicode.com/albums")
+      .then(response => response.json())
+      .then(albums => albums.filter(album => album.userId === 2))
+      .then(filtered => {
+        const container = document.getElementById("albums-container");
+        container.innerHTML = "";
+
+        document.getElementById("count").textContent =
+          `Found ${filtered.length} albums for userId 2`;
+
+        filtered.forEach((album, i) => {
+          console.log(`Album ${i + 1}: ${album.title}`);
+
+          const card = document.createElement("div");
+          card.classList.add("album-card");
+          card.innerHTML = `<span class="album-num">#${i + 1}</span>${album.title}`;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => console.error("Error:", err));
+  </script>
+</body>
+</html>

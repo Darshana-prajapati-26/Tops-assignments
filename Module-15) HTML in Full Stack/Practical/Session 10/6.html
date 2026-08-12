@@ -1,0 +1,43 @@
+<!--
+  Q6:
+  Write a function orderFood(item, quantity = 1) that returns a string like
+  'You ordered 2 Burgers.' Use default parameters so that if quantity is not passed,
+  it defaults to 1.
+  Hint: Try calling orderFood('Pizza') and orderFood('Burger', 2) to test both cases.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - Default Parameter orderFood</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    p { font-size: 16px; }
+  </style>
+</head>
+<body>
+
+  <h2>Q6: orderFood() – Default Parameter (quantity = 1)</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q6</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Write a function <code>orderFood(item, quantity = 1)</code> that returns a string like <code>'You ordered 2 Burgers.'</code> Use default parameters so that if quantity is not passed, it defaults to 1.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Try calling <code>orderFood('Pizza')</code> and <code>orderFood('Burger', 2)</code> to test both cases.</em></p>
+  </div>
+
+  <script>
+    // Q6: Default parameter — quantity defaults to 1 if not provided
+    function orderFood(item, quantity = 1) {
+      return `You ordered ${quantity} ${item}${quantity > 1 ? "s" : ""}.`;
+    }
+
+    const order1 = orderFood("Pizza");       // quantity defaults to 1
+    const order2 = orderFood("Burger", 2);  // quantity = 2
+
+    console.log(order1);
+    console.log(order2);
+
+    document.getElementById("output").innerHTML =
+      `<p>🍕 ${order1}</p><p>🍔 ${order2}</p>`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!--
+  Q10 & Q11:
+  Refactor an existing file where you have three functions: addToCart, removeFromCart,
+  and calculateTotal (all related to a Flipkart-style shopping cart) into a separate file
+  cartUtils.js. Use named exports and update your main.js to import and use these functions.
+  Hint: Make sure you remove the original function definitions from main.js and only use
+  the imported versions.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - cartUtils.js Named Exports</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    h3 { color: #555; margin-top: 22px; }
+    #total { font-size: 18px; font-weight: bold; color: #2874f0; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Q10 & Q11: cartUtils.js → main.js (Named Exports)</h2>
+  <div style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q10 &amp; Q11</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Refactor an existing file where you have three functions: <code>addToCart</code>, <code>removeFromCart</code>, and <code>calculateTotal</code> (all related to a Flipkart-style shopping cart) into a separate file <code>cartUtils.js</code>. Use named exports and update your <code>main.js</code> to import and use these functions.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Make sure you remove the original function definitions from <code>main.js</code> and only use the imported versions.</em></p>
+  </div>
+  <div id="product-list"></div>
+  <h3>🛒 Cart</h3>
+  <div id="cart-list"></div>
+  <div id="total">Total: ₹0</div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

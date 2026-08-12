@@ -1,0 +1,80 @@
+<!--
+  Q4:
+  Write a try...catch...finally block that tries to parse a JSON string representing a
+  Flipkart product (e.g., '{"name":"Shoes","price":999}'). If parsing fails, catch the
+  error and log 'Invalid product data', and in the finally block, log
+  'Parsing attempt finished'.
+
+  Q5:
+  Write a try...catch...finally block that tries to parse a JSON string representing a
+  Flipkart product (e.g., '{"name":"Shoes","price":999}'). If parsing fails, catch the
+  error and log 'Invalid product data', and in the finally block, log
+  'Parsing attempt finished'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - try...catch...finally JSON Parse</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    input {
+      padding: 9px 14px; font-size: 14px;
+      border: 1px solid #ccc; border-radius: 6px; width: 340px;
+    }
+    button {
+      padding: 9px 18px; background: #2874f0; color: #fff;
+      border: none; border-radius: 6px; font-size: 15px; cursor: pointer;
+    }
+    button:hover { background: #1a5ec4; }
+    .log-box {
+      background: #fff; border: 1px solid #ddd; border-radius: 8px;
+      padding: 14px 18px; max-width: 520px; margin-top: 10px; font-size: 15px;
+    }
+    .ok      { color: #388e3c; }
+    .err     { color: #c62828; }
+    .finally { color: #555; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <h2>Q4 & Q5: try…catch…finally – JSON Parse</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q4 &amp; Q5</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Write a <code>try…catch…finally</code> block that tries to parse a JSON string representing a Flipkart product (e.g., <code>'&#123;"name":"Shoes","price":999&#125;'</code>). If parsing fails, catch the error and log <code>'Invalid product data'</code>, and in the <code>finally</code> block, log <code>'Parsing attempt finished'</code>.</p>
+  </div>
+    <input type="text" id="json-input" value='{"name":"Shoes","price":999}' />
+    <button onclick="parseProduct()">Parse JSON</button>
+  </div>
+  <div class="log-box" id="log-output"></div>
+
+  <script>
+    // Q4 & Q5: try to parse JSON, catch invalid data, always run finally
+    function parseProduct() {
+      const jsonStr = document.getElementById("json-input").value.trim();
+      const logEl = document.getElementById("log-output");
+      logEl.innerHTML = "";
+
+      const addLine = (text, cls) => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        p.className = cls || "";
+        p.style.margin = "4px 0";
+        logEl.appendChild(p);
+        console.log(text);
+      };
+
+      try {
+        const product = JSON.parse(jsonStr);
+        addLine(`✅ Parsed: ${product.name} — ₹${product.price}`, "ok");
+      } catch (e) {
+        addLine("❌ Invalid product data", "err");
+      } finally {
+        addLine("ℹ️ Parsing attempt finished", "finally");
+      }
+    }
+  </script>
+</body>
+</html>

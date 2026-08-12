@@ -1,0 +1,78 @@
+<!--
+  Q9:
+  Given an array of Instagram post objects with a likes property, use reduce() to calculate
+  the total number of likes across all posts.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - reduce() Total Likes</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #833ab4; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .post-row {
+      background: #fff; border-radius: 8px; padding: 10px 18px;
+      margin: 8px 0; max-width: 500px; display: flex;
+      justify-content: space-between; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .post-caption { color: #555; font-size: 14px; }
+    .likes { color: #e1306c; font-weight: bold; }
+    .total-box {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      color: #fff; border-radius: 12px;
+      padding: 20px 28px; max-width: 300px; margin-top: 20px; text-align: center;
+    }
+    .total-num { font-size: 42px; font-weight: bold; }
+    .total-label { font-size: 14px; margin-top: 4px; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <h2>Q9: reduce() – Total Likes (Instagram Posts)</h2>
+  <div class="question-box">
+    <h3>Q9</h3>
+    <p>Given an array of Instagram post objects with a <code>likes</code> property, use
+    <code>reduce()</code> to calculate the total number of likes across all posts.</p>
+  </div>
+
+  <h3 style="color:#833ab4;">Posts:</h3>
+  <div id="posts-list"></div>
+  <div class="total-box" id="total-box"></div>
+
+  <script>
+    // Q9: reduce() — sum all likes across posts
+    const posts = [
+      { caption: "Sunset at the beach 🌅", likes: 4320 },
+      { caption: "Coffee and code ☕", likes: 1890 },
+      { caption: "Weekend vibes 🎉", likes: 7650 },
+      { caption: "New sneakers drop 👟", likes: 3210 },
+      { caption: "Morning run 🏃", likes: 980 }
+    ];
+
+    const totalLikes = posts.reduce((acc, post) => acc + post.likes, 0);
+
+    console.log("Total likes:", totalLikes);
+
+    const list = document.getElementById("posts-list");
+    posts.forEach(p => {
+      const row = document.createElement("div");
+      row.classList.add("post-row");
+      row.innerHTML = `<span class="post-caption">📷 ${p.caption}</span>
+                       <span class="likes">❤️ ${p.likes.toLocaleString()}</span>`;
+      list.appendChild(row);
+    });
+
+    document.getElementById("total-box").innerHTML = `
+      <div class="total-num">❤️ ${totalLikes.toLocaleString()}</div>
+      <div class="total-label">Total Likes (all posts)</div>
+    `;
+  </script>
+</body>
+</html>

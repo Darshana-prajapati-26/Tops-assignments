@@ -1,0 +1,109 @@
+<!--
+  Q9:
+  Write a function getOrderTotal(items) for a Zomato-style food order, where items is an
+  array of objects with name and price. If any price is negative, throw a custom
+  Error('Invalid item price'). Use try...catch to handle the error and display a friendly
+  message.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - getOrderTotal Zomato</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .order-list { max-width: 420px; }
+    .order-item {
+      background: #fff; border: 1px solid #e23744; border-radius: 8px;
+      padding: 10px 16px; margin: 8px 0; display: flex;
+      justify-content: space-between; font-size: 15px;
+    }
+    button {
+      padding: 10px 22px; background: #e23744; color: #fff;
+      border: none; border-radius: 6px; font-size: 15px; cursor: pointer;
+      margin: 6px 6px 6px 0;
+    }
+    button:hover { background: #c0303c; }
+    #result { font-size: 17px; font-weight: bold; margin-top: 14px; }
+    .ok  { color: #388e3c; }
+    .err { color: #c62828; }
+  </style>
+</head>
+<body>
+
+  <h2>Q9: getOrderTotal() – Zomato Order Validation</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q9</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Write a function <code>getOrderTotal(items)</code> for a Zomato-style food order, where <code>items</code> is an array of objects with <code>name</code> and <code>price</code>. If any price is negative, throw a custom <code>Error('Invalid item price')</code>. Use <code>try...catch</code> to handle the error and display a friendly message.</p>
+  </div>
+
+  <button onclick="runValidOrder()">Valid Order</button>
+  <button onclick="runInvalidOrder()">Order with Negative Price</button>
+  <div id="result"></div>
+
+  <script>
+    // Q9: Throw Error if any item price is negative
+    function getOrderTotal(items) {
+      for (const item of items) {
+        if (item.price < 0) {
+          throw new Error("Invalid item price");
+        }
+      }
+      return items.reduce((sum, item) => sum + item.price, 0);
+    }
+
+    const validItems = [
+      { name: "Butter Chicken", price: 320 },
+      { name: "Naan", price: 60 },
+      { name: "Mango Lassi", price: 80 }
+    ];
+
+    const invalidItems = [
+      { name: "Biryani", price: 180 },
+      { name: "Raita", price: -20 },  // negative price!
+      { name: "Gulab Jamun", price: 60 }
+    ];
+
+    function renderOrder(items) {
+      const container = document.getElementById("order-display");
+      container.innerHTML = "";
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("order-item");
+        div.innerHTML = `<span>${item.name}</span><span style="color:${item.price < 0 ? '#c62828' : '#333'}">₹${item.price}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    function runValidOrder() {
+      renderOrder(validItems);
+      const resultEl = document.getElementById("result");
+      try {
+        const total = getOrderTotal(validItems);
+        resultEl.textContent = `✅ Order Total: ₹${total}`;
+        resultEl.className = "ok";
+        console.log("Order Total:", total);
+      } catch (e) {
+        resultEl.textContent = "❌ " + e.message;
+        resultEl.className = "err";
+        console.error(e.message);
+      }
+    }
+
+    function runInvalidOrder() {
+      renderOrder(invalidItems);
+      const resultEl = document.getElementById("result");
+      try {
+        const total = getOrderTotal(invalidItems);
+        resultEl.textContent = `✅ Order Total: ₹${total}`;
+        resultEl.className = "ok";
+      } catch (e) {
+        resultEl.textContent = "❌ " + e.message + " — please check your cart.";
+        resultEl.className = "err";
+        console.error(e.message);
+      }
+    }
+  </script>
+</body>
+</html>

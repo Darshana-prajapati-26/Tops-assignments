@@ -1,0 +1,65 @@
+<!--
+  Q4:
+  Write a function getDeliveryDetails that takes two parameters: address (string) and
+  paymentMethod (string), both with default values ('Ahmedabad' and 'UPI'). Log a message
+  using template literals showing both values. Call the function once with no arguments
+  and once with custom values.
+
+  Q5:
+  Write a function getDeliveryDetails that takes two parameters: address (string) and
+  paymentMethod (string), both with default values ('Ahmedabad' and 'UPI'). Log a message
+  using template literals showing both values. Call the function once with no arguments
+  and once with custom values.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - Default Parameters getDeliveryDetails</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .card {
+      background: #fff;
+      border: 1px solid #e23744;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      max-width: 400px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q4 & Q5: getDeliveryDetails() – Default Parameters</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q4 &amp; Q5</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Write a function <code>getDeliveryDetails</code> that takes two parameters: <code>address</code> (string) and <code>paymentMethod</code> (string), both with default values (<code>'Ahmedabad'</code> and <code>'UPI'</code>). Log a message using template literals showing both values. Call the function once with no arguments and once with custom values.</p>
+  </div>
+
+  <script>
+    // Q4 & Q5: Default parameter values — address = 'Ahmedabad', paymentMethod = 'UPI'
+    function getDeliveryDetails(address = "Ahmedabad", paymentMethod = "UPI") {
+      return `Delivering to: ${address} | Payment: ${paymentMethod}`;
+    }
+
+    // Call with no arguments (uses defaults)
+    const msg1 = getDeliveryDetails();
+    console.log(msg1);
+
+    // Call with custom values
+    const msg2 = getDeliveryDetails("Mumbai", "Credit Card");
+    console.log(msg2);
+
+    // Display on page
+    const container = document.getElementById("output");
+    [msg1, msg2].forEach(msg => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.textContent = "📦 " + msg;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

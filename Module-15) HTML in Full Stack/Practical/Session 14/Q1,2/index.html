@@ -1,0 +1,34 @@
+<!--
+  Q1 & Q2:
+  Create a file called utils.js and write a function generateOrderId() that returns a
+  random 8-character order ID string. Export this function using a named export, then
+  import and use it in a separate file order.js to log a new order ID.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - generateOrderId</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    #order-id {
+      font-size: 22px; font-weight: bold; color: #2874f0; background: #fff;
+      padding: 14px 22px; border-radius: 8px; display: inline-block;
+      border: 1px solid #ddd; margin-top: 14px; letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q1 & Q2: utils.js → order.js (Named Export)</h2>
+  <div style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q1 &amp; Q2</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Create a file called <code>utils.js</code> and write a function <code>generateOrderId()</code> that returns a random 8-character order ID string. Export this function using a named export, then import and use it in a separate file <code>order.js</code> to log a new order ID.</p>
+  </div>
+  <p>Check console for logged Order ID.</p>
+  <div id="order-id">Generating...</div>
+
+  <!-- type="module" enables ES module import/export -->
+  <script type="module" src="order.js"></script>
+</body>
+</html>

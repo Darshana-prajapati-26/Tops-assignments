@@ -1,0 +1,72 @@
+<!--
+  Q1:
+  Create a function validateSpotifyURL(url) that takes a string and checks if it starts
+  with 'https://open.spotify.com/'. If not, throw a custom Error with the message
+  'Invalid Spotify URL'.
+
+  Q2:
+  Create a function validateSpotifyURL(url) that takes a string and checks if it starts
+  with 'https://open.spotify.com/'. If not, throw a custom Error with the message
+  'Invalid Spotify URL'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - validateSpotifyURL</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 16px; }
+    input {
+      padding: 9px 14px; font-size: 15px; border: none;
+      border-radius: 6px; background: #282828; color: #fff; width: 340px;
+    }
+    button {
+      padding: 9px 20px; background: #1DB954; color: #fff;
+      border: none; border-radius: 25px; font-size: 15px; cursor: pointer;
+    }
+    button:hover { background: #17a047; }
+    #result { font-size: 16px; font-weight: bold; margin-top: 10px; }
+    .ok  { color: #1DB954; }
+    .err { color: #e74c3c; }
+  </style>
+</head>
+<body>
+
+  <h2>Q2: validateSpotifyURL()</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q1 &amp; Q2</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Create a function <code>validateSpotifyURL(url)</code> that takes a string and checks if it starts with <code>'https://open.spotify.com/'</code>. If not, throw a custom Error with the message <code>'Invalid Spotify URL'</code>.</p>
+  </div>
+    <input type="text" id="url-input" value="https://open.spotify.com/playlist/abc123" />
+    <button onclick="validate()">Validate</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    // Q1 & Q2: Throw custom Error if URL doesn't start with Spotify prefix
+    function validateSpotifyURL(url) {
+      if (!url.startsWith("https://open.spotify.com/")) {
+        throw new Error("Invalid Spotify URL");
+      }
+      return "Valid Spotify URL ✅";
+    }
+
+    function validate() {
+      const url = document.getElementById("url-input").value.trim();
+      const resultEl = document.getElementById("result");
+      try {
+        const msg = validateSpotifyURL(url);
+        resultEl.textContent = msg;
+        resultEl.className = "ok";
+        console.log(msg);
+      } catch (e) {
+        resultEl.textContent = "❌ " + e.message;
+        resultEl.className = "err";
+        console.error(e.message);
+      }
+    }
+  </script>
+</body>
+</html>

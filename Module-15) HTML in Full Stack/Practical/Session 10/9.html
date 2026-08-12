@@ -1,0 +1,46 @@
+<!--
+  Q9:
+  Given this object: const movie = { title: 'Jawan', rating: 4.5, genre: 'Action' },
+  use object destructuring to extract title and rating into separate variables and log
+  them as 'Movie: Jawan, Rating: 4.5'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - Object Destructuring Movie</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #1a1a2e; color: #fff; }
+    h2 { color: #e94560; }
+    .movie-card {
+      background: #16213e;
+      border-left: 4px solid #e94560;
+      border-radius: 8px;
+      padding: 14px 20px;
+      max-width: 360px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q9: Object Destructuring – Movie</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q9</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#eee;">Given this object: <code>const movie = &#123; title: 'Jawan', rating: 4.5, genre: 'Action' &#125;</code>, use object destructuring to extract <code>title</code> and <code>rating</code> into separate variables and log them as <code>'Movie: Jawan, Rating: 4.5'</code>.</p>
+  </div>
+
+  <script>
+    // Q9: Destructure title and rating from movie object
+    const movie = { title: "Jawan", rating: 4.5, genre: "Action" };
+
+    const { title, rating } = movie;
+
+    const message = `Movie: ${title}, Rating: ${rating}`;
+    console.log(message);
+
+    document.getElementById("output").innerHTML =
+      `<div class="movie-card">🎬 ${message}</div>`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!--
+  Q4:
+  Use the map() method to transform an array of Instagram post objects (each with a likes
+  property) into a new array of just the like counts.
+
+  Q5:
+  Use the map() method to transform an array of Instagram post objects (each with a likes
+  property) into a new array of just the like counts.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - map() Like Counts</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #833ab4; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .post-row {
+      background: #fff; border-radius: 8px; padding: 12px 18px;
+      margin: 8px 0; max-width: 500px; display: flex;
+      justify-content: space-between; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .post-caption { font-size: 14px; color: #555; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .like-count { color: #e1306c; font-weight: bold; font-size: 16px; }
+    .result-box {
+      background: #f9f0ff; border-left: 4px solid #833ab4;
+      border-radius: 8px; padding: 14px 18px; max-width: 480px; margin-top: 16px;
+      font-size: 15px; color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q4 &amp; Q5: map() – Extract Like Counts</h2>
+  <div class="question-box">
+    <h3>Q4 &amp; Q5</h3>
+    <p>Use the <code>map()</code> method to transform an array of Instagram post objects
+    (each with a <code>likes</code> property) into a new array of just the like counts.</p>
+  </div>
+
+  <h3 style="color:#833ab4;">Posts:</h3>
+  <div id="posts-list"></div>
+
+  <div class="result-box" id="result-box"></div>
+
+  <script>
+    // Q4 & Q5: map() — extract only the likes value from each post object
+    const posts = [
+      { caption: "Sunset at the beach 🌅", likes: 4320 },
+      { caption: "Coffee and code ☕", likes: 1890 },
+      { caption: "Weekend vibes 🎉", likes: 7650 },
+      { caption: "New sneakers drop 👟", likes: 3210 },
+      { caption: "Morning run 🏃", likes: 980 }
+    ];
+
+    const likeCounts = posts.map(post => post.likes);
+
+    console.log("Like counts:", likeCounts);
+
+    // Display each post
+    const list = document.getElementById("posts-list");
+    posts.forEach(post => {
+      const row = document.createElement("div");
+      row.classList.add("post-row");
+      row.innerHTML = `
+        <span class="post-caption">📷 ${post.caption}</span>
+        <span class="like-count">❤️ ${post.likes.toLocaleString()}</span>
+      `;
+      list.appendChild(row);
+    });
+
+    // Display the mapped array
+    document.getElementById("result-box").innerHTML =
+      `<strong>Mapped likeCounts array:</strong><br>[${likeCounts.join(", ")}]`;
+  </script>
+</body>
+</html>

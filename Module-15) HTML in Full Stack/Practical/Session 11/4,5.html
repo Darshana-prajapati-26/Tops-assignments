@@ -1,0 +1,70 @@
+<!--
+  Q4:
+  Simulate a Zomato order status updater using callbacks: write a function placeOrder
+  that takes a food item and a callback, waits 1 second using setTimeout, then calls
+  the callback with the message 'Your [item] is being prepared'.
+
+  Q5:
+  Simulate a Zomato order status updater using callbacks: write a function placeOrder
+  that takes a food item and a callback, waits 1 second using setTimeout, then calls
+  the callback with the message 'Your [item] is being prepared'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - Callback placeOrder</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .status-box {
+      background: #fff;
+      border: 1px solid #e23744;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      max-width: 400px;
+      font-size: 16px;
+      min-height: 24px;
+    }
+    button {
+      padding: 10px 22px;
+      background: #e23744;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 6px 6px 6px 0;
+    }
+    button:hover { background: #c0303c; }
+  </style>
+</head>
+<body>
+
+  <h2>Q4 & Q5: Callbacks – Zomato placeOrder()</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q4 &amp; Q5</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Simulate a Zomato order status updater using callbacks: write a function <code>placeOrder</code> that takes a food item and a callback, waits 1 second using <code>setTimeout</code>, then calls the callback with the message <code>'Your [item] is being prepared'</code>.</p>
+  </div>
+  <button onclick="placeOrder('Burger', handleStatus)">Order Burger</button>
+  <div class="status-box" id="status-output">Click an order button...</div>
+
+  <script>
+    // Q4 & Q5: placeOrder takes a food item and a callback,
+    // waits 1 second then calls callback with a status message
+    function placeOrder(item, callback) {
+      document.getElementById("status-output").textContent = `Placing order for ${item}...`;
+
+      setTimeout(() => {
+        callback(`Your ${item} is being prepared`);
+      }, 1000);
+    }
+
+    function handleStatus(message) {
+      console.log(message);
+      document.getElementById("status-output").textContent = "🍴 " + message;
+    }
+  </script>
+</body>
+</html>

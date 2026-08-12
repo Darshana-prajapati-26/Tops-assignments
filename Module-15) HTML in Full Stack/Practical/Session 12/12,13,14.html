@@ -1,0 +1,117 @@
+<!--
+  Q12:
+  Open your browser's Developer Tools, go to the Network tab, and perform a fetch() GET
+  request to https://jsonplaceholder.typicode.com/users. Take a screenshot showing the
+  request and response details, and write two lines explaining the request-response cycle
+  you observed.
+
+  Q13:
+  Open your browser's DevTools Network tab, run a fetch() GET request to
+  https://jsonplaceholder.typicode.com/users, and take a screenshot showing the request
+  and response details. Briefly describe what you see in the request and response cycle.
+
+  Q14:
+  Open your browser's DevTools Network tab, run a fetch() GET request to
+  https://jsonplaceholder.typicode.com/users, and take a screenshot showing the request
+  and response details. Briefly describe what you see in the request and response cycle.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12, Q13 & Q14 - DevTools Network Explanation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 700px; background: #fafafa; }
+    h2 { color: #333; }
+    .card {
+      background: #fff;
+      border-left: 5px solid #2874f0;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    h3 { color: #2874f0; margin-top: 0; }
+    p { line-height: 1.7; color: #444; }
+    code {
+      background: #e8eaf6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    button {
+      padding: 10px 22px;
+      background: #2874f0;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    button:hover { background: #1a5ec4; }
+    pre {
+      background: #f4f4f4;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      overflow-x: auto;
+      max-height: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q12, Q13 & Q14: DevTools Network Tab – Request-Response Cycle</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:700px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q12, Q13 &amp; Q14</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Open your browser's Developer Tools, go to the Network tab, and perform a <code>fetch()</code> GET request to <code>https://jsonplaceholder.typicode.com/users</code>. Take a screenshot showing the request and response details, and write two lines explaining the request-response cycle you observed.</p>
+  </div>
+    <h3>🔍 How to Observe in DevTools</h3>
+    <p>
+      1. Open DevTools with <strong>F12</strong> and go to the <strong>Network</strong> tab.<br/>
+      2. Click the button below to run a <code>fetch()</code> GET request.<br/>
+      3. In the Network tab you will see an entry for <code>users</code>.<br/>
+      4. Click on it to view <strong>Headers</strong>, <strong>Preview</strong>, and <strong>Response</strong> panels.
+    </p>
+    <button onclick="runFetch()">Run GET /users</button>
+    <pre id="fetch-output">Response will appear here...</pre>
+  </div>
+
+  <div class="card">
+    <h3>📝 Request–Response Cycle Explanation</h3>
+    <p>
+      <strong>Request:</strong> The browser sends an HTTP <code>GET</code> request to
+      <code>https://jsonplaceholder.typicode.com/users</code>. The request includes headers
+      such as <code>Accept: */*</code> and the HTTP method. No request body is sent
+      because GET requests only ask for data.
+    </p>
+    <p>
+      <strong>Response:</strong> The server replies with a <code>200 OK</code> status code
+      and a JSON array of 10 user objects in the response body. The
+      <code>Content-Type: application/json</code> header tells the browser how to interpret
+      the data. The browser then makes it available to our JavaScript via <code>.json()</code>.
+    </p>
+  </div>
+
+  <script>
+    // Q12, 13, 14: Run a fetch() GET and display results — open Network tab to observe
+    function runFetch() {
+      document.getElementById("fetch-output").textContent = "Fetching...";
+
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(response => response.json())
+        .then(users => {
+          // Show first 3 users as a preview
+          const preview = users.slice(0, 3).map(u => ({
+            id: u.id, name: u.name, email: u.email
+          }));
+          document.getElementById("fetch-output").textContent =
+            JSON.stringify(preview, null, 2) + "\n...and 7 more users";
+          console.log("All users:", users);
+        })
+        .catch(err => console.error("Error:", err));
+    }
+  </script>
+</body>
+</html>

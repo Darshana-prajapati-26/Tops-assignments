@@ -1,0 +1,76 @@
+<!--
+  Q13:
+  Refactor this function to use an arrow function and rest parameters:
+  function addToCart() { let total = 0; for(let i=0; i<arguments.length; i++) {
+  total += arguments[i]; } return total; }
+  The new function should be called addToCartArrow and accept any number of prices
+  as arguments, returning their sum.
+
+  Q14:
+  Refactor this function to use an arrow function and rest parameters:
+  function addToCart() { let total = 0; for(let i=0; i<arguments.length; i++) {
+  total += arguments[i]; } return total; }
+  The new function should be called addToCartArrow and accept any number of prices
+  as arguments, returning their sum.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - Arrow Function + Rest Parameters addToCartArrow</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .result {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin: 8px 0;
+      max-width: 380px;
+      font-size: 16px;
+    }
+    .total { color: #388e3c; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Q13 & Q14: addToCartArrow() – Arrow Function + Rest Parameters</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q13 &amp; Q14</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Refactor this function to use an arrow function and rest parameters:<br><code>function addToCart() &#123; let total = 0; for(let i=0; i&lt;arguments.length; i++) &#123; total += arguments[i]; &#125; return total; &#125;</code><br>The new function should be called <code>addToCartArrow</code> and accept any number of prices as arguments, returning their sum.</p>
+  </div>
+
+  <script>
+    // Original function (for reference):
+    // function addToCart() {
+    //   let total = 0;
+    //   for (let i = 0; i < arguments.length; i++) { total += arguments[i]; }
+    //   return total;
+    // }
+
+    // Q13 & Q14: Refactored with arrow function and rest parameters
+    const addToCartArrow = (...prices) => prices.reduce((total, price) => total + price, 0);
+
+    const total1 = addToCartArrow(199, 499, 999);
+    const total2 = addToCartArrow(350, 150);
+    const total3 = addToCartArrow(1999, 3499, 899, 1299);
+
+    console.log("Total 1:", total1);
+    console.log("Total 2:", total2);
+    console.log("Total 3:", total3);
+
+    const container = document.getElementById("output");
+    [
+      { label: "Cart (199 + 499 + 999)", total: total1 },
+      { label: "Cart (350 + 150)", total: total2 },
+      { label: "Cart (1999 + 3499 + 899 + 1299)", total: total3 }
+    ].forEach(({ label, total }) => {
+      const div = document.createElement("div");
+      div.classList.add("result");
+      div.innerHTML = `🛒 ${label} = <span class="total">₹${total}</span>`;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>

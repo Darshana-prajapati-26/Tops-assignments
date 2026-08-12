@@ -1,0 +1,104 @@
+<!--
+  Q12:
+  Refactor the following callback-based code to use Promises instead:
+  setTimeout(function() { console.log('Payment successful!'); }, 1000);
+  Ensure the new function returns a Promise and logs the message after 1 second.
+  Hint: Use new Promise((resolve, reject) => { ... }) and resolve inside setTimeout.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Refactor Callback to Promise</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 22px;
+      max-width: 560px;
+      margin-bottom: 18px;
+      border-left: 5px solid #e65100;
+    }
+    .box.promise { border-left-color: #2874f0; }
+    .box h3 { margin-top: 0; }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+    button {
+      padding: 9px 20px;
+      background: #2874f0;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { background: #1a5ec4; }
+    #pay-status { margin-top: 12px; font-size: 17px; font-weight: bold; color: #388e3c; min-height: 26px; }
+  </style>
+</head>
+<body>
+
+  <h2>Q12: Refactor Callback → Promise</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q12</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Refactor the following callback-based code to use Promises instead: <code>setTimeout(function() &#123; console.log('Payment successful!'); &#125;, 1000);</code> Ensure the new function returns a Promise and logs the message after 1 second.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Use <code>new Promise((resolve, reject) =&gt; &#123; ... &#125;)</code> and resolve inside setTimeout.</em></p>
+  </div>
+    <h3>❌ Original Callback-based Code</h3>
+    <pre>
+setTimeout(function() {
+  console.log('Payment successful!');
+}, 1000);</pre>
+    <p>Problem: Can't chain, can't handle errors, no return value.</p>
+  </div>
+
+  <div class="box promise">
+    <h3>✅ Refactored Promise Version</h3>
+    <pre>
+function processPayment() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('Payment successful!');
+    }, 1000);
+  });
+}
+
+processPayment()
+  .then(message => console.log(message));</pre>
+
+    <button onclick="runPayment()">Process Payment</button>
+    <div id="pay-status"></div>
+  </div>
+
+  <script>
+    // Q12: Refactored — returns a Promise instead of using a bare callback
+    function processPayment() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Payment successful!");
+        }, 1000);
+      });
+    }
+
+    function runPayment() {
+      const statusEl = document.getElementById("pay-status");
+      statusEl.textContent = "Processing...";
+      statusEl.style.color = "#888";
+
+      processPayment()
+        .then(message => {
+          console.log(message);
+          statusEl.textContent = "✅ " + message;
+          statusEl.style.color = "#388e3c";
+        });
+    }
+  </script>
+</body>
+</html>

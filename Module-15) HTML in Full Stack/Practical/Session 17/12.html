@@ -1,0 +1,126 @@
+<!--
+  Q12:
+  Given the following code snippet, fix the bug so that clicking the 'X' icon on any
+  card removes only that card, even if cards are added dynamically:
+
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', function() { this.parentElement.remove(); });
+  });
+
+  Hint: Use event delegation by adding a single event listener to the parent container
+  instead of looping through all buttons.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Bug Fix: Event Delegation Instead of querySelectorAll Loop</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #333; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .code-box {
+      background: #fff; border-radius: 10px; padding: 16px 22px;
+      margin-bottom: 18px; border-left: 5px solid #c62828;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    .code-box.fixed { border-left-color: #388e3c; }
+    .code-box h3 { margin-top: 0; font-size: 15px; color: #c62828; }
+    .code-box.fixed h3 { color: #388e3c; }
+    pre { background: #f4f4f4; border-radius: 6px; padding: 12px; font-size: 13px; overflow-x: auto; }
+    .add-btn {
+      padding: 9px 20px; background: #388e3c; color: #fff; border: none;
+      border-radius: 6px; font-size: 14px; cursor: pointer; margin-bottom: 16px;
+    }
+    .add-btn:hover { background: #2e7d32; }
+    #card-container { max-width: 460px; }
+    .item-card {
+      background: #fff; border-radius: 8px; padding: 12px 16px; margin: 8px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .item-name { font-size: 15px; color: #212121; font-weight: bold; }
+    .remove-btn {
+      background: none; border: none; font-size: 18px; color: #aaa;
+      cursor: pointer; padding: 2px 6px; border-radius: 50%;
+    }
+    .remove-btn:hover { color: #e53935; background: #fdecea; }
+  </style>
+</head>
+<body>
+  <h2>Q12: Bug Fix – Use Event Delegation Instead of Loop</h2>
+  <div class="question-box">
+    <h3>Q12</h3>
+    <p>Fix the bug so that clicking the 'X' icon on any card removes only that card, even
+    if cards are added dynamically.<br><br>
+    <code>document.querySelectorAll('.remove-btn').forEach(btn =&gt; &#123; btn.addEventListener('click', function() &#123; this.parentElement.remove(); &#125;); &#125;);</code><br><br>
+    <em><strong>Hint:</strong> Use event delegation by adding a single event listener to
+    the parent container instead of looping through all buttons.</em></p>
+  </div>
+
+  <div class="code-box">
+    <h3>❌ Buggy Code – forEach loop doesn't cover dynamically added cards</h3>
+    <pre>
+// BUG: querySelectorAll only finds existing elements at this point in time.
+// Cards added later won't have the listener!
+document.querySelectorAll('.remove-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.parentElement.remove();
+  });
+});</pre>
+    <p><strong>Problem:</strong> If a new card is added dynamically after this code runs,
+    its button won't have a listener — so clicking 'X' on it does nothing.</p>
+  </div>
+
+  <div class="code-box fixed">
+    <h3>✅ Fixed Code – Single delegated listener on parent container</h3>
+    <pre>
+// FIX: One listener on the parent catches clicks from ALL buttons,
+// including those added dynamically later.
+document.getElementById('card-container').addEventListener('click', function(e) {
+  if (e.target.classList.contains('remove-btn')) {
+    e.target.closest('.item-card').remove();
+  }
+});</pre>
+  </div>
+
+  <button class="add-btn" id="add-btn">+ Add Card Dynamically</button>
+
+  <!-- ✅ Single listener on this container -->
+  <div id="card-container">
+    <div class="item-card"><span class="item-name">Redmi Note 12 Pro</span><button class="remove-btn">✕</button></div>
+    <div class="item-card"><span class="item-name">Boat Rockerz 255</span><button class="remove-btn">✕</button></div>
+    <div class="item-card"><span class="item-name">Noise Smartwatch</span><button class="remove-btn">✕</button></div>
+  </div>
+
+  <script>
+    const dynamicItems = ["HP Laptop 15s", "Samsung Galaxy Tab", "Apple AirPods Pro"];
+    let idx = 0;
+
+    // ✅ Fixed: single delegated listener works for all cards — existing and future
+    document.getElementById("card-container").addEventListener("click", function (e) {
+      if (e.target.classList.contains("remove-btn")) {
+        e.target.closest(".item-card").remove();
+      }
+    });
+
+    document.getElementById("add-btn").addEventListener("click", function () {
+      if (idx >= dynamicItems.length) {
+        this.disabled = true;
+        this.textContent = "No more items";
+        return;
+      }
+      const card = document.createElement("div");
+      card.classList.add("item-card");
+      card.innerHTML = `<span class="item-name">✨ ${dynamicItems[idx++]} (added dynamically)</span>
+                        <button class="remove-btn">✕</button>`;
+      document.getElementById("card-container").appendChild(card);
+    });
+  </script>
+</body>
+</html>

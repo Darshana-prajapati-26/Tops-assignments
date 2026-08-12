@@ -1,0 +1,95 @@
+<!--
+  Q10:
+  Given this buggy code, debug it so that it properly handles errors when trying to
+  access a property of an undefined object:
+
+  let user;
+  try {
+    console.log(user.name);
+  } catch (e) {
+    // handle error
+  }
+
+  Hint: Make sure the error message is user-friendly, like 'User data not found'.
+
+  Q11:
+  Given this buggy code, debug it so that it properly handles errors when trying to
+  access a property of an undefined object:
+
+  let user;
+  try {
+    console.log(user.name);
+  } catch (e) {
+    // handle error
+  }
+
+  Hint: Make sure the error message is user-friendly, like 'User data not found'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Debug Undefined Object Error</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 640px; background: #fafafa; }
+    h2 { color: #333; }
+    .box {
+      background: #fff; border-radius: 8px; padding: 18px 22px;
+      margin-bottom: 18px; border-left: 5px solid #c62828;
+    }
+    .box.fixed { border-left-color: #388e3c; }
+    .box h3 { margin-top: 0; }
+    pre {
+      background: #f4f4f4; padding: 12px; border-radius: 6px;
+      font-size: 13px; overflow-x: auto;
+    }
+    #output {
+      font-size: 16px; font-weight: bold; margin-top: 10px; color: #388e3c;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q10 & Q11: Debug – Accessing Property of Undefined</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q10 &amp; Q11</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Debug this code so that it properly handles errors when trying to access a property of an undefined object:<br><br><code>let user;<br>try &#123;<br>&nbsp;&nbsp;console.log(user.name);<br>&#125; catch (e) &#123;<br>&nbsp;&nbsp;// handle error<br>&#125;</code><br><br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Make sure the error message is user-friendly, like <code>'User data not found'</code>.</em></p>
+  </div>
+    <h3>❌ Buggy Code</h3>
+    <pre>
+let user;
+try {
+  console.log(user.name);  // TypeError: Cannot read properties of undefined
+} catch (e) {
+  // handle error  ← empty catch, no user-friendly message
+}</pre>
+    <p><strong>Problem:</strong> The catch block is empty — the error is silently swallowed
+    and the user sees nothing.</p>
+  </div>
+
+  <div class="box fixed">
+    <h3>✅ Fixed Code</h3>
+    <pre>
+let user;  // undefined
+try {
+  console.log(user.name);
+} catch (e) {
+  console.error("User data not found");   // user-friendly message
+}</pre>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Q10 & Q11: Fixed version — catch block logs a friendly message
+    let user; // undefined intentionally
+
+    try {
+      console.log(user.name); // This throws TypeError
+    } catch (e) {
+      const msg = "User data not found";
+      console.error(msg);
+      document.getElementById("output").textContent = "❌ " + msg;
+    }
+  </script>
+</body>
+</html>

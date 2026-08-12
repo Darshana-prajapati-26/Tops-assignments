@@ -1,0 +1,51 @@
+<!--
+  Q10:
+  You have two arrays: const cricketFans = ['Virat', 'Rohit']; const footballFans =
+  ['Messi', 'Ronaldo']; Use the spread operator to combine both arrays into a single
+  array called allFans and log the result.
+  Hint: Use [...cricketFans, ...footballFans]
+
+  Q11:
+  You have two arrays: const cricketFans = ['Virat', 'Rohit']; const footballFans =
+  ['Messi', 'Ronaldo']; Use the spread operator to combine both arrays into a single
+  array called allFans and log the result.
+  Hint: Use [...cricketFans, ...footballFans]
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Spread Operator Combine Arrays</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    h2 { color: #333; }
+    ul { font-size: 16px; }
+    li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+  <h2>Q10 & Q11: Spread Operator – Combine Fan Arrays</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q10 &amp; Q11</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">You have two arrays: <code>const cricketFans = ['Virat', 'Rohit'];</code> and <code>const footballFans = ['Messi', 'Ronaldo'];</code> Use the spread operator to combine both arrays into a single array called <code>allFans</code> and log the result.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Use <code>[...cricketFans, ...footballFans]</code></em></p>
+  </div>
+
+  <script>
+    // Q10 & Q11: Spread operator to combine two arrays into one
+    const cricketFans = ["Virat", "Rohit"];
+    const footballFans = ["Messi", "Ronaldo"];
+
+    const allFans = [...cricketFans, ...footballFans];
+
+    console.log("allFans:", allFans);
+
+    const list = document.getElementById("fan-list");
+    allFans.forEach(fan => {
+      const li = document.createElement("li");
+      li.textContent = "🙋 " + fan;
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!--
+  Q9:
+  Build a function getOrderStatus(orderId) that returns a Promise. Simulate a 1.5 second
+  delay using setTimeout, then resolve with 'Order delivered' if orderId is even, or
+  reject with 'Order not found' if odd. Use .then() and .catch() to handle both cases
+  and log the result.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - Promise getOrderStatus resolve & reject</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 16px; }
+    input[type="number"] {
+      padding: 9px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 140px;
+    }
+    button {
+      padding: 9px 20px;
+      background: #e23744;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover { background: #c0303c; }
+    #result {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 14px;
+      min-height: 28px;
+    }
+    .success { color: #388e3c; }
+    .error   { color: #c62828; }
+  </style>
+</head>
+<body>
+
+  <h2>Q9: Promise – getOrderStatus() resolve & reject</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q9</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Build a function <code>getOrderStatus(orderId)</code> that returns a Promise. Simulate a 1.5 second delay using <code>setTimeout</code>, then resolve with <code>'Order delivered'</code> if orderId is even, or reject with <code>'Order not found'</code> if odd. Use <code>.then()</code> and <code>.catch()</code> to handle both cases and log the result.</p>
+  </div>
+    <button onclick="checkOrder()">Check Status</button>
+  </div>
+  <div id="result">Enter an Order ID and click Check Status.</div>
+
+  <script>
+    // Q9: Resolves if orderId is even, rejects if odd
+    function getOrderStatus(orderId) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (orderId % 2 === 0) {
+            resolve("Order delivered");
+          } else {
+            reject("Order not found");
+          }
+        }, 1500);
+      });
+    }
+
+    function checkOrder() {
+      const orderId = parseInt(document.getElementById("order-id").value);
+      const resultEl = document.getElementById("result");
+      resultEl.textContent = "Checking order...";
+      resultEl.className = "";
+
+      getOrderStatus(orderId)
+        .then(message => {
+          console.log(message);
+          resultEl.textContent = "✅ " + message;
+          resultEl.className = "success";
+        })
+        .catch(error => {
+          console.log(error);
+          resultEl.textContent = "❌ " + error;
+          resultEl.className = "error";
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!--
+  Q1:
+  Create an HTML file with a <script> tag and use setTimeout to display a
+  'Loading your feed...' message after 2 seconds, then replace it with
+  'Feed loaded!' after another 2 seconds.
+
+  Q2:
+  Create an HTML file with a <script> tag and use setTimeout to display a
+  'Loading your feed...' message after 2 seconds, then replace it with
+  'Feed loaded!' after another 2 seconds.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - setTimeout Feed Loading</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; background: #fafafa; }
+    h2 { color: #333; }
+    #status {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #888;
+      min-height: 36px;
+      transition: color 0.3s;
+    }
+    .loaded { color: #1DB954 !important; }
+  </style>
+</head>
+<body>
+
+  <h2>Q1 & Q2: setTimeout – Feed Loading</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q1 &amp; Q2</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Create an HTML file with a <code>&lt;script&gt;</code> tag and use <code>setTimeout</code> to display a <code>'Loading your feed...'</code> message after 2 seconds, then replace it with <code>'Feed loaded!'</code> after another 2 seconds.</p>
+  </div>
+  <p>Wait for the messages to appear below:</p>
+  <div id="status">Waiting...</div>
+
+  <script>
+    const statusEl = document.getElementById("status");
+
+    // Step 1: After 2 seconds show 'Loading your feed...'
+    setTimeout(() => {
+      statusEl.textContent = "Loading your feed...";
+
+      // Step 2: After another 2 seconds replace with 'Feed loaded!'
+      setTimeout(() => {
+        statusEl.textContent = "Feed loaded!";
+        statusEl.classList.add("loaded");
+      }, 2000);
+
+    }, 2000);
+  </script>
+</body>
+</html>

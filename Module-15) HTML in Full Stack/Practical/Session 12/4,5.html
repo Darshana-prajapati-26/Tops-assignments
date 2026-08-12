@@ -1,0 +1,66 @@
+<!--
+  Q4:
+  Build a function fetchTopMovies() that uses fetch() to get movie data from
+  https://jsonplaceholder.typicode.com/albums, parses the JSON response, and logs the
+  titles of the first 3 items as if they were trending movies on BookMyShow.
+
+  Q5:
+  Build a function fetchTopMovies() that uses fetch() to get movie data from
+  https://jsonplaceholder.typicode.com/albums, parses the JSON response, and logs the
+  titles of the first 3 items as if they were trending movies on BookMyShow.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - fetchTopMovies BookMyShow</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #1a0533; color: #fff; }
+    h2 { color: #ff3056; }
+    .movie-card {
+      background: #2b0952;
+      border-left: 4px solid #ff3056;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      max-width: 480px;
+      font-size: 15px;
+    }
+    .rank { color: #ff3056; font-weight: bold; margin-right: 8px; font-size: 18px; }
+    #loading { color: #aaa; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <h2>🎬 Trending on BookMyShow</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q4 &amp; Q5</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Build a function <code>fetchTopMovies()</code> that uses <code>fetch()</code> to get movie data from <code>https://jsonplaceholder.typicode.com/albums</code>, parses the JSON response, and logs the titles of the first 3 items as if they were trending movies on BookMyShow.</p>
+  </div>
+
+  <script>
+    // Q4 & Q5: fetchTopMovies() — GET albums, treat first 3 titles as trending movies
+    function fetchTopMovies() {
+      fetch("https://jsonplaceholder.typicode.com/albums")
+        .then(response => response.json())
+        .then(albums => {
+          const top3 = albums.slice(0, 3);
+          const container = document.getElementById("movies-container");
+          container.innerHTML = "";
+
+          top3.forEach((album, i) => {
+            console.log(`Trending #${i + 1}: ${album.title}`);
+
+            const card = document.createElement("div");
+            card.classList.add("movie-card");
+            card.innerHTML = `<span class="rank">#${i + 1}</span>${album.title}`;
+            container.appendChild(card);
+          });
+        })
+        .catch(err => console.error("Error:", err));
+    }
+
+    fetchTopMovies();
+  </script>
+</body>
+</html>

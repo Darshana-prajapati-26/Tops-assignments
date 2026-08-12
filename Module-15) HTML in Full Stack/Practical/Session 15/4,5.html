@@ -1,0 +1,78 @@
+<!--
+  Q4:
+  Add a method displayPlaylist() to the Playlist class that logs the playlist name and
+  all song titles in a formatted string.
+
+  Q5:
+  Add a method displayPlaylist() to the Playlist class that logs the playlist name and
+  all song titles in a formatted string.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - displayPlaylist() Method</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    button {
+      padding: 10px 22px; background: #1DB954; color: #fff;
+      border: none; border-radius: 25px; font-size: 15px; cursor: pointer; margin-bottom: 16px;
+    }
+    button:hover { background: #17a047; }
+    .output-box {
+      background: #282828; border-radius: 10px; padding: 16px 20px;
+      max-width: 480px; font-size: 15px; line-height: 1.8; color: #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q4 &amp; Q5: Playlist – displayPlaylist() Method</h2>
+  <div class="question-box">
+    <h3>Q4 &amp; Q5</h3>
+    <p>Add a method <code>displayPlaylist()</code> to the <code>Playlist</code> class that
+    logs the playlist name and all song titles in a formatted string.</p>
+  </div>
+
+  <button onclick="show()">Display Playlist</button>
+  <div class="output-box" id="output">Click the button to display the playlist...</div>
+
+  <script>
+    // Q4 & Q5: Playlist class with displayPlaylist() method
+    class Playlist {
+      constructor(name, songs) {
+        this.name = name;
+        this.songs = songs;
+      }
+
+      displayPlaylist() {
+        const header = `Playlist: ${this.name}`;
+        const songList = this.songs.map((s, i) => `  ${i + 1}. ${s}`).join("\n");
+        const result = `${header}\n${songList}`;
+        console.log(result);
+        return result;
+      }
+    }
+
+    const chillVibes = new Playlist("Chill Vibes", [
+      "Kesariya",
+      "Tum Hi Ho",
+      "Raataan Lambiyan"
+    ]);
+
+    function show() {
+      const result = chillVibes.displayPlaylist();
+      document.getElementById("output").textContent = result;
+    }
+  </script>
+</body>
+</html>

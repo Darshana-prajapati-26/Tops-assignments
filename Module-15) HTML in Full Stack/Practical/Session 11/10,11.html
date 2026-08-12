@@ -1,0 +1,146 @@
+<!--
+  Q10:
+  Rewrite a Flipkart-style product search using both a callback version and a Promise
+  version: given an array of products, simulate a 1 second delay before returning all
+  products whose name includes the search term.
+  Hint: Use setTimeout to simulate the delay in both approaches.
+
+  Q11:
+  Rewrite a Flipkart-style product search using both a callback version and a Promise
+  version: given an array of products, simulate a 1 second delay before returning all
+  products whose name includes the search term.
+  Hint: Use setTimeout to simulate the delay in both approaches.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Callback vs Promise Product Search</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .search-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    input {
+      padding: 9px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 200px;
+    }
+    .btn {
+      padding: 9px 18px;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .cb-btn  { background: #e65100; }
+    .pr-btn  { background: #2874f0; }
+    .cb-btn:hover { background: #bf360c; }
+    .pr-btn:hover { background: #1a5ec4; }
+    .results-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 10px;
+      max-width: 440px;
+      min-height: 60px;
+      border: 1px solid #ddd;
+    }
+    .results-box h4 { margin: 0 0 8px; }
+    .product-item { padding: 6px 0; border-bottom: 1px solid #eee; font-size: 15px; }
+    .product-item:last-child { border-bottom: none; }
+    .no-result { color: #aaa; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <h2>Q10 & Q11: Flipkart Product Search – Callback vs Promise</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q10 &amp; Q11</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Rewrite a Flipkart-style product search using both a callback version and a Promise version: given an array of products, simulate a 1 second delay before returning all products whose name includes the search term.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Use <code>setTimeout</code> to simulate the delay in both approaches.</em></p>
+  </div>
+    <input type="text" id="search-term" placeholder="Search product..." value="phone" />
+    <button class="btn cb-btn" onclick="searchWithCallback()">Callback Search</button>
+    <button class="btn pr-btn" onclick="searchWithPromise()">Promise Search</button>
+  </div>
+
+  <div class="results-box" id="cb-results">
+    <h4>Callback Results:</h4>
+    <p class="no-result">Click "Callback Search"...</p>
+  </div>
+
+  <div class="results-box" id="pr-results" style="margin-top:10px;">
+    <h4>Promise Results:</h4>
+    <p class="no-result">Click "Promise Search"...</p>
+  </div>
+
+  <script>
+    const products = [
+      { name: "Samsung Phone", price: 15999 },
+      { name: "iPhone 14", price: 79999 },
+      { name: "OnePlus Phone", price: 24999 },
+      { name: "Laptop HP", price: 45000 },
+      { name: "Wireless Headphones", price: 1999 },
+      { name: "Phone Case", price: 299 }
+    ];
+
+    // ── Callback version ──────────────────────────────────────────────────────
+    function searchProductsCallback(term, callback) {
+      setTimeout(() => {
+        const results = products.filter(p =>
+          p.name.toLowerCase().includes(term.toLowerCase())
+        );
+        callback(results);
+      }, 1000);
+    }
+
+    function searchWithCallback() {
+      const term = document.getElementById("search-term").value.trim();
+      const box = document.getElementById("cb-results");
+      box.innerHTML = "<h4>Callback Results:</h4><p>Searching...</p>";
+
+      searchProductsCallback(term, (results) => {
+        renderResults(box, "Callback Results:", results);
+      });
+    }
+
+    // ── Promise version ───────────────────────────────────────────────────────
+    function searchProductsPromise(term) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const results = products.filter(p =>
+            p.name.toLowerCase().includes(term.toLowerCase())
+          );
+          resolve(results);
+        }, 1000);
+      });
+    }
+
+    function searchWithPromise() {
+      const term = document.getElementById("search-term").value.trim();
+      const box = document.getElementById("pr-results");
+      box.innerHTML = "<h4>Promise Results:</h4><p>Searching...</p>";
+
+      searchProductsPromise(term)
+        .then(results => renderResults(box, "Promise Results:", results));
+    }
+
+    // ── Shared render helper ──────────────────────────────────────────────────
+    function renderResults(box, title, results) {
+      box.innerHTML = `<h4>${title}</h4>`;
+      if (results.length === 0) {
+        box.innerHTML += `<p class="no-result">No products found.</p>`;
+        return;
+      }
+      results.forEach(p => {
+        const div = document.createElement("div");
+        div.classList.add("product-item");
+        div.textContent = `${p.name} — ₹${p.price}`;
+        box.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

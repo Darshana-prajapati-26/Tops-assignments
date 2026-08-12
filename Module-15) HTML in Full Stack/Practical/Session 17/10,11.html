@@ -1,0 +1,129 @@
+<!--
+  Q10:
+  Simulate a notification feed like YouTube, where each notification card has a 'Dismiss'
+  button. When you click 'Dismiss', fade out and remove the card. Make sure the event
+  delegation works for dynamically loaded notifications as well as those present at page
+  load.
+
+  Q11:
+  Simulate a notification feed like YouTube, where each notification card has a 'Dismiss'
+  button. When you click 'Dismiss', fade out and remove the card. Make sure the event
+  delegation works for dynamically loaded notifications as well as those present at page
+  load.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Notification Feed with Dismiss (Event Delegation)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff; }
+    h2 { color: #ff0000; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .load-btn {
+      padding: 9px 20px; background: #ff0000; color: #fff; border: none;
+      border-radius: 6px; font-size: 14px; cursor: pointer; margin-bottom: 18px;
+    }
+    .load-btn:hover { background: #cc0000; }
+    #notification-feed { max-width: 560px; }
+    .notif-card {
+      background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 10px;
+      padding: 14px 16px; margin: 10px 0; display: flex;
+      align-items: flex-start; gap: 14px;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .notif-card.fade-out { opacity: 0; transform: translateX(30px); }
+    .notif-icon { font-size: 28px; flex-shrink: 0; }
+    .notif-body { flex: 1; }
+    .notif-title { font-weight: bold; font-size: 14px; color: #212121; }
+    .notif-sub { font-size: 13px; color: #757575; margin-top: 3px; }
+    .dismiss-btn {
+      background: none; border: 1px solid #ccc; color: #555; border-radius: 6px;
+      padding: 4px 12px; font-size: 13px; cursor: pointer; white-space: nowrap;
+      align-self: center;
+    }
+    .dismiss-btn:hover { background: #eee; }
+    #empty-msg { color: #aaa; font-style: italic; display: none; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2>Q10 &amp; Q11: YouTube-style Notification Feed – Event Delegation</h2>
+  <div class="question-box">
+    <h3>Q10 &amp; Q11</h3>
+    <p>Simulate a notification feed like YouTube, where each notification card has a
+    'Dismiss' button. When you click 'Dismiss', fade out and remove the card. Make sure
+    <strong>event delegation</strong> works for dynamically loaded notifications as well
+    as those present at page load.</p>
+  </div>
+
+  <button class="load-btn" id="load-btn">+ Load More Notifications</button>
+
+  <!-- ✅ Single listener on this container -->
+  <div id="notification-feed"></div>
+  <p id="empty-msg">All notifications dismissed! 🎉</p>
+
+  <script>
+    const initialNotifs = [
+      { icon: "🎬", title: "Fireship uploaded: 10 CSS tricks in 5 minutes", sub: "2 hours ago" },
+      { icon: "🔔", title: "Traversy Media is live now!", sub: "Just now" },
+      { icon: "❤️", title: "Your comment got 120 likes", sub: "5 hours ago" }
+    ];
+
+    const moreNotifs = [
+      { icon: "🎵", title: "New music video from Arijit Singh", sub: "1 day ago" },
+      { icon: "📢", title: "Kevin Powell uploaded: Flexbox vs Grid", sub: "3 hours ago" },
+      { icon: "💬", title: "Someone replied to your comment", sub: "30 min ago" }
+    ];
+
+    let moreIdx = 0;
+    const feed = document.getElementById("notification-feed");
+
+    function createNotif(n) {
+      const card = document.createElement("div");
+      card.classList.add("notif-card");
+      card.innerHTML = `
+        <div class="notif-icon">${n.icon}</div>
+        <div class="notif-body">
+          <div class="notif-title">${n.title}</div>
+          <div class="notif-sub">${n.sub}</div>
+        </div>
+        <button class="dismiss-btn">Dismiss</button>
+      `;
+      return card;
+    }
+
+    // Render initial notifications
+    initialNotifs.forEach(n => feed.appendChild(createNotif(n)));
+
+    // ✅ Single delegated listener — covers initial + dynamically loaded cards
+    feed.addEventListener("click", function (e) {
+      if (e.target.classList.contains("dismiss-btn")) {
+        const card = e.target.closest(".notif-card");
+        card.classList.add("fade-out");
+        // Remove from DOM after fade completes
+        card.addEventListener("transitionend", () => {
+          card.remove();
+          document.getElementById("empty-msg").style.display =
+            feed.children.length === 0 ? "block" : "none";
+        }, { once: true });
+      }
+    });
+
+    // Load more notifications
+    document.getElementById("load-btn").addEventListener("click", function () {
+      if (moreIdx >= moreNotifs.length) {
+        this.textContent = "No more notifications";
+        this.disabled = true;
+        return;
+      }
+      feed.appendChild(createNotif(moreNotifs[moreIdx++]));
+      document.getElementById("empty-msg").style.display = "none";
+    });
+  </script>
+</body>
+</html>

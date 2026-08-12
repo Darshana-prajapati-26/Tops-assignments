@@ -1,0 +1,87 @@
+<!--
+  Q6:
+  Build a Flipkart-style shopping cart UI with cards for each product and an 'X' icon to
+  remove a product. Use event bubbling to ensure clicking the 'X' removes only the correct
+  card without adding separate event listeners to each card.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - Event Bubbling: Flipkart Cart Remove</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    #cart-container { max-width: 480px; }
+    .cart-card {
+      background: #fff; border-radius: 10px; padding: 14px 18px;
+      margin: 10px 0; display: flex; justify-content: space-between;
+      align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .product-info { display: flex; flex-direction: column; gap: 4px; }
+    .product-name { font-weight: bold; font-size: 15px; color: #212121; }
+    .product-price { color: #388e3c; font-size: 14px; }
+    .remove-btn {
+      background: none; border: none; font-size: 20px; color: #aaa;
+      cursor: pointer; padding: 4px; border-radius: 50%;
+      transition: color 0.2s, background 0.2s;
+    }
+    .remove-btn:hover { color: #e53935; background: #fdecea; }
+    #empty-msg { color: #aaa; font-style: italic; display: none; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Q6: Event Bubbling – Flipkart Cart Remove</h2>
+  <div class="question-box">
+    <h3>Q6</h3>
+    <p>Build a Flipkart-style shopping cart UI with cards for each product and an 'X' icon
+    to remove a product. Use <strong>event bubbling</strong> to ensure clicking the 'X'
+    removes only the correct card without adding separate event listeners to each card.</p>
+  </div>
+
+  <!-- Single listener on this container — event bubbles up from each 'X' -->
+  <div id="cart-container"></div>
+  <p id="empty-msg">Your cart is empty 🛒</p>
+
+  <script>
+    // Q6: Event bubbling — single listener on #cart-container handles all 'X' clicks
+    const cartItems = [
+      { name: "Redmi Note 12 Pro", price: 18999 },
+      { name: "Boat Rockerz 255", price: 1299 },
+      { name: "Noise Smartwatch", price: 3499 },
+      { name: "HP Laptop 15s", price: 45999 }
+    ];
+
+    const container = document.getElementById("cart-container");
+
+    cartItems.forEach(item => {
+      const card = document.createElement("div");
+      card.classList.add("cart-card");
+      card.innerHTML = `
+        <div class="product-info">
+          <span class="product-name">${item.name}</span>
+          <span class="product-price">₹${item.price.toLocaleString()}</span>
+        </div>
+        <button class="remove-btn" title="Remove">✕</button>
+      `;
+      container.appendChild(card);
+    });
+
+    // ✅ One listener — click bubbles up from the 'X' button through .cart-card to here
+    container.addEventListener("click", function (e) {
+      if (e.target.classList.contains("remove-btn")) {
+        e.target.closest(".cart-card").remove();
+        if (container.children.length === 0) {
+          document.getElementById("empty-msg").style.display = "block";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

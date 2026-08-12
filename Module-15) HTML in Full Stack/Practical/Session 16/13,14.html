@@ -1,0 +1,105 @@
+<!--
+  Q13:
+  Ask ChatGPT to suggest a one-liner using map() and reduce() that calculates the sum of
+  all prices in an array of Myntra cart items, and then implement the suggested code in
+  your editor.
+
+  Q14:
+  Ask ChatGPT to suggest a one-liner using map() and reduce() that calculates the sum of
+  all prices in an array of Myntra cart items, and then implement the suggested code in
+  your editor.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - map() + reduce() One-Liner (Myntra)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #ff3f6c; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .card {
+      background: #fff; border-radius: 10px; padding: 18px 22px;
+      margin-bottom: 18px; border-left: 5px solid #ff3f6c;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    .card h3 { margin-top: 0; color: #ff3f6c; }
+    pre {
+      background: #f4f4f4; border-radius: 6px; padding: 12px;
+      font-size: 14px; overflow-x: auto;
+    }
+    .cart-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px;
+    }
+    .cart-row:last-child { border-bottom: none; }
+    .item-name { color: #333; }
+    .item-price { color: #388e3c; font-weight: bold; }
+    .total-box {
+      background: #ff3f6c; color: #fff; border-radius: 10px;
+      padding: 18px 24px; max-width: 300px; margin-top: 16px; text-align: center;
+    }
+    .total-num { font-size: 40px; font-weight: bold; }
+    .total-label { font-size: 14px; margin-top: 4px; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <h2>Q13 &amp; Q14: map() + reduce() One-Liner – Myntra Cart Total</h2>
+  <div class="question-box">
+    <h3>Q13 &amp; Q14</h3>
+    <p>Ask ChatGPT to suggest a one-liner using <code>map()</code> and <code>reduce()</code>
+    that calculates the sum of all prices in an array of Myntra cart items, and then implement
+    the suggested code in your editor.</p>
+  </div>
+
+  <div class="card">
+    <h3>💡 ChatGPT Suggested One-Liner</h3>
+    <p>ChatGPT suggestion: extract all prices using <code>map()</code> then sum them with
+    <code>reduce()</code> in a single chained expression.</p>
+    <pre>const total = cartItems.map(item => item.price).reduce((acc, price) => acc + price, 0);</pre>
+  </div>
+
+  <div class="card">
+    <h3>🛒 Myntra Cart Items</h3>
+    <div id="cart-list"></div>
+  </div>
+
+  <div class="total-box" id="total-box"></div>
+
+  <script>
+    // Q13 & Q14: One-liner — map() extracts prices, reduce() sums them
+    const cartItems = [
+      { name: "Puma Running Shoes", price: 3499 },
+      { name: "Levi's T-Shirt", price: 999 },
+      { name: "H&M Cargo Pants", price: 2199 },
+      { name: "Adidas Cap", price: 799 },
+      { name: "Nike Socks (3-pack)", price: 499 }
+    ];
+
+    // ChatGPT suggested one-liner
+    const total = cartItems.map(item => item.price).reduce((acc, price) => acc + price, 0);
+
+    console.log("Cart total:", total);
+
+    // Display cart items
+    const list = document.getElementById("cart-list");
+    cartItems.forEach(item => {
+      const row = document.createElement("div");
+      row.classList.add("cart-row");
+      row.innerHTML = `<span class="item-name">👗 ${item.name}</span>
+                       <span class="item-price">₹${item.price}</span>`;
+      list.appendChild(row);
+    });
+
+    document.getElementById("total-box").innerHTML = `
+      <div class="total-num">₹${total.toLocaleString()}</div>
+      <div class="total-label">Total Cart Value</div>
+    `;
+  </script>
+</body>
+</html>

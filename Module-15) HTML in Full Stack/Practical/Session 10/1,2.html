@@ -1,0 +1,45 @@
+<!--
+  Q1:
+  Create a function formatWelcomeMessage(userName, followers) that returns a string like
+  'Hello Rahul, you have 1200 followers!' using template literals. Call this function with
+  your own name and any follower count, then log the result.
+
+  Q2:
+  Create a function formatWelcomeMessage(userName, followers) that returns a string like
+  'Hello Rahul, you have 1200 followers!' using template literals. Call this function with
+  your own name and any follower count, then log the result.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - Template Literals formatWelcomeMessage</title>
+  <style>
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;
+      max-width: 680px; font-family: Arial, sans-serif;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q1 &amp; Q2</h3>
+    <p>Create a function <code>formatWelcomeMessage(userName, followers)</code> that returns a string like <code>'Hello Rahul, you have 1200 followers!'</code> using template literals. Call this function with your own name and any follower count, then log the result.</p>
+  </div>
+  <h2>Q1 & Q2: formatWelcomeMessage() – Template Literals</h2>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // Q1 & Q2: Function using template literals to return a welcome message
+    function formatWelcomeMessage(userName, followers) {
+      return `Hello ${userName}, you have ${followers} followers!`;
+    }
+
+    console.log(formatWelcomeMessage("Rahul", 1200));
+    console.log(formatWelcomeMessage("Priya", 4500));
+  </script>
+</body>
+</html>

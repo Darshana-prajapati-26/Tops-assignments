@@ -1,0 +1,78 @@
+<!--
+  Q13 & Q14:
+  Explain in your own words (3-4 sentences) how splitting utility functions into separate
+  files using imports and exports would help you scale a Zomato-like app as it grows from
+  2 to 20 features. Give one concrete example.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - Scaling with Modules</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 700px; background: #fafafa; }
+    h2 { color: #e23744; }
+    .card {
+      background: #fff; border-left: 5px solid #e23744; border-radius: 8px;
+      padding: 20px 24px; margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    h3 { color: #e23744; margin-top: 0; }
+    p { line-height: 1.8; color: #444; }
+    .example { background: #fff8f0; border-radius: 6px; padding: 14px 18px; margin-top: 12px; }
+    code { background: #fdecea; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .folder-tree {
+      background: #f4f4f4; border-radius: 6px; padding: 14px;
+      font-family: monospace; font-size: 13px; margin-top: 10px; line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q13 & Q14: Scaling a Zomato-like App with Modules</h2>
+  <div style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:700px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q13 &amp; Q14</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Explain in your own words (3–4 sentences) how splitting utility functions into separate files using imports and exports would help you scale a Zomato-like app as it grows from 2 to 20 features. Give one concrete example.</p>
+  </div>
+    <h3>📝 Explanation in Own Words</h3>
+    <p>
+      When a Zomato-like app starts small with 2 features, all code can fit in one file. But as
+      it grows to 20+ features like reviews, discounts, delivery tracking, and user profiles,
+      a single file becomes very hard to maintain. Splitting utility functions into separate
+      files using <strong>named and default exports</strong> means each feature has its own
+      isolated module — changes to one file don't accidentally break another.
+    </p>
+    <p>
+      It also makes teamwork easier: one developer can work on <code>orderUtils.js</code>
+      while another works on <code>discountUtils.js</code> without any conflicts. Any file
+      that needs a utility just imports it — no copy-pasting code everywhere.
+    </p>
+
+    <div class="example">
+      <strong>🍕 Concrete Example:</strong><br/><br/>
+      Suppose a discount calculation <code>getDiscountedPrice()</code> is used in the cart page,
+      checkout page, and promotions page. Without modules, each file would have its own copy.
+      If the discount formula changes (e.g. a ₹500 cap is added), you would need to update
+      it in 3+ places — and likely miss one.<br/><br/>
+      With modules, <code>discountUtils.js</code> exports the single source of truth.
+      All other files import it. Update <strong>one file</strong> and every feature is fixed instantly.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📁 Example Folder Structure for a Scaled Zomato App</h3>
+    <div class="folder-tree">
+src/<br/>
+├── utils/<br/>
+│   ├── discountUtils.js    ← getDiscountedPrice, applyCoupon<br/>
+│   ├── orderUtils.js       ← placeOrder, cancelOrder, getOrderStatus<br/>
+│   ├── formatUtils.js      ← formatPrice, formatDate, formatAddress<br/>
+│   └── authUtils.js        ← validateEmail, validatePassword<br/>
+├── pages/<br/>
+│   ├── cart.js             ← imports from discountUtils, orderUtils<br/>
+│   ├── checkout.js         ← imports from discountUtils, formatUtils<br/>
+│   └── profile.js          ← imports from authUtils, formatUtils<br/>
+└── main.js
+    </div>
+  </div>
+</body>
+</html>

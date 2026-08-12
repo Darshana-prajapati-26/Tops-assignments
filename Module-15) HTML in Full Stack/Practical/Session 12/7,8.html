@@ -1,0 +1,100 @@
+<!--
+  Q7:
+  Create a function addNewPlaylist() that sends a POST request using fetch() to
+  https://jsonplaceholder.typicode.com/posts with a playlist object containing a name
+  and description. Log the response JSON to the console.
+  Hint: Use method: 'POST' and headers: { 'Content-Type': 'application/json' } in your fetch options.
+
+  Q8:
+  Create a function addNewPlaylist() that sends a POST request using fetch() to
+  https://jsonplaceholder.typicode.com/posts with a playlist object containing a name
+  and description. Log the response JSON to the console.
+  Hint: Use method: 'POST' and headers: { 'Content-Type': 'application/json' } in your fetch options.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - addNewPlaylist POST</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .form-group { margin-bottom: 12px; }
+    label { display: block; margin-bottom: 4px; font-size: 14px; color: #ccc; }
+    input, textarea {
+      padding: 9px 14px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      background: #282828;
+      color: #fff;
+      width: 300px;
+    }
+    textarea { height: 80px; resize: vertical; }
+    button {
+      padding: 10px 22px;
+      background: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    button:hover { background: #17a047; }
+    pre {
+      background: #282828;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      margin-top: 16px;
+      max-width: 460px;
+      overflow-x: auto;
+      color: #1DB954;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q7 & Q8: addNewPlaylist() – POST Request</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q7 &amp; Q8</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#eee;">Create a function <code>addNewPlaylist()</code> that sends a POST request using <code>fetch()</code> to <code>https://jsonplaceholder.typicode.com/posts</code> with a playlist object containing a <code>name</code> and <code>description</code>. Log the response JSON to the console.<br><em style="font-size:14px;color:#ccc;"><strong>Hint:</strong> Use <code>method: 'POST'</code> and <code>headers: &#123; 'Content-Type': 'application/json' &#125;</code> in your fetch options.</em></p>
+  </div>
+    <label>Playlist Name</label>
+    <input type="text" id="pl-name" value="Late Night Lofi" />
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea id="pl-desc">Chill beats to study and relax.</textarea>
+  </div>
+  <button onclick="addNewPlaylist()">Create Playlist</button>
+
+  <pre id="response-output">Response will appear here...</pre>
+
+  <script>
+    // Q7 & Q8: addNewPlaylist() sends a POST with name and description
+    function addNewPlaylist() {
+      const name = document.getElementById("pl-name").value.trim();
+      const description = document.getElementById("pl-desc").value.trim();
+
+      const playlist = { name, description };
+
+      fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(playlist)
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log("New playlist response:", data);
+          document.getElementById("response-output").textContent =
+            JSON.stringify(data, null, 2);
+        })
+        .catch(err => console.error("POST error:", err));
+    }
+  </script>
+</body>
+</html>

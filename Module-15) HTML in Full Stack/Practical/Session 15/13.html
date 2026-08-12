@@ -1,0 +1,116 @@
+<!--
+  Q13:
+  Refactor the FlipkartProduct class: rename the displayDetails() method to
+  showProductInfo() and ensure it still works as before.
+  Hint: Update any code that calls the old method name.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 - FlipkartProduct showProductInfo()</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .box {
+      background: #fff; border-radius: 10px; padding: 16px 22px;
+      max-width: 560px; margin-bottom: 18px;
+      border-left: 5px solid #c62828;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    .box.fixed { border-left-color: #388e3c; }
+    .box h3 { margin-top: 0; font-size: 15px; color: #c62828; }
+    .box.fixed h3 { color: #388e3c; }
+    pre {
+      background: #f4f4f4; border-radius: 6px; padding: 12px;
+      font-size: 13px; overflow-x: auto;
+    }
+    .product-card {
+      background: #fff; border-radius: 8px; padding: 14px 18px;
+      max-width: 400px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 10px 0; font-size: 15px; color: #212121;
+      border-left: 4px solid #2874f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q13: FlipkartProduct – Rename to showProductInfo()</h2>
+  <div class="question-box">
+    <h3>Q13</h3>
+    <p>Refactor the <code>FlipkartProduct</code> class: rename the <code>displayDetails()</code>
+    method to <code>showProductInfo()</code> and ensure it still works as before.<br>
+    <em><strong>Hint:</strong> Update any code that calls the old method name.</em></p>
+  </div>
+
+  <div class="box">
+    <h3>❌ Before – method called displayDetails()</h3>
+    <pre>
+class FlipkartProduct {
+  constructor(title, price, rating) { ... }
+  displayDetails() {             // ← old name
+    return `${this.title} - ₹${this.price} - ${this.rating}⭐`;
+  }
+}
+const p = new FlipkartProduct(...);
+p.displayDetails();              // ← old call site</pre>
+  </div>
+
+  <div class="box fixed">
+    <h3>✅ After – renamed to showProductInfo()</h3>
+    <pre>
+class FlipkartProduct {
+  constructor(title, price, rating) { ... }
+  showProductInfo() {            // ✅ new name
+    return `${this.title} - ₹${this.price} - ${this.rating}⭐`;
+  }
+}
+const p = new FlipkartProduct(...);
+p.showProductInfo();             // ✅ updated call site</pre>
+  </div>
+
+  <h3 style="color:#2874f0;">Output:</h3>
+  <div id="product-list"></div>
+
+  <script>
+    // Q13: FlipkartProduct — displayDetails() renamed to showProductInfo()
+    class FlipkartProduct {
+      constructor(title, price, rating) {
+        this.title = title;
+        this.price = price;
+        this.rating = rating;
+      }
+
+      // Renamed from displayDetails() to showProductInfo()
+      showProductInfo() {
+        return `${this.title} - ₹${this.price} - ${this.rating}⭐`;
+      }
+    }
+
+    const products = [
+      new FlipkartProduct("Redmi Note 12 Pro", 18999, 4.5),
+      new FlipkartProduct("Apple AirPods Pro", 24990, 4.7),
+      new FlipkartProduct("Boat Rockerz 255", 1299, 4.3)
+    ];
+
+    const container = document.getElementById("product-list");
+    products.forEach(p => {
+      // Using the new method name showProductInfo()
+      const info = p.showProductInfo();
+      console.log(info);
+
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+      card.textContent = info;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!--
+  Q6:
+  Write a function fetchSongLyrics(song, callback) that simulates fetching lyrics from
+  a server using setTimeout, then calls the callback with the lyrics string. Test it by
+  logging the lyrics for any song title.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - Callback fetchSongLyrics</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    button {
+      padding: 10px 22px;
+      background: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 6px 6px 6px 0;
+    }
+    button:hover { background: #17a047; }
+    #lyrics-box {
+      background: #282828;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 16px;
+      max-width: 480px;
+      font-size: 15px;
+      min-height: 60px;
+      line-height: 1.7;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q6: Callback – fetchSongLyrics()</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q6</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#eee;">Write a function <code>fetchSongLyrics(song, callback)</code> that simulates fetching lyrics from a server using <code>setTimeout</code>, then calls the callback with the lyrics string. Test it by logging the lyrics for any song title.</p>
+  </div>
+  <button onclick="fetchSongLyrics('Tum Hi Ho', showLyrics)">Fetch Tum Hi Ho</button>
+  <div id="lyrics-box">Click a button to fetch lyrics...</div>
+
+  <script>
+    // Q6: Simulates fetching lyrics using setTimeout, then calls the callback
+    const lyricsDB = {
+      "Kesariya": "Kesariya tera ishq hai piya... Kesariya tera ishq hai piya...",
+      "Tum Hi Ho": "Tum hi ho, ab tum hi ho... Zindagi ab tum hi ho..."
+    };
+
+    function fetchSongLyrics(song, callback) {
+      document.getElementById("lyrics-box").textContent = `Fetching lyrics for "${song}"...`;
+
+      setTimeout(() => {
+        const lyrics = lyricsDB[song] || "Lyrics not found for this song.";
+        callback(song, lyrics);
+      }, 1500);
+    }
+
+    function showLyrics(song, lyrics) {
+      console.log(`${song}: ${lyrics}`);
+      document.getElementById("lyrics-box").innerHTML =
+        `<strong>🎵 ${song}</strong><br/><br/>${lyrics}`;
+    }
+  </script>
+</body>
+</html>

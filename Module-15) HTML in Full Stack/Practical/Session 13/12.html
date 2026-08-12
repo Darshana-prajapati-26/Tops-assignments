@@ -1,0 +1,100 @@
+<!--
+  Q12:
+  You are given this buggy code:
+  function formatFollowers(count) { try { if(count < 0) throw 'Negative count';
+  return count + ' followers'; } catch(e) { return e.message; } }
+  It should return the error message if count is negative, but it returns undefined.
+  Fix the code so it properly throws and catches an Error object.
+  Hint: Use Error objects instead of strings for throwing and catching errors.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Fix formatFollowers Error Handling</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 680px; background: #fafafa; }
+    h2 { color: #333; }
+    .box {
+      background: #fff; border-radius: 8px; padding: 18px 22px;
+      margin-bottom: 18px; border-left: 5px solid #c62828;
+    }
+    .box.fixed { border-left-color: #388e3c; }
+    .box h3 { margin-top: 0; }
+    pre { background: #f4f4f4; padding: 12px; border-radius: 6px; font-size: 13px; overflow-x: auto; }
+    #result { font-size: 16px; font-weight: bold; margin-top: 12px; }
+    .ok  { color: #388e3c; }
+    .err { color: #c62828; }
+    button {
+      padding: 9px 20px; background: #388e3c; color: #fff;
+      border: none; border-radius: 6px; font-size: 15px; cursor: pointer; margin: 6px 6px 6px 0;
+    }
+    button:hover { background: #2e7d32; }
+  </style>
+</head>
+<body>
+
+  <h2>Q12: Fix formatFollowers() – Throw Error Objects, not Strings</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q12</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">You are given this buggy code: <code>function formatFollowers(count) &#123; try &#123; if(count &lt; 0) throw 'Negative count'; return count + ' followers'; &#125; catch(e) &#123; return e.message; &#125; &#125;</code>. It should return the error message if count is negative, but it returns <code>undefined</code>. Fix the code so it properly throws and catches an Error object.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Use Error objects instead of strings for throwing and catching errors.</em></p>
+  </div>
+    <h3>❌ Buggy Code</h3>
+    <pre>
+function formatFollowers(count) {
+  try {
+    if (count < 0) throw 'Negative count';  // throws a STRING, not an Error
+    return count + ' followers';
+  } catch (e) {
+    return e.message;  // strings don't have .message — returns undefined!
+  }
+}</pre>
+    <p><strong>Bug:</strong> <code>throw 'Negative count'</code> throws a plain string.
+    Strings don't have a <code>.message</code> property, so <code>e.message</code>
+    is <code>undefined</code>.</p>
+  </div>
+
+  <div class="box fixed">
+    <h3>✅ Fixed Code – Use <code>new Error()</code></h3>
+    <pre>
+function formatFollowers(count) {
+  try {
+    if (count < 0) throw new Error('Negative count');  // ✅ Error object
+    return count + ' followers';
+  } catch (e) {
+    return e.message;  // ✅ 'Negative count'
+  }
+}</pre>
+
+    <button onclick="testValid()">Test valid (1200)</button>
+    <button onclick="testInvalid()">Test invalid (-5)</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    // Q12: Fixed — throw new Error() so .message works in catch
+    function formatFollowers(count) {
+      try {
+        if (count < 0) throw new Error("Negative count");
+        return count + " followers";
+      } catch (e) {
+        return e.message; // now correctly returns "Negative count"
+      }
+    }
+
+    function testValid() {
+      const res = formatFollowers(1200);
+      document.getElementById("result").textContent = "Result: " + res;
+      document.getElementById("result").className = "ok";
+      console.log(res);
+    }
+
+    function testInvalid() {
+      const res = formatFollowers(-5);
+      document.getElementById("result").textContent = "Result: " + res;
+      document.getElementById("result").className = "err";
+      console.log(res);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!--
+  Q15:
+  Write an arrow function called getFollowersSummary that takes any number of follower
+  counts (using the rest operator), sums them, and returns a string like
+  'Total followers: 1200'. Call it with 3 sample numbers to test.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q15 - Rest Operator getFollowersSummary</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #833ab4; }
+    .result {
+      background: #fff;
+      border: 1px solid #c58de8;
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin: 8px 0;
+      max-width: 360px;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Q15: getFollowersSummary() – Rest Operator</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q15</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Write an arrow function called <code>getFollowersSummary</code> that takes any number of follower counts (using the rest operator), sums them, and returns a string like <code>'Total followers: 1200'</code>. Call it with 3 sample numbers to test.</p>
+  </div>
+
+  <script>
+    // Q15: Arrow function using rest operator to accept any number of follower counts
+    const getFollowersSummary = (...counts) => {
+      const total = counts.reduce((sum, count) => sum + count, 0);
+      return `Total followers: ${total}`;
+    };
+
+    const result1 = getFollowersSummary(400, 600, 200);
+    const result2 = getFollowersSummary(1500, 3200, 800);
+    const result3 = getFollowersSummary(10000, 25000, 5000);
+
+    console.log(result1);
+    console.log(result2);
+    console.log(result3);
+
+    const container = document.getElementById("output");
+    [result1, result2, result3].forEach(res => {
+      const div = document.createElement("div");
+      div.classList.add("result");
+      div.textContent = "👥 " + res;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>

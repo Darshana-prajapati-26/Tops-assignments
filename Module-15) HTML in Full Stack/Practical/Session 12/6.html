@@ -1,0 +1,82 @@
+<!--
+  Q6:
+  Send a POST request using fetch() to https://jsonplaceholder.typicode.com/posts with a
+  JSON body containing a title and body (your own text), then log the response object and
+  check if the id property is present in the response.
+  Hint: Set the Content-Type header to 'application/json' and use JSON.stringify() for the body.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - POST Request with fetch()</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #333; }
+    button {
+      padding: 10px 22px;
+      background: #2874f0;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    button:hover { background: #1a5ec4; }
+    pre {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      max-width: 540px;
+      overflow-x: auto;
+    }
+    #id-check { margin-top: 10px; font-size: 16px; font-weight: bold; color: #388e3c; }
+  </style>
+</head>
+<body>
+
+  <h2>Q6: POST Request with fetch()</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q6</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Send a POST request using <code>fetch()</code> to <code>https://jsonplaceholder.typicode.com/posts</code> with a JSON body containing a <code>title</code> and <code>body</code> (your own text), then log the response object and check if the <code>id</code> property is present in the response.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Set the <code>Content-Type</code> header to <code>'application/json'</code> and use <code>JSON.stringify()</code> for the body.</em></p>
+  </div>
+  <pre id="response-output">Response will appear here...</pre>
+  <div id="id-check"></div>
+
+  <script>
+    // Q6: POST to JSONPlaceholder with title and body, check for id in response
+    function sendPost() {
+      const postData = {
+        title: "My New Post",
+        body: "This is the body of my new post sent via fetch().",
+        userId: 1
+      };
+
+      fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Response object:", data);
+          document.getElementById("response-output").textContent =
+            JSON.stringify(data, null, 2);
+
+          const idCheck = document.getElementById("id-check");
+          if ("id" in data) {
+            idCheck.textContent = `✅ 'id' is present in response: ${data.id}`;
+          } else {
+            idCheck.textContent = "❌ 'id' not found in response.";
+          }
+        })
+        .catch(err => console.error("POST error:", err));
+    }
+  </script>
+</body>
+</html>

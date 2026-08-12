@@ -1,0 +1,80 @@
+<!--
+  Q7:
+  Build a Promise called getFollowersCount that resolves after 1 second with a random
+  number between 1000 and 5000, then use .then() to display 'You have X new followers'
+  (like Instagram) in the console.
+
+  Q8:
+  Build a Promise called getFollowersCount that resolves after 1 second with a random
+  number between 1000 and 5000, then use .then() to display 'You have X new followers'
+  (like Instagram) in the console.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Promise getFollowersCount</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #833ab4; }
+    #output {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #833ab4;
+      min-height: 30px;
+    }
+    button {
+      padding: 10px 22px;
+      background: #833ab4;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover { background: #6a2f99; }
+  </style>
+</head>
+<body>
+
+  <h2>Q7 & Q8: Promise – getFollowersCount (Instagram-style)</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q7 &amp; Q8</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Build a Promise called <code>getFollowersCount</code> that resolves after 1 second with a random number between 1000 and 5000, then use <code>.then()</code> to display <code>'You have X new followers'</code> (like Instagram) in the console.</p>
+  </div>
+  <div id="output">Waiting...</div>
+
+  <script>
+    // Q7 & Q8: Promise that resolves after 1 second with a random follower count
+    const getFollowersCount = new Promise((resolve) => {
+      setTimeout(() => {
+        const count = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
+        resolve(count);
+      }, 1000);
+    });
+
+    function checkFollowers() {
+      document.getElementById("output").textContent = "Loading...";
+
+      // Create a fresh promise each click
+      new Promise((resolve) => {
+        setTimeout(() => {
+          const count = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
+          resolve(count);
+        }, 1000);
+      })
+      .then(count => {
+        const message = `You have ${count} new followers`;
+        console.log(message);
+        document.getElementById("output").textContent = "❤️ " + message;
+      });
+    }
+
+    // Also demonstrate the original promise on page load
+    getFollowersCount.then(count => {
+      console.log(`You have ${count} new followers`);
+    });
+  </script>
+</body>
+</html>
