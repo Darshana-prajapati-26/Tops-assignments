@@ -1,0 +1,122 @@
+<!--
+  Q10:
+  Implement a 'Clear Favorites' button on your restaurant list page that removes the saved
+  data from localStorage using localStorage.removeItem() and updates the UI accordingly.
+  Hint: Use localStorage.removeItem('yourKey') and refresh the displayed list after clearing.
+
+  Q11:
+  Implement a 'Clear Favorites' button on your restaurant list page that removes the saved
+  data from localStorage using localStorage.removeItem() and updates the UI accordingly.
+  Hint: Use localStorage.removeItem('yourKey') and refresh the displayed list after clearing.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Clear Favourites Button</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 16px; }
+    input {
+      padding: 9px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 240px;
+    }
+    .btn {
+      padding: 9px 18px;
+      background: #e23744;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #c0303c; }
+    .clear-btn {
+      padding: 9px 18px;
+      background: #555;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .clear-btn:hover { background: #333; }
+    .restaurant-card {
+      background: #fff;
+      border: 1px solid #e23744;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 8px 0;
+      max-width: 340px;
+      font-size: 16px;
+    }
+    #empty-msg { color: #aaa; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <h2>🍽️ My Favourite Restaurants</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q10 &amp; Q11</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Implement a 'Clear Favourites' button on your restaurant list page that removes the saved data from <code>localStorage</code> using <code>localStorage.removeItem()</code> and updates the UI accordingly.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Use <code>localStorage.removeItem('yourKey')</code> and refresh the displayed list after clearing.</em></p>
+  </div>
+
+  <div id="restaurant-list"></div>
+
+  <script>
+    const KEY = "favouriteRestaurants";
+
+    function getRestaurants() {
+      const data = localStorage.getItem(KEY);
+      return data ? JSON.parse(data) : [];
+    }
+
+    function saveRestaurants(arr) {
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    }
+
+    function renderRestaurants() {
+      const list = document.getElementById("restaurant-list");
+      const restaurants = getRestaurants();
+      list.innerHTML = "";
+
+      if (restaurants.length === 0) {
+        list.innerHTML = '<p id="empty-msg">No favourites saved yet.</p>';
+        return;
+      }
+
+      restaurants.forEach(name => {
+        const card = document.createElement("div");
+        card.classList.add("restaurant-card");
+        card.textContent = "🍴 " + name;
+        list.appendChild(card);
+      });
+    }
+
+    function addRestaurant() {
+      const input = document.getElementById("restaurant-input");
+      const name = input.value.trim();
+      if (!name) return;
+      const restaurants = getRestaurants();
+      restaurants.push(name);
+      saveRestaurants(restaurants);
+      renderRestaurants();
+      input.value = "";
+    }
+
+    // Q10 & Q11: Clear button uses localStorage.removeItem() and updates UI
+    function clearFavourites() {
+      localStorage.removeItem(KEY);
+      renderRestaurants();
+    }
+
+    // Load on page start
+    renderRestaurants();
+  </script>
+</body>
+</html>

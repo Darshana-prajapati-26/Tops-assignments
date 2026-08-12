@@ -1,0 +1,102 @@
+<!--
+  Q13:
+  Create an array called orders, where each order is an object with properties: orderId,
+  items (an array of objects with itemName and price), and delivery (an object with address
+  and status). Write a loop to display each order's orderId and total price of all items.
+  Hint: Use a nested loop or array method to sum the prices inside each order.
+
+  Q14:
+  Create an array called orders, where each order is an object with properties: orderId,
+  items (an array of objects with itemName and price), and delivery (an object with address
+  and status). Write a loop to display each order's orderId and total price of all items.
+  Hint: Use a nested loop or array method to sum the prices inside each order.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - Orders with Nested Items & Delivery</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .order-card {
+      background: #fff;
+      border: 1px solid #e23744;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      max-width: 440px;
+    }
+    .order-id { font-weight: bold; font-size: 17px; color: #e23744; }
+    .item-list { margin: 8px 0; padding-left: 18px; font-size: 14px; color: #555; }
+    .total { font-weight: bold; color: #2e7d32; margin-top: 8px; }
+    .delivery { font-size: 13px; color: #777; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <h2>🍕 Zomato Orders</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q13 &amp; Q14</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Create an array called <code>orders</code>, where each order is an object with properties: <code>orderId</code>, <code>items</code> (an array of objects with <code>itemName</code> and <code>price</code>), and <code>delivery</code> (an object with <code>address</code> and <code>status</code>). Write a loop to display each order's <code>orderId</code> and total price of all items.<br><em style="font-size:14px;color:#666;"><strong>Hint:</strong> Use a nested loop or array method to sum the prices inside each order.</em></p>
+  </div>
+  <div id="orders-container"></div>
+
+  <script>
+    // Q13 & Q14: Nested structure – each order has orderId, items[], and delivery{}
+    const orders = [
+      {
+        orderId: "ZMT-001",
+        items: [
+          { itemName: "Butter Chicken", price: 320 },
+          { itemName: "Naan", price: 60 },
+          { itemName: "Mango Lassi", price: 80 }
+        ],
+        delivery: { address: "12 MG Road, Pune", status: "Delivered" }
+      },
+      {
+        orderId: "ZMT-002",
+        items: [
+          { itemName: "Paneer Tikka", price: 250 },
+          { itemName: "Biryani", price: 180 }
+        ],
+        delivery: { address: "5 Park Street, Mumbai", status: "Out for Delivery" }
+      },
+      {
+        orderId: "ZMT-003",
+        items: [
+          { itemName: "Masala Dosa", price: 120 },
+          { itemName: "Filter Coffee", price: 50 },
+          { itemName: "Idli Sambar", price: 90 }
+        ],
+        delivery: { address: "8 Anna Nagar, Chennai", status: "Preparing" }
+      }
+    ];
+
+    const container = document.getElementById("orders-container");
+
+    for (const order of orders) {
+      // Calculate total using reduce
+      const total = order.items.reduce((sum, item) => sum + item.price, 0);
+
+      console.log(`Order ${order.orderId} — Total: ₹${total}`);
+
+      // Build card
+      const card = document.createElement("div");
+      card.classList.add("order-card");
+
+      const itemListHTML = order.items
+        .map(item => `<li>${item.itemName} — ₹${item.price}</li>`)
+        .join("");
+
+      card.innerHTML = `
+        <div class="order-id">Order ID: ${order.orderId}</div>
+        <ul class="item-list">${itemListHTML}</ul>
+        <div class="total">Total: ₹${total}</div>
+        <div class="delivery">📍 ${order.delivery.address} &nbsp;|&nbsp; Status: ${order.delivery.status}</div>
+      `;
+      container.appendChild(card);
+    }
+  </script>
+</body>
+</html>

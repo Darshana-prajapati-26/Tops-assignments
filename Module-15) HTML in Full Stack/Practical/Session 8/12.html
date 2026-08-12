@@ -1,0 +1,60 @@
+<!--
+  Q12:
+  Given an array of objects called movies, where each object has properties: title, year,
+  and a nested object rating with keys imdb and rottenTomatoes, write code to print each
+  movie's title and its IMDb rating.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Movies with Nested Rating Object</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #1a1a2e; color: #fff; }
+    h2 { color: #e94560; }
+    .movie-card {
+      background: #16213e;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin: 10px 0;
+      max-width: 380px;
+      border-left: 4px solid #e94560;
+    }
+    .title { font-size: 18px; font-weight: bold; }
+    .rating { margin-top: 6px; font-size: 14px; color: #f4c430; }
+  </style>
+</head>
+<body>
+
+  <h2>🎬 Movies – IMDb Ratings</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q12</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#eee;">Given an array of objects called <code>movies</code>, where each object has properties: <code>title</code>, <code>year</code>, and a nested object <code>rating</code> with keys <code>imdb</code> and <code>rottenTomatoes</code>, write code to print each movie's title and its IMDb rating.</p>
+  </div>
+  <div id="movie-list"></div>
+
+  <script>
+    // Q12: Nested objects – each movie has a rating object with imdb and rottenTomatoes
+    const movies = [
+      { title: "Interstellar",    year: 2014, rating: { imdb: 8.6, rottenTomatoes: "73%" } },
+      { title: "The Dark Knight", year: 2008, rating: { imdb: 9.0, rottenTomatoes: "94%" } },
+      { title: "Inception",       year: 2010, rating: { imdb: 8.8, rottenTomatoes: "87%" } },
+      { title: "3 Idiots",        year: 2009, rating: { imdb: 8.4, rottenTomatoes: "100%" } }
+    ];
+
+    const container = document.getElementById("movie-list");
+
+    for (const movie of movies) {
+      console.log(`${movie.title} — IMDb: ${movie.rating.imdb}`);
+
+      const card = document.createElement("div");
+      card.classList.add("movie-card");
+      card.innerHTML = `
+        <div class="title">🎥 ${movie.title} (${movie.year})</div>
+        <div class="rating">⭐ IMDb: ${movie.rating.imdb} &nbsp;|&nbsp; 🍅 Rotten Tomatoes: ${movie.rating.rottenTomatoes}</div>
+      `;
+      container.appendChild(card);
+    }
+  </script>
+</body>
+</html>

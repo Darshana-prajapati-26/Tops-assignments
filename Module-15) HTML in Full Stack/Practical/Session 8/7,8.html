@@ -1,0 +1,50 @@
+<!--
+  Q7:
+  Remove the last playlist from your playlists array using the pop() method and display
+  the removed object in the console.
+
+  Q8:
+  Remove the last playlist from your playlists array using the pop() method and display
+  the removed object in the console.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - pop() Last Playlist</title>
+  <style>
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;
+      max-width: 680px; font-family: Arial, sans-serif;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q7 &amp; Q8</h3>
+    <p>Remove the last playlist from your <code>playlists</code> array using the <code>pop()</code> method and display the removed object in the console.</p>
+  </div>
+  <h2>Q7 & Q8: pop() – Remove and Display Last Playlist</h2>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // Q7 & Q8: pop() removes the last playlist object and logs it
+    const playlists = [
+      { name: "Chill Vibes", creator: "Rahul", numberOfSongs: 25 },
+      { name: "Workout Beats", creator: "Priya", numberOfSongs: 40 },
+      { name: "Bollywood Hits", creator: "Amit", numberOfSongs: 55 }
+    ];
+
+    const removedPlaylist = playlists.pop();
+
+    console.log("Removed playlist:");
+    console.log(removedPlaylist);
+
+    console.log("\nRemaining playlists:");
+    console.log(playlists);
+  </script>
+</body>
+</html>

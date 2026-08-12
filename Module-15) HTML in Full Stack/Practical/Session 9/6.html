@@ -1,0 +1,83 @@
+<!--
+  Q6:
+  Build a function saveRecentSearch(query) that takes a search term (like 'Biryani' or
+  'Sneakers'), adds it to an array, converts the array to JSON, and saves it in localStorage
+  under the key 'recentSearches'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - saveRecentSearch to localStorage</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; }
+    h2 { color: #e23744; }
+    input {
+      padding: 9px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 220px;
+      margin-right: 8px;
+    }
+    button {
+      padding: 9px 18px;
+      background: #e23744;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover { background: #c0303c; }
+    #search-list { margin-top: 16px; padding-left: 20px; font-size: 15px; }
+    #search-list li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+  <h2>🔍 Recent Searches</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q6</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Build a function <code>saveRecentSearch(query)</code> that takes a search term (like 'Biryani' or 'Sneakers'), adds it to an array, converts the array to JSON, and saves it in <code>localStorage</code> under the key <code>'recentSearches'</code>.</p>
+  </div>
+  <input type="text" id="search-input" placeholder="e.g. Biryani, Sneakers" />
+  <button onclick="handleSearch()">Search</button>
+
+  <h3>Saved Searches:</h3>
+  <ul id="search-list"></ul>
+
+  <script>
+    // Q6: saveRecentSearch() adds query to array and saves to localStorage as JSON
+    function saveRecentSearch(query) {
+      const existing = localStorage.getItem("recentSearches");
+      const searches = existing ? JSON.parse(existing) : [];
+      searches.push(query);
+      localStorage.setItem("recentSearches", JSON.stringify(searches));
+      renderList(searches);
+    }
+
+    function renderList(searches) {
+      const list = document.getElementById("search-list");
+      list.innerHTML = "";
+      searches.forEach(s => {
+        const li = document.createElement("li");
+        li.textContent = "🔎 " + s;
+        list.appendChild(li);
+      });
+    }
+
+    function handleSearch() {
+      const input = document.getElementById("search-input");
+      const query = input.value.trim();
+      if (!query) return;
+      saveRecentSearch(query);
+      input.value = "";
+    }
+
+    // Load existing searches on page load
+    const saved = localStorage.getItem("recentSearches");
+    if (saved) renderList(JSON.parse(saved));
+  </script>
+</body>
+</html>

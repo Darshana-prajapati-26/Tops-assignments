@@ -1,0 +1,105 @@
+<!--
+  Q13:
+  Debug this code: It tries to save an array of movie names to localStorage, but after
+  reloading, the list doesn't display correctly.
+
+  let movies = ['Jawan', 'Pathaan', 'Dunki'];
+  localStorage.setItem('movies', movies);
+  let saved = localStorage.getItem('movies');
+  let arr = JSON.parse(saved);
+  console.log(arr);
+
+  Hint: Check how movies is being stored and what type localStorage expects.
+
+  Q14:
+  Debug this code: It tries to save an array of movie names to localStorage, but after
+  reloading, the list doesn't display correctly.
+
+  let movies = ['Jawan', 'Pathaan', 'Dunki'];
+  localStorage.setItem('movies', movies);
+  let saved = localStorage.getItem('movies');
+  let arr = JSON.parse(saved);
+  console.log(arr);
+
+  Hint: Check how movies is being stored and what type localStorage expects.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - Debug localStorage Bug</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    h2 { color: #c62828; }
+    .box {
+      background: #fff3f3;
+      border-left: 5px solid #c62828;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      max-width: 580px;
+    }
+    .box h3 { margin-top: 0; color: #c62828; }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+    .fixed { background: #f1f8e9; border-left-color: #388e3c; }
+    .fixed h3 { color: #388e3c; }
+    #output { color: #388e3c; font-weight: bold; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <h2>Q13 & Q14: Debug – localStorage Array Not Displaying Correctly</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q13 &amp; Q14</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Debug this code: It tries to save an array of movie names to <code>localStorage</code>, but after reloading, the list doesn't display correctly.<br><br>
+    <code>let movies = ['Jawan', 'Pathaan', 'Dunki'];<br>localStorage.setItem('movies', movies);<br>let saved = localStorage.getItem('movies');<br>let arr = JSON.parse(saved);<br>console.log(arr);</code><br><br>
+    <em style="font-size:14px;color:#555;"><strong>Hint:</strong> Check how movies is being stored and what type localStorage expects.</em></p>
+  </div>
+
+  <div class="box">
+    <h3>❌ Buggy Code</h3>
+    <pre>
+let movies = ['Jawan', 'Pathaan', 'Dunki'];
+localStorage.setItem('movies', movies);   // BUG: stores as comma-separated string, not JSON
+let saved = localStorage.getItem('movies');
+let arr = JSON.parse(saved);              // ERROR: "Jawan,Pathaan,Dunki" is not valid JSON
+console.log(arr);</pre>
+    <p><strong>Bug:</strong> <code>localStorage.setItem()</code> calls <code>.toString()</code> on the array,
+    storing it as <code>"Jawan,Pathaan,Dunki"</code> (a plain string). <code>JSON.parse()</code> then
+    throws a SyntaxError because that is not valid JSON. The fix is to use
+    <code>JSON.stringify()</code> before storing.</p>
+  </div>
+
+  <div class="box fixed">
+    <h3>✅ Fixed Code</h3>
+    <pre>
+let movies = ['Jawan', 'Pathaan', 'Dunki'];
+localStorage.setItem('movies', JSON.stringify(movies));  // ✅ store as JSON string
+let saved = localStorage.getItem('movies');
+let arr = JSON.parse(saved);                             // ✅ parse back to array
+console.log(arr);</pre>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Q13 & Q14: Demonstrate the fixed code working correctly
+    const movies = ["Jawan", "Pathaan", "Dunki"];
+
+    // Fixed: use JSON.stringify before storing
+    localStorage.setItem("movies", JSON.stringify(movies));
+
+    const saved = localStorage.getItem("movies");
+    const arr = JSON.parse(saved);
+
+    console.log("Parsed movies array:", arr);
+    document.getElementById("output").textContent =
+      "Console output: " + JSON.stringify(arr);
+  </script>
+</body>
+</html>

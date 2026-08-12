@@ -1,0 +1,50 @@
+<!--
+  Q9:
+  Write a function getRecentSearches() that reads the 'recentSearches' item from localStorage,
+  parses it from JSON, and returns the array. If nothing is saved yet, return an empty array.
+  Hint: Check for null before parsing.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - getRecentSearches from localStorage</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    h2 { color: #333; }
+    pre {
+      background: #f4f4f4;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q9: getRecentSearches() – Read from localStorage</h2>
+  <div class="question-box" style="background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:20px;max-width:680px;font-family:Arial,sans-serif;">
+    <h3 style="margin:0 0 8px;color:#e65100;font-size:15px;">Q9</h3>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#333;">Write a function <code>getRecentSearches()</code> that reads the <code>'recentSearches'</code> item from <code>localStorage</code>, parses it from JSON, and returns the array. If nothing is saved yet, return an empty array.<br><em style="font-size:14px;color:#555;"><strong>Hint:</strong> Check for null before parsing.</em></p>
+  </div>
+  <p>Open the browser console to see the output.</p>
+  <pre id="output"></pre>
+
+  <script>
+    // Q9: Read 'recentSearches' from localStorage, parse JSON, return [] if nothing saved
+    function getRecentSearches() {
+      const data = localStorage.getItem("recentSearches");
+      // Check for null before parsing
+      if (data === null) return [];
+      return JSON.parse(data);
+    }
+
+    const searches = getRecentSearches();
+    console.log("Recent searches:", searches);
+
+    document.getElementById("output").textContent =
+      searches.length > 0
+        ? "Recent Searches:\n" + searches.map((s, i) => `${i + 1}. ${s}`).join("\n")
+        : "No recent searches found in localStorage.";
+  </script>
+</body>
+</html>

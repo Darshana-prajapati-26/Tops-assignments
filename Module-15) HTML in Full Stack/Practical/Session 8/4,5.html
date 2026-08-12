@@ -1,0 +1,50 @@
+<!--
+  Q4:
+  Add a new playlist object to your playlists array using the push() method. The new
+  playlist should have a unique name, creator, and numberOfSongs. Print the updated array.
+
+  Q5:
+  Add a new playlist object to your playlists array using the push() method. The new
+  playlist should have a unique name, creator, and numberOfSongs. Print the updated array.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - push() New Playlist</title>
+  <style>
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;
+      max-width: 680px; font-family: Arial, sans-serif;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q4 &amp; Q5</h3>
+    <p>Add a new playlist object to your <code>playlists</code> array using the <code>push()</code> method. The new playlist should have a unique <code>name</code>, <code>creator</code>, and <code>numberOfSongs</code>. Print the updated array.</p>
+  </div>
+  <h2>Q4 & Q5: push() – Add New Playlist</h2>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // Q4 & Q5: Start with 3 playlists, push() a new one and print updated array
+    const playlists = [
+      { name: "Chill Vibes", creator: "Rahul", numberOfSongs: 25 },
+      { name: "Workout Beats", creator: "Priya", numberOfSongs: 40 },
+      { name: "Bollywood Hits", creator: "Amit", numberOfSongs: 55 }
+    ];
+
+    console.log("Before push:");
+    console.log(playlists);
+
+    playlists.push({ name: "Night Drive", creator: "Sneha", numberOfSongs: 30 });
+
+    console.log("\nAfter push:");
+    console.log(playlists);
+  </script>
+</body>
+</html>
