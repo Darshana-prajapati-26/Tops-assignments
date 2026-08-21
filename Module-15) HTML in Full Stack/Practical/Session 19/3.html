@@ -1,0 +1,94 @@
+<!--
+  Q3:
+  Sketch the architecture for a Flipkart-style Wishlist Manager app on paper or a
+  whiteboard — show how data flows from the Add Item form, to storage (array or
+  localStorage), to the display list, and how edit/delete actions update the data and UI.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q3 - Wishlist Manager Architecture Sketch</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; max-width: 760px; }
+    h2 { color: #2874f0; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .arch-diagram {
+      background: #fff; border-radius: 12px; padding: 28px 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    }
+    .arch-diagram h3 { color: #2874f0; margin-top: 0; }
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+    .box {
+      background: #e3f2fd; border: 2px solid #2874f0; border-radius: 8px;
+      padding: 10px 18px; font-size: 14px; font-weight: bold; color: #1a237e; text-align: center;
+    }
+    .box.store { background: #e8f5e9; border-color: #388e3c; color: #1b5e20; }
+    .box.ui    { background: #fce4ec; border-color: #c62828; color: #7f0000; }
+    .box.action { background: #fff3e0; border-color: #e65100; color: #bf360c; }
+    .arrow { font-size: 22px; color: #555; }
+    .step { display: flex; align-items: flex-start; gap: 14px; margin: 12px 0; font-size: 14px; color: #444; }
+    .step-num { background: #2874f0; color: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <h2>Q3: Flipkart Wishlist Manager – Architecture Sketch</h2>
+  <div class="question-box">
+    <h3>Q3</h3>
+    <p>Sketch the architecture for a Flipkart-style Wishlist Manager: show how data flows
+    from the Add Item form → storage (array/localStorage) → display list, and how
+    edit/delete actions update both data and UI.</p>
+  </div>
+
+  <div class="arch-diagram">
+    <h3>📐 Data Flow Diagram</h3>
+
+    <strong>Add Flow:</strong>
+    <div class="flow">
+      <div class="box">📝 Add Item Form<br><small>(name, price)</small></div>
+      <span class="arrow">→</span>
+      <div class="box store">💾 wishlist[] Array<br><small>(+ localStorage)</small></div>
+      <span class="arrow">→</span>
+      <div class="box ui">🖥️ Display List<br><small>(re-render)</small></div>
+    </div>
+
+    <strong>Edit Flow:</strong>
+    <div class="flow">
+      <div class="box ui">🖥️ Display List</div>
+      <span class="arrow">→</span>
+      <div class="box action">✏️ Edit Button<br><small>(pre-fill form)</small></div>
+      <span class="arrow">→</span>
+      <div class="box">📝 Form<br><small>(update values)</small></div>
+      <span class="arrow">→</span>
+      <div class="box store">💾 Update Array<br><small>(+ localStorage)</small></div>
+      <span class="arrow">→</span>
+      <div class="box ui">🖥️ Re-render</div>
+    </div>
+
+    <strong>Delete Flow:</strong>
+    <div class="flow">
+      <div class="box ui">🖥️ Display List</div>
+      <span class="arrow">→</span>
+      <div class="box action">🗑️ Delete Button<br><small>(splice index)</small></div>
+      <span class="arrow">→</span>
+      <div class="box store">💾 Remove from Array<br><small>(+ localStorage)</small></div>
+      <span class="arrow">→</span>
+      <div class="box ui">🖥️ Re-render</div>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#eee;" />
+    <strong>Steps:</strong>
+    <div class="step"><div class="step-num">1</div>User fills Add Item form and clicks "Add"</div>
+    <div class="step"><div class="step-num">2</div>JS reads form values, creates an object, pushes to <code>wishlist[]</code></div>
+    <div class="step"><div class="step-num">3</div>Array is saved to <code>localStorage</code> for persistence</div>
+    <div class="step"><div class="step-num">4</div><code>renderWishlist()</code> clears the display and re-renders all items</div>
+    <div class="step"><div class="step-num">5</div>Edit: form pre-fills, user updates, array item is replaced at the same index</div>
+    <div class="step"><div class="step-num">6</div>Delete: <code>array.splice(index, 1)</code> removes the item, UI re-renders</div>
+  </div>
+</body>
+</html>

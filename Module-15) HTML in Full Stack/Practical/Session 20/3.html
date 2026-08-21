@@ -1,0 +1,63 @@
+<!--
+  Q3:
+  Manually test a Flipkart-style Add to Cart button: click the button multiple times and
+  verify that the item is only added once and the cart count updates correctly.
+  Hint: Check for bugs like double adds or cart count not updating.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q3 - Add to Cart Test (Count + Duplicate Check)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    #msg { color: red; }
+    #msg.ok { color: green; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q3</h3>
+    <p>Click the Add to Cart button multiple times and verify the item is only added once
+    and the cart count updates correctly.<br>
+    <em><strong>Hint:</strong> Check for double adds or cart count not updating.</em></p>
+  </div>
+
+  <h2>Q3: Cart Count + Duplicate Check</h2>
+
+  <p>Product: Laptop Stand – ₹1299</p>
+  <button onclick="addToCart()">Add to Cart</button>
+  <p>Cart Count: <strong id="cart-count">0</strong></p>
+  <p id="msg"></p>
+  <ul id="cart-list"></ul>
+
+  <script>
+    // Q3: Track whether item is already added; update count correctly
+    const cart = [];
+    const product = { id: 5, name: "Laptop Stand", price: 1299 };
+
+    function addToCart() {
+      const exists = cart.find(item => item.id === product.id);
+      const msg = document.getElementById("msg");
+
+      if (exists) {
+        msg.textContent = "⚠️ Already in cart — item only added once.";
+        msg.className = "";
+        return;
+      }
+
+      cart.push(product);
+      document.getElementById("cart-count").textContent = cart.length;
+      msg.textContent = "✅ Item added. Cart count updated to " + cart.length;
+      msg.className = "ok";
+
+      const li = document.createElement("li");
+      li.textContent = product.name + " – ₹" + product.price;
+      document.getElementById("cart-list").appendChild(li);
+    }
+  </script>
+</body>
+</html>

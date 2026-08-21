@@ -1,0 +1,98 @@
+<!--
+  Q1:
+  Create an HTML file with a simple form that lets a user add a new playlist (name,
+  description) like Spotify's 'Create Playlist' feature, and use JavaScript to store the
+  playlist data in an array.
+
+  Q2:
+  Create an HTML file with a simple form that lets a user add a new playlist (name,
+  description) like Spotify's 'Create Playlist' feature, and use JavaScript to store the
+  playlist data in an array.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - Add Playlist Form (Store in Array)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .form-box {
+      background: #282828; border-radius: 12px; padding: 24px 28px;
+      max-width: 440px; margin-bottom: 24px;
+    }
+    .form-box h3 { color: #1DB954; margin-top: 0; }
+    label { display: block; font-size: 13px; color: #ccc; margin-bottom: 4px; margin-top: 14px; }
+    input, textarea {
+      width: 100%; padding: 10px 12px; font-size: 14px;
+      background: #3a3a3a; border: 1px solid #555; border-radius: 6px;
+      color: #fff; box-sizing: border-box;
+    }
+    textarea { height: 80px; resize: vertical; }
+    button {
+      margin-top: 16px; padding: 10px 24px; background: #1DB954; color: #000;
+      border: none; border-radius: 25px; font-size: 15px; font-weight: bold;
+      cursor: pointer; width: 100%;
+    }
+    button:hover { background: #17a047; }
+    #array-preview {
+      background: #1e1e1e; color: #4ec9b0; border-radius: 8px; padding: 14px 18px;
+      font-family: monospace; font-size: 13px; max-width: 500px; white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Q1 &amp; Q2: Create Playlist Form – Store in Array</h2>
+  <div class="question-box">
+    <h3>Q1 &amp; Q2</h3>
+    <p>Create a form that lets a user add a new playlist (<code>name</code>,
+    <code>description</code>) like Spotify's "Create Playlist" feature, and use JavaScript
+    to store the playlist data in an array.</p>
+  </div>
+
+  <div class="form-box">
+    <h3>🎵 Create Playlist</h3>
+    <label for="pl-name">Playlist Name</label>
+    <input type="text" id="pl-name" placeholder="e.g. Chill Vibes" />
+    <label for="pl-desc">Description</label>
+    <textarea id="pl-desc" placeholder="What's this playlist about?"></textarea>
+    <button onclick="addPlaylist()">Create</button>
+    <p id="form-msg" style="color:#e74c3c;font-size:13px;margin-top:8px;"></p>
+  </div>
+
+  <h3 style="color:#1DB954;">playlists[] array (console preview):</h3>
+  <div id="array-preview">// Array is empty — add a playlist above</div>
+
+  <script>
+    // Q1 & Q2: Store playlists in an array
+    const playlists = [];
+
+    function addPlaylist() {
+      const name = document.getElementById("pl-name").value.trim();
+      const description = document.getElementById("pl-desc").value.trim();
+      const msg = document.getElementById("form-msg");
+
+      if (!name || !description) {
+        msg.textContent = "Both fields are required.";
+        return;
+      }
+      msg.textContent = "";
+
+      playlists.push({ name, description });
+      console.log("playlists array:", playlists);
+
+      document.getElementById("pl-name").value = "";
+      document.getElementById("pl-desc").value = "";
+
+      document.getElementById("array-preview").textContent =
+        JSON.stringify(playlists, null, 2);
+    }
+  </script>
+</body>
+</html>

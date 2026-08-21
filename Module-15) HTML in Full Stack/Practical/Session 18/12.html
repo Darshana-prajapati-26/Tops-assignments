@@ -1,0 +1,106 @@
+<!--
+  Q12:
+  Given the following buggy code, run it in your browser and use the stack trace in the
+  console to identify which function is causing the error:
+  function getUser() { return fetchUser(); }
+  function fetchUser() { return JSON.parse(undefined); }
+  getUser();
+  Write down the function name and line number where the error occurs.
+  Hint: Expand the error in the console to view the call stack.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Stack Trace: getUser / fetchUser Bug</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #c62828; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .box { background: #fff; border-radius: 10px; padding: 16px 22px; margin-bottom: 16px; border-left: 5px solid #c62828; box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+    .box.fixed { border-left-color: #388e3c; }
+    .box h3 { margin-top: 0; font-size: 15px; color: #c62828; }
+    .box.fixed h3 { color: #388e3c; }
+    pre { background: #f4f4f4; border-radius: 6px; padding: 12px; font-size: 13px; overflow-x: auto; }
+    button { padding: 10px 22px; background: #c62828; color: #fff; border: none; border-radius: 6px; font-size: 15px; cursor: pointer; margin: 6px 6px 16px 0; }
+    button.fix { background: #388e3c; }
+    button:hover { opacity: 0.85; }
+    #output { background: #1e1e1e; color: #f48771; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 13px; white-space: pre-wrap; max-width: 620px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Q12: Stack Trace – getUser / fetchUser Bug</h2>
+  <div class="question-box">
+    <h3>Q12</h3>
+    <p>Run the buggy code and use the stack trace to identify which function and line
+    caused the error. Write down the function name and line number.<br>
+    <em><strong>Hint:</strong> Expand the error in DevTools Console to view the call stack.</em></p>
+  </div>
+
+  <div class="box">
+    <h3>❌ Buggy Code</h3>
+    <pre>
+function getUser()   { return fetchUser(); }
+function fetchUser() { return JSON.parse(undefined); }  // 💥 BUG HERE
+getUser();</pre>
+    <p style="font-size:14px;color:#555;"><strong>Bug:</strong> <code>JSON.parse(undefined)</code>
+    throws <code>SyntaxError</code> — <code>fetchUser()</code> is the culprit.</p>
+  </div>
+
+  <div class="box fixed">
+    <h3>✅ Fixed Code</h3>
+    <pre>
+function getUser()   { return fetchUser(); }
+function fetchUser() {
+  const raw = undefined;
+  if (raw === undefined || raw === null) return null; // ✅ guard
+  return JSON.parse(raw);
+}
+getUser();</pre>
+  </div>
+
+  <button onclick="runBuggy()">▶ Run Buggy Code</button>
+  <button class="fix" onclick="runFixed()">✅ Run Fixed Code</button>
+
+  <pre id="output">// Click a button to see the result</pre>
+
+  <script>
+    // Q12: Buggy version — fetchUser() is the source of the SyntaxError
+    function getUser()   { return fetchUser(); }
+    function fetchUser() { return JSON.parse(undefined); }
+
+    // Fixed version
+    function getUserFixed()   { return fetchUserFixed(); }
+    function fetchUserFixed() {
+      const raw = undefined;
+      if (raw === undefined || raw === null) return null;
+      return JSON.parse(raw);
+    }
+
+    function runBuggy() {
+      const out = document.getElementById("output");
+      try {
+        getUser();
+      } catch (e) {
+        console.error(e);
+        out.style.color = "#f48771";
+        out.textContent = (e.stack || e.toString()) +
+          "\n\n// ↑ fetchUser() at the top is the source of the error\n// JSON.parse(undefined) → SyntaxError";
+      }
+    }
+
+    function runFixed() {
+      const out = document.getElementById("output");
+      const result = getUserFixed();
+      console.log("Fixed result:", result);
+      out.style.color = "#4ec9b0";
+      out.textContent = `✅ Fixed result: ${result}\n// fetchUserFixed() guards against undefined before parsing`;
+    }
+  </script>
+</body>
+</html>

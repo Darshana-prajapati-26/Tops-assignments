@@ -1,0 +1,95 @@
+<!--
+  Q13:
+  Copy any error message you see in the browser console (from your previous tasks) and
+  paste it into ChatGPT. Ask ChatGPT to explain what the error means and suggest how to
+  fix it, then write down the explanation you received.
+
+  Q14:
+  Copy any error message you see in the browser console (from your previous tasks) and
+  paste it into ChatGPT. Ask ChatGPT to explain what the error means and suggest how to
+  fix it, then write down the explanation you received.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - ChatGPT Error Explanation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #10a37f; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .card { background: #fff; border-radius: 10px; padding: 18px 22px; margin-bottom: 16px; border-left: 5px solid #10a37f; box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+    .card h3 { margin-top: 0; color: #10a37f; font-size: 15px; }
+    pre { background: #1e1e1e; color: #f48771; border-radius: 6px; padding: 12px; font-size: 13px; overflow-x: auto; }
+    .explanation { background: #f0fdf4; border-left: 4px solid #10a37f; border-radius: 6px; padding: 14px 18px; font-size: 14px; line-height: 1.8; color: #333; }
+    .steps { background: #f5f5f5; border-radius: 8px; padding: 14px 18px; font-size: 14px; line-height: 1.9; color: #333; }
+    .steps ol { margin: 0; padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Q13 &amp; Q14: Using ChatGPT to Understand Error Messages</h2>
+  <div class="question-box">
+    <h3>Q13 &amp; Q14</h3>
+    <p>Copy an error message from the browser console, paste it into ChatGPT, and ask for
+    an explanation and fix. Write down the explanation you received.</p>
+  </div>
+
+  <div class="card">
+    <h3>📋 How to Use ChatGPT for Debugging</h3>
+    <div class="steps">
+      <ol>
+        <li>Open DevTools Console (F12) and run any of your previous tasks to see an error</li>
+        <li>Right-click the error → "Copy" or select the text and Ctrl+C</li>
+        <li>Go to <strong>chat.openai.com</strong> and paste the error</li>
+        <li>Ask: <em>"What does this error mean and how do I fix it?"</em></li>
+        <li>Read ChatGPT's explanation and write a summary in your own words below</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔴 Sample Error (from Q12)</h3>
+    <pre>SyntaxError: Unexpected token 'u', "undefined" is not valid JSON
+    at JSON.parse (&lt;anonymous&gt;)
+    at fetchUser (12.html:XX:XX)
+    at getUser (12.html:XX:XX)</pre>
+  </div>
+
+  <div class="card">
+    <h3>💬 ChatGPT Explanation (Summary)</h3>
+    <div class="explanation">
+      <p><strong>What the error means:</strong><br>
+      <code>JSON.parse(undefined)</code> tries to convert the string <code>"undefined"</code>
+      into a JavaScript object, but <code>"undefined"</code> is not valid JSON — only values
+      like <code>"{}"</code>, <code>"[]"</code>, or <code>"\"hello\""</code> are. So JavaScript
+      throws a <code>SyntaxError</code> saying the input is unexpected.</p>
+
+      <p><strong>How to fix it (ChatGPT suggestion):</strong><br>
+      Always check that the value you pass to <code>JSON.parse()</code> is actually a string
+      before calling it. Add a guard like:<br>
+      <code>if (raw === undefined || raw === null) return null;</code><br>
+      before calling <code>JSON.parse(raw)</code>.</p>
+
+      <p><strong>In my own words:</strong><br>
+      The error happened because <code>fetchUser()</code> tried to parse <code>undefined</code>
+      as JSON. JSON only understands text that looks like data (like objects or arrays in string
+      form). The fix is simple — check if the value exists before parsing it.</p>
+    </div>
+  </div>
+
+  <script>
+    // Q13 & Q14: Trigger a real error to copy from console
+    try {
+      JSON.parse(undefined);
+    } catch (e) {
+      console.error("Error for Q13 & Q14 — copy this and paste into ChatGPT:");
+      console.error(e);
+    }
+  </script>
+</body>
+</html>

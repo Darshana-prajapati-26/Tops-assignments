@@ -1,0 +1,98 @@
+<!--
+  Q12:
+  Test a Zomato-style review form: fill out all fields, submit, then try submitting with
+  missing or invalid data (empty review or rating above 5). List any bugs or missing
+  validation you find and fix at least one.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q12 - Zomato Review Form with Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    input, textarea { display: block; padding: 8px; font-size: 14px; width: 280px; margin: 6px 0; }
+    .err { color: red; font-size: 13px; display: block; }
+    button { padding: 9px 20px; font-size: 14px; margin-top: 10px; cursor: pointer; }
+    #success { color: green; margin-top: 10px; }
+    ul { font-size: 14px; line-height: 1.8; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q12</h3>
+    <p>Test a Zomato-style review form: fill out all fields and submit, then try submitting
+    with missing or invalid data (empty review, rating above 5). List bugs found and fix
+    at least one.</p>
+  </div>
+
+  <h2>Q12: Zomato Review Form – Test &amp; Fix</h2>
+
+  <form onsubmit="return handleReview(event)">
+    <label>Reviewer Name</label>
+    <input type="text" id="r-name" placeholder="Your name" />
+    <span class="err" id="name-err"></span>
+
+    <label>Review</label>
+    <textarea id="r-review" rows="3" placeholder="Write your review..."></textarea>
+    <span class="err" id="review-err"></span>
+
+    <label>Rating (1–5)</label>
+    <input type="number" id="r-rating" placeholder="e.g. 4" />
+    <span class="err" id="rating-err"></span>
+
+    <button type="submit">Submit Review</button>
+  </form>
+  <p id="success"></p>
+
+  <hr />
+  <h3>Bugs Found During Testing &amp; Fixes Applied</h3>
+  <ul>
+    <li><strong>Bug 1:</strong> Empty review submitted → <strong>Fix:</strong> Check <code>if (!review.trim())</code> and show error.</li>
+    <li><strong>Bug 2:</strong> Rating above 5 accepted → <strong>Fix:</strong> Validate <code>rating &lt; 1 || rating &gt; 5</code>.</li>
+    <li><strong>Bug 3:</strong> Rating field empty → <strong>Fix:</strong> Check <code>isNaN(rating)</code> before storing.</li>
+    <li><strong>Bug 4:</strong> Name field blank → <strong>Fix:</strong> Required validation added.</li>
+  </ul>
+
+  <script>
+    // Q12: Validation for all three fields — fixes all 4 listed bugs
+    function handleReview(e) {
+      e.preventDefault();
+
+      const name   = document.getElementById("r-name").value.trim();
+      const review = document.getElementById("r-review").value.trim();
+      const rating = parseFloat(document.getElementById("r-rating").value);
+      let valid = true;
+
+      document.getElementById("name-err").textContent   = "";
+      document.getElementById("review-err").textContent = "";
+      document.getElementById("rating-err").textContent = "";
+      document.getElementById("success").textContent    = "";
+
+      if (!name) {
+        document.getElementById("name-err").textContent = "Name is required.";
+        valid = false;
+      }
+      if (!review) {
+        document.getElementById("review-err").textContent = "Review cannot be empty.";
+        valid = false;
+      }
+      if (isNaN(rating) || rating < 1 || rating > 5) {
+        document.getElementById("rating-err").textContent = "Rating must be a number between 1 and 5.";
+        valid = false;
+      }
+
+      if (valid) {
+        document.getElementById("success").textContent =
+          '✅ Review submitted by ' + name + ' — Rating: ' + rating + '/5';
+        document.getElementById("r-name").value   = "";
+        document.getElementById("r-review").value = "";
+        document.getElementById("r-rating").value = "";
+      }
+    }
+  </script>
+</body>
+</html>

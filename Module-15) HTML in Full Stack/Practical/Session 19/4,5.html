@@ -1,0 +1,114 @@
+<!--
+  Q4:
+  Display the list of playlists below the form, showing each playlist's name and
+  description, and update the display every time a new playlist is added.
+
+  Q5:
+  Display the list of playlists below the form, showing each playlist's name and
+  description, and update the display every time a new playlist is added.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - Display Playlist List (Live Update)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .form-box { background: #282828; border-radius: 12px; padding: 22px 26px; max-width: 440px; margin-bottom: 28px; }
+    .form-box h3 { color: #1DB954; margin-top: 0; }
+    label { display: block; font-size: 13px; color: #ccc; margin: 12px 0 4px; }
+    input, textarea {
+      width: 100%; padding: 9px 12px; font-size: 14px;
+      background: #3a3a3a; border: 1px solid #555; border-radius: 6px;
+      color: #fff; box-sizing: border-box;
+    }
+    textarea { height: 70px; resize: vertical; }
+    button.add-btn {
+      margin-top: 14px; padding: 10px 24px; background: #1DB954; color: #000;
+      border: none; border-radius: 25px; font-size: 15px; font-weight: bold;
+      cursor: pointer; width: 100%;
+    }
+    button.add-btn:hover { background: #17a047; }
+    #err-msg { color: #e74c3c; font-size: 13px; margin-top: 8px; }
+    h3.list-title { color: #1DB954; }
+    .playlist-card {
+      background: #282828; border-radius: 10px; padding: 14px 18px;
+      max-width: 480px; margin: 10px 0;
+      border-left: 4px solid #1DB954;
+    }
+    .pl-name { font-weight: bold; font-size: 16px; color: #fff; }
+    .pl-desc { color: #aaa; font-size: 14px; margin-top: 4px; }
+    #empty-msg { color: #555; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h2>Q4 &amp; Q5: Playlist Form + Live List Display</h2>
+  <div class="question-box">
+    <h3>Q4 &amp; Q5</h3>
+    <p>Display the list of playlists below the form, showing each playlist's <code>name</code>
+    and <code>description</code>, and update the display every time a new playlist is added.</p>
+  </div>
+
+  <div class="form-box">
+    <h3>🎵 Create Playlist</h3>
+    <label>Playlist Name</label>
+    <input type="text" id="pl-name" placeholder="e.g. Chill Vibes" />
+    <label>Description</label>
+    <textarea id="pl-desc" placeholder="What's this playlist about?"></textarea>
+    <button class="add-btn" onclick="addPlaylist()">+ Create Playlist</button>
+    <p id="err-msg"></p>
+  </div>
+
+  <h3 class="list-title">🎶 Your Playlists</h3>
+  <div id="playlist-list"><p id="empty-msg">No playlists yet — create one above!</p></div>
+
+  <script>
+    // Q4 & Q5: Store in array, render list every time a new playlist is added
+    const playlists = [];
+
+    function addPlaylist() {
+      const name = document.getElementById("pl-name").value.trim();
+      const desc = document.getElementById("pl-desc").value.trim();
+      const err  = document.getElementById("err-msg");
+
+      if (!name || !desc) { err.textContent = "Both fields are required."; return; }
+      err.textContent = "";
+
+      playlists.push({ name, description: desc });
+      console.log("playlists:", playlists);
+
+      document.getElementById("pl-name").value = "";
+      document.getElementById("pl-desc").value = "";
+
+      renderList();
+    }
+
+    function renderList() {
+      const container = document.getElementById("playlist-list");
+      container.innerHTML = "";
+
+      if (playlists.length === 0) {
+        container.innerHTML = '<p id="empty-msg">No playlists yet — create one above!</p>';
+        return;
+      }
+
+      playlists.forEach((pl, i) => {
+        const card = document.createElement("div");
+        card.classList.add("playlist-card");
+        card.innerHTML = `
+          <div class="pl-name">🎵 ${pl.name}</div>
+          <div class="pl-desc">${pl.description}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

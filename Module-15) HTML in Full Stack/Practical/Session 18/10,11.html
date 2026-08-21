@@ -1,0 +1,97 @@
+<!--
+  Q10:
+  Given the following broken function, run it in your browser and use the stack trace in
+  the console to identify which function call caused the error:
+  function placeOrder() { confirmOrder(); }
+  function confirmOrder() { processPayment(); }
+  function processPayment() { throw new Error('Payment failed'); }
+  placeOrder();
+  Hint: Expand the error in the console to see the call stack.
+
+  Q11:
+  Given the following broken function, run it in your browser and use the stack trace in
+  the console to identify which function call caused the error:
+  function placeOrder() { confirmOrder(); }
+  function confirmOrder() { processPayment(); }
+  function processPayment() { throw new Error('Payment failed'); }
+  placeOrder();
+  Hint: Expand the error in the console to see the call stack.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Stack Trace: placeOrder Chain</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #c62828; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    button { padding: 10px 22px; background: #c62828; color: #fff; border: none; border-radius: 6px; font-size: 15px; cursor: pointer; margin-bottom: 18px; }
+    button:hover { background: #a31f1f; }
+    .card { background: #fff; border-radius: 10px; padding: 16px 22px; margin-bottom: 16px; border-left: 5px solid #c62828; box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+    .card h3 { margin-top: 0; color: #c62828; font-size: 15px; }
+    pre { background: #f4f4f4; border-radius: 6px; padding: 12px; font-size: 13px; overflow-x: auto; }
+    #stack-output { background: #1e1e1e; color: #f48771; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 13px; white-space: pre-wrap; max-width: 620px; }
+    .call-chain { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 15px; margin: 12px 0; }
+    .fn-box { background: #fff3cd; border: 1px solid #f9a825; border-radius: 6px; padding: 6px 14px; font-family: monospace; font-size: 14px; }
+    .arrow { color: #c62828; font-size: 20px; }
+    .fn-box.error { background: #fdecea; border-color: #c62828; color: #c62828; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Q10 &amp; Q11: Stack Trace – Call Chain Error</h2>
+  <div class="question-box">
+    <h3>Q10 &amp; Q11</h3>
+    <p>Run the broken function chain and use the <strong>stack trace</strong> in the console
+    to identify which function caused the error.<br>
+    <em><strong>Hint:</strong> Expand the error in DevTools Console to see the full call stack.</em></p>
+  </div>
+
+  <div class="card">
+    <h3>📋 Call Chain</h3>
+    <div class="call-chain">
+      <div class="fn-box">placeOrder()</div>
+      <span class="arrow">→</span>
+      <div class="fn-box">confirmOrder()</div>
+      <span class="arrow">→</span>
+      <div class="fn-box error">processPayment() 💥</div>
+    </div>
+    <p style="font-size:14px;color:#555;">The error originates in <code>processPayment()</code> and bubbles up through the call stack.</p>
+  </div>
+
+  <button onclick="runChain()">▶ Run placeOrder() – Trigger Stack Trace</button>
+
+  <pre id="stack-output">// Click the button to trigger the error and see the stack trace</pre>
+
+  <script>
+    // Q10 & Q11: Nested function calls — processPayment throws, trace shows full chain
+    function placeOrder() {
+      confirmOrder();
+    }
+
+    function confirmOrder() {
+      processPayment();
+    }
+
+    function processPayment() {
+      throw new Error("Payment failed");
+    }
+
+    function runChain() {
+      const output = document.getElementById("stack-output");
+      try {
+        placeOrder();
+      } catch (e) {
+        console.error(e);  // Expand in DevTools to see full call stack
+        output.textContent = (e.stack || e.toString()) +
+          "\n\n// ↑ Read the stack trace bottom-up:\n// 1. HTMLButtonElement.onclick (user clicked)\n// 2. runChain() called placeOrder()\n// 3. placeOrder() → confirmOrder() → processPayment() 💥";
+      }
+    }
+  </script>
+</body>
+</html>

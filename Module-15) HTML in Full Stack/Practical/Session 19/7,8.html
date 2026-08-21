@@ -1,0 +1,153 @@
+<!--
+  Q7:
+  Add 'Edit' and 'Delete' buttons next to each playlist in the displayed list, and
+  implement the JavaScript functions so users can update or remove a playlist from the
+  array and see the changes instantly.
+
+  Q8:
+  Add 'Edit' and 'Delete' buttons next to each playlist in the displayed list, and
+  implement the JavaScript functions so users can update or remove a playlist from the
+  array and see the changes instantly.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Playlist CRUD (Edit & Delete)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #121212; color: #fff; }
+    h2 { color: #1DB954; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .form-box { background: #282828; border-radius: 12px; padding: 22px 26px; max-width: 440px; margin-bottom: 28px; }
+    .form-box h3 { color: #1DB954; margin-top: 0; }
+    label { display: block; font-size: 13px; color: #ccc; margin: 10px 0 4px; }
+    input, textarea {
+      width: 100%; padding: 9px 12px; font-size: 14px;
+      background: #3a3a3a; border: 1px solid #555; border-radius: 6px; color: #fff; box-sizing: border-box;
+    }
+    textarea { height: 70px; resize: vertical; }
+    .btn-row { display: flex; gap: 8px; margin-top: 14px; }
+    .btn-add  { flex: 1; padding: 10px; background: #1DB954; color: #000; border: none; border-radius: 25px; font-size: 14px; font-weight: bold; cursor: pointer; }
+    .btn-add:hover { background: #17a047; }
+    .btn-add.editing { background: #f9a825; }
+    #err-msg { color: #e74c3c; font-size: 13px; margin-top: 8px; }
+    .playlist-card { background: #282828; border-radius: 10px; padding: 14px 18px; max-width: 500px; margin: 10px 0; border-left: 4px solid #1DB954; display: flex; justify-content: space-between; align-items: flex-start; }
+    .pl-info { flex: 1; }
+    .pl-name { font-weight: bold; font-size: 15px; color: #fff; }
+    .pl-desc { color: #aaa; font-size: 13px; margin-top: 3px; }
+    .card-btns { display: flex; gap: 6px; flex-shrink: 0; }
+    .btn-edit { background: #f9a825; color: #000; border: none; border-radius: 6px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+    .btn-del  { background: #e74c3c; color: #fff; border: none; border-radius: 6px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+    #empty-msg { color: #555; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h2>Q7 &amp; Q8: Playlist CRUD – Edit &amp; Delete</h2>
+  <div class="question-box">
+    <h3>Q7 &amp; Q8</h3>
+    <p>Add 'Edit' and 'Delete' buttons next to each playlist. Implement the JavaScript
+    functions so users can update or remove a playlist from the array and see changes
+    instantly.</p>
+  </div>
+
+  <div class="form-box">
+    <h3 id="form-title">🎵 Create Playlist</h3>
+    <label>Playlist Name</label>
+    <input type="text" id="pl-name" placeholder="e.g. Chill Vibes" />
+    <label>Description</label>
+    <textarea id="pl-desc" placeholder="What's this playlist about?"></textarea>
+    <div class="btn-row">
+      <button class="btn-add" id="submit-btn" onclick="submitForm()">+ Create</button>
+    </div>
+    <p id="err-msg"></p>
+  </div>
+
+  <h3 style="color:#1DB954;">🎶 Your Playlists</h3>
+  <div id="playlist-list"><p id="empty-msg">No playlists yet!</p></div>
+
+  <script>
+    // Q7 & Q8: Full CRUD — array-based, re-renders on every change
+    const playlists = [];
+    let editIndex = -1;
+
+    function submitForm() {
+      const name = document.getElementById("pl-name").value.trim();
+      const desc = document.getElementById("pl-desc").value.trim();
+      const err  = document.getElementById("err-msg");
+
+      if (!name || !desc) { err.textContent = "Both fields are required."; return; }
+      err.textContent = "";
+
+      if (editIndex >= 0) {
+        // UPDATE existing entry
+        playlists[editIndex] = { name, description: desc };
+        editIndex = -1;
+        document.getElementById("form-title").textContent = "🎵 Create Playlist";
+        document.getElementById("submit-btn").textContent = "+ Create";
+        document.getElementById("submit-btn").classList.remove("editing");
+      } else {
+        // ADD new entry
+        playlists.push({ name, description: desc });
+      }
+
+      document.getElementById("pl-name").value = "";
+      document.getElementById("pl-desc").value = "";
+      renderList();
+    }
+
+    function editPlaylist(index) {
+      editIndex = index;
+      document.getElementById("pl-name").value = playlists[index].name;
+      document.getElementById("pl-desc").value = playlists[index].description;
+      document.getElementById("form-title").textContent = "✏️ Edit Playlist";
+      document.getElementById("submit-btn").textContent = "💾 Save Changes";
+      document.getElementById("submit-btn").classList.add("editing");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function deletePlaylist(index) {
+      playlists.splice(index, 1);
+      if (editIndex === index) {
+        editIndex = -1;
+        document.getElementById("form-title").textContent = "🎵 Create Playlist";
+        document.getElementById("submit-btn").textContent = "+ Create";
+        document.getElementById("submit-btn").classList.remove("editing");
+        document.getElementById("pl-name").value = "";
+        document.getElementById("pl-desc").value = "";
+      }
+      renderList();
+    }
+
+    function renderList() {
+      const container = document.getElementById("playlist-list");
+      container.innerHTML = "";
+
+      if (playlists.length === 0) {
+        container.innerHTML = '<p id="empty-msg">No playlists yet!</p>';
+        return;
+      }
+
+      playlists.forEach((pl, i) => {
+        const card = document.createElement("div");
+        card.classList.add("playlist-card");
+        card.innerHTML = `
+          <div class="pl-info">
+            <div class="pl-name">🎵 ${pl.name}</div>
+            <div class="pl-desc">${pl.description}</div>
+          </div>
+          <div class="card-btns">
+            <button class="btn-edit" onclick="editPlaylist(${i})">✏️ Edit</button>
+            <button class="btn-del"  onclick="deletePlaylist(${i})">🗑️ Delete</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

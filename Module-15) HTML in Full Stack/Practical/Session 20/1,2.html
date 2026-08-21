@@ -1,0 +1,68 @@
+<!--
+  Q1:
+  Manually test a Flipkart-style Add to Cart button: click it multiple times and check if
+  the item is added only once, then write down any bug you notice and how you fixed it.
+
+  Q2:
+  Manually test a Flipkart-style Add to Cart button: click it multiple times and check if
+  the item is added only once, then write down any bug you notice and how you fixed it.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - Add to Cart (Add Once)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q1 &amp; Q2</h3>
+    <p>Manually test a Flipkart-style Add to Cart button: click it multiple times and check
+    if the item is added only once. Write down any bug you notice and how you fixed it.</p>
+  </div>
+
+  <h2>Add to Cart – Single Add Test</h2>
+
+  <p><strong>Product:</strong> Redmi Note 12 Pro – ₹18999</p>
+  <button id="add-btn" onclick="addToCart()">Add to Cart</button>
+  <p id="status"></p>
+  <p>Cart items: <span id="cart-count">0</span></p>
+  <ul id="cart-list"></ul>
+
+  <hr />
+  <h3>Bug Found &amp; Fixed</h3>
+  <p><strong>Bug:</strong> Clicking "Add to Cart" multiple times added the same item
+  multiple times to the array.</p>
+  <p><strong>Fix:</strong> Check if the item is already in the cart before pushing.
+  If it exists, show a message instead of adding again.</p>
+
+  <script>
+    // Q1 & Q2: Add item only once — check for duplicate before pushing
+    const cart = [];
+    const PRODUCT = { id: 1, name: "Redmi Note 12 Pro", price: 18999 };
+
+    function addToCart() {
+      const alreadyInCart = cart.some(item => item.id === PRODUCT.id);
+
+      if (alreadyInCart) {
+        document.getElementById("status").textContent = "⚠️ Item already in cart!";
+        return;
+      }
+
+      // Item not in cart — add it
+      cart.push(PRODUCT);
+      document.getElementById("status").textContent = "✅ Added to cart!";
+      document.getElementById("cart-count").textContent = cart.length;
+
+      const li = document.createElement("li");
+      li.textContent = PRODUCT.name + " – ₹" + PRODUCT.price;
+      document.getElementById("cart-list").appendChild(li);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!--
+  Q10:
+  Draw a diagram that shows how data flows between your form, the JavaScript array, and
+  the display area when adding, editing, or deleting a playlist.
+  Hint: Use arrows to show direction of data movement, label each step.
+
+  Q11:
+  Draw a diagram that shows how data flows between your form, the JavaScript array, and
+  the display area when adding, editing, or deleting a playlist.
+  Hint: Use arrows to show direction, label each step.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Data Flow Diagram: Playlist CRUD</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f0f4ff; max-width: 760px; }
+    h2 { color: #3d5afe; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .diagram { background: #fff; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.09); }
+    .diagram h3 { color: #3d5afe; margin-top: 0; font-size: 16px; }
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 16px 0 8px; }
+    .node {
+      border-radius: 8px; padding: 10px 16px; font-size: 13px;
+      font-weight: bold; text-align: center; min-width: 110px;
+    }
+    .form-node   { background: #e8f5e9; border: 2px solid #388e3c; color: #1b5e20; }
+    .array-node  { background: #e3f2fd; border: 2px solid #1565c0; color: #0d47a1; }
+    .render-node { background: #fce4ec; border: 2px solid #880e4f; color: #880e4f; }
+    .action-node { background: #fff3e0; border: 2px solid #e65100; color: #bf360c; }
+    .arrow { font-size: 22px; color: #555; }
+    .label { font-size: 12px; color: #888; margin-left: 4px; white-space: nowrap; }
+    .step { display: flex; align-items: flex-start; gap: 12px; margin: 10px 0; font-size: 14px; color: #444; line-height: 1.6; }
+    .step-num { background: #3d5afe; color: #fff; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 13px; }
+    hr { border: none; border-top: 1px solid #eee; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <h2>Q10 &amp; Q11: Data Flow Diagram – Playlist CRUD</h2>
+  <div class="question-box">
+    <h3>Q10 &amp; Q11</h3>
+    <p>Draw a diagram showing how data flows between the form, the JavaScript array, and
+    the display area when adding, editing, or deleting a playlist. Use arrows and labels
+    at each step.</p>
+  </div>
+
+  <div class="diagram">
+    <h3>➕ ADD Flow</h3>
+    <div class="flow">
+      <div class="node form-node">📝 Form<br><small>name, desc</small></div>
+      <span class="arrow">→</span><span class="label">Submit</span>
+      <span class="arrow">→</span>
+      <div class="node array-node">💾 playlists[]<br><small>push()</small></div>
+      <span class="arrow">→</span><span class="label">renderList()</span>
+      <span class="arrow">→</span>
+      <div class="node render-node">🖥️ Display<br><small>re-render</small></div>
+    </div>
+
+    <h3>✏️ EDIT Flow</h3>
+    <div class="flow">
+      <div class="node render-node">🖥️ Display</div>
+      <span class="arrow">→</span>
+      <div class="node action-node">✏️ Edit Btn<br><small>pre-fill form</small></div>
+      <span class="arrow">→</span>
+      <div class="node form-node">📝 Form<br><small>update values</small></div>
+      <span class="arrow">→</span>
+      <div class="node array-node">💾 playlists[i]<br><small>replace</small></div>
+      <span class="arrow">→</span>
+      <div class="node render-node">🖥️ Re-render</div>
+    </div>
+
+    <h3>🗑️ DELETE Flow</h3>
+    <div class="flow">
+      <div class="node render-node">🖥️ Display</div>
+      <span class="arrow">→</span>
+      <div class="node action-node">🗑️ Delete Btn<br><small>index i</small></div>
+      <span class="arrow">→</span>
+      <div class="node array-node">💾 playlists[]<br><small>splice(i,1)</small></div>
+      <span class="arrow">→</span>
+      <div class="node render-node">🖥️ Re-render</div>
+    </div>
+
+    <hr />
+    <strong>Labelled Steps:</strong>
+    <div class="step"><div class="step-num">1</div>User fills form and clicks Submit → JS reads input values</div>
+    <div class="step"><div class="step-num">2</div>ADD: <code>playlists.push(&#123; name, description &#125;)</code></div>
+    <div class="step"><div class="step-num">3</div>EDIT: <code>playlists[editIndex] = &#123; name, description &#125;</code></div>
+    <div class="step"><div class="step-num">4</div>DELETE: <code>playlists.splice(index, 1)</code></div>
+    <div class="step"><div class="step-num">5</div><code>renderList()</code> clears the display container and re-renders all cards</div>
+    <div class="step"><div class="step-num">6</div>Each card shows Edit &amp; Delete buttons which call steps 3 or 4</div>
+  </div>
+</body>
+</html>

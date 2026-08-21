@@ -1,0 +1,92 @@
+<!--
+  Q6:
+  Create an HTML file with a Zomato-style 'Add Restaurant' form (name, cuisine, rating),
+  and use JavaScript to collect the form data and store each entry in an array.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - Add Restaurant Form (Store in Array)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .form-box { background: #fff; border-radius: 12px; padding: 24px 28px; max-width: 440px; box-shadow: 0 2px 8px rgba(0,0,0,0.09); margin-bottom: 24px; }
+    .form-box h3 { color: #e23744; margin-top: 0; }
+    label { display: block; font-size: 13px; color: #555; margin: 12px 0 4px; }
+    input, select {
+      width: 100%; padding: 9px 12px; font-size: 14px;
+      border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
+    }
+    button {
+      margin-top: 16px; padding: 10px 24px; background: #e23744; color: #fff;
+      border: none; border-radius: 6px; font-size: 15px; cursor: pointer; width: 100%;
+    }
+    button:hover { background: #c0303c; }
+    #err-msg { color: #e23744; font-size: 13px; margin-top: 8px; }
+    #array-preview { background: #1e1e1e; color: #4ec9b0; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 13px; max-width: 500px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h2>Q6: Add Restaurant Form – Zomato Style</h2>
+  <div class="question-box">
+    <h3>Q6</h3>
+    <p>Create a Zomato-style 'Add Restaurant' form (<code>name</code>, <code>cuisine</code>,
+    <code>rating</code>), and use JavaScript to collect the form data and store each entry
+    in an array.</p>
+  </div>
+
+  <div class="form-box">
+    <h3>🍽️ Add Restaurant</h3>
+    <label>Restaurant Name</label>
+    <input type="text" id="r-name" placeholder="e.g. Biryani Palace" />
+    <label>Cuisine</label>
+    <select id="r-cuisine">
+      <option value="">Select Cuisine</option>
+      <option>Indian</option><option>Chinese</option><option>Italian</option>
+      <option>Mexican</option><option>Japanese</option>
+    </select>
+    <label>Rating (1–5)</label>
+    <input type="number" id="r-rating" min="1" max="5" step="0.1" placeholder="e.g. 4.5" />
+    <button onclick="addRestaurant()">+ Add Restaurant</button>
+    <p id="err-msg"></p>
+  </div>
+
+  <h3 style="color:#e23744;">restaurants[] array:</h3>
+  <div id="array-preview">// Array is empty — add a restaurant above</div>
+
+  <script>
+    // Q6: Store restaurant entries in an array
+    const restaurants = [];
+
+    function addRestaurant() {
+      const name    = document.getElementById("r-name").value.trim();
+      const cuisine = document.getElementById("r-cuisine").value;
+      const rating  = parseFloat(document.getElementById("r-rating").value);
+      const err     = document.getElementById("err-msg");
+
+      if (!name || !cuisine || isNaN(rating) || rating < 1 || rating > 5) {
+        err.textContent = "All fields are required. Rating must be between 1 and 5.";
+        return;
+      }
+      err.textContent = "";
+
+      restaurants.push({ name, cuisine, rating });
+      console.log("restaurants array:", restaurants);
+
+      document.getElementById("r-name").value   = "";
+      document.getElementById("r-cuisine").value = "";
+      document.getElementById("r-rating").value  = "";
+
+      document.getElementById("array-preview").textContent =
+        JSON.stringify(restaurants, null, 2);
+    }
+  </script>
+</body>
+</html>

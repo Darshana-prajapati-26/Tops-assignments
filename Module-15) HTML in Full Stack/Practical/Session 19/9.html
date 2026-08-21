@@ -1,0 +1,160 @@
+<!--
+  Q9:
+  Display the list of added restaurants below the form, showing name, cuisine, and rating
+  for each, with Edit and Delete buttons next to each entry.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - Restaurant List with Edit & Delete</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fff8f0; }
+    h2 { color: #e23744; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .form-box { background: #fff; border-radius: 12px; padding: 22px 26px; max-width: 460px; box-shadow: 0 2px 8px rgba(0,0,0,0.09); margin-bottom: 28px; }
+    .form-box h3 { color: #e23744; margin-top: 0; }
+    label { display: block; font-size: 13px; color: #555; margin: 10px 0 4px; }
+    input, select {
+      width: 100%; padding: 9px 12px; font-size: 14px;
+      border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
+    }
+    .btn-row { display: flex; gap: 8px; margin-top: 14px; }
+    .btn-add { flex: 1; padding: 10px; background: #e23744; color: #fff; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; }
+    .btn-add.editing { background: #f9a825; color: #333; }
+    #err-msg { color: #e23744; font-size: 13px; margin-top: 8px; }
+    .restaurant-card {
+      background: #fff; border-radius: 10px; padding: 14px 18px;
+      max-width: 540px; margin: 10px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .r-info { flex: 1; }
+    .r-name { font-weight: bold; font-size: 15px; color: #212121; }
+    .r-meta { font-size: 13px; color: #777; margin-top: 3px; }
+    .rating { color: #f9a825; font-weight: bold; }
+    .card-btns { display: flex; gap: 6px; }
+    .btn-edit { background: #fff3cd; color: #e65100; border: 1px solid #f9a825; border-radius: 6px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+    .btn-del  { background: #fdecea; color: #c62828; border: 1px solid #e53935; border-radius: 6px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+    #empty-msg { color: #aaa; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h2>Q9: Restaurant List with Edit &amp; Delete</h2>
+  <div class="question-box">
+    <h3>Q9</h3>
+    <p>Display the list of added restaurants below the form, showing <code>name</code>,
+    <code>cuisine</code>, and <code>rating</code> for each, with <strong>Edit</strong> and
+    <strong>Delete</strong> buttons next to each entry.</p>
+  </div>
+
+  <div class="form-box">
+    <h3 id="form-title">🍽️ Add Restaurant</h3>
+    <label>Restaurant Name</label>
+    <input type="text" id="r-name" placeholder="e.g. Biryani Palace" />
+    <label>Cuisine</label>
+    <select id="r-cuisine">
+      <option value="">Select Cuisine</option>
+      <option>Indian</option><option>Chinese</option><option>Italian</option>
+      <option>Mexican</option><option>Japanese</option>
+    </select>
+    <label>Rating (1–5)</label>
+    <input type="number" id="r-rating" min="1" max="5" step="0.1" placeholder="e.g. 4.5" />
+    <div class="btn-row">
+      <button class="btn-add" id="submit-btn" onclick="submitForm()">+ Add Restaurant</button>
+    </div>
+    <p id="err-msg"></p>
+  </div>
+
+  <h3 style="color:#e23744;">🍴 Restaurants</h3>
+  <div id="restaurant-list"><p id="empty-msg">No restaurants added yet!</p></div>
+
+  <script>
+    // Q9: Restaurants array with full CRUD and live re-render
+    const restaurants = [];
+    let editIndex = -1;
+
+    function submitForm() {
+      const name    = document.getElementById("r-name").value.trim();
+      const cuisine = document.getElementById("r-cuisine").value;
+      const rating  = parseFloat(document.getElementById("r-rating").value);
+      const err     = document.getElementById("err-msg");
+
+      if (!name || !cuisine || isNaN(rating) || rating < 1 || rating > 5) {
+        err.textContent = "All fields are required. Rating: 1–5.";
+        return;
+      }
+      err.textContent = "";
+
+      if (editIndex >= 0) {
+        restaurants[editIndex] = { name, cuisine, rating };
+        editIndex = -1;
+        document.getElementById("form-title").textContent = "🍽️ Add Restaurant";
+        document.getElementById("submit-btn").textContent = "+ Add Restaurant";
+        document.getElementById("submit-btn").classList.remove("editing");
+      } else {
+        restaurants.push({ name, cuisine, rating });
+      }
+
+      document.getElementById("r-name").value   = "";
+      document.getElementById("r-cuisine").value = "";
+      document.getElementById("r-rating").value  = "";
+      renderList();
+    }
+
+    function editRestaurant(i) {
+      editIndex = i;
+      document.getElementById("r-name").value    = restaurants[i].name;
+      document.getElementById("r-cuisine").value = restaurants[i].cuisine;
+      document.getElementById("r-rating").value  = restaurants[i].rating;
+      document.getElementById("form-title").textContent = "✏️ Edit Restaurant";
+      document.getElementById("submit-btn").textContent = "💾 Save";
+      document.getElementById("submit-btn").classList.add("editing");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function deleteRestaurant(i) {
+      restaurants.splice(i, 1);
+      if (editIndex === i) {
+        editIndex = -1;
+        document.getElementById("r-name").value   = "";
+        document.getElementById("r-cuisine").value = "";
+        document.getElementById("r-rating").value  = "";
+        document.getElementById("form-title").textContent = "🍽️ Add Restaurant";
+        document.getElementById("submit-btn").textContent = "+ Add Restaurant";
+        document.getElementById("submit-btn").classList.remove("editing");
+      }
+      renderList();
+    }
+
+    function renderList() {
+      const container = document.getElementById("restaurant-list");
+      container.innerHTML = "";
+      if (restaurants.length === 0) {
+        container.innerHTML = '<p id="empty-msg">No restaurants added yet!</p>';
+        return;
+      }
+      restaurants.forEach((r, i) => {
+        const card = document.createElement("div");
+        card.classList.add("restaurant-card");
+        card.innerHTML = `
+          <div class="r-info">
+            <div class="r-name">🍴 ${r.name}</div>
+            <div class="r-meta">${r.cuisine} &nbsp;|&nbsp; <span class="rating">⭐ ${r.rating}</span></div>
+          </div>
+          <div class="card-btns">
+            <button class="btn-edit" onclick="editRestaurant(${i})">✏️ Edit</button>
+            <button class="btn-del"  onclick="deleteRestaurant(${i})">🗑️ Delete</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

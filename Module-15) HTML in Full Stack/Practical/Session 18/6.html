@@ -1,0 +1,81 @@
+<!--
+  Q6:
+  Write a function addToCart(productName, quantity) that logs a success message using
+  console.log(), a warning if quantity is zero using console.warn(), and an error if
+  quantity is negative using console.error(). Call the function with all three scenarios.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q6 - addToCart() with console.log/warn/error</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h2 { color: #2874f0; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+    button { padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; }
+    .btn-ok  { background: #2874f0; color: #fff; }
+    .btn-warn { background: #f9a825; color: #333; }
+    .btn-err { background: #e53935; color: #fff; }
+    .console-box {
+      background: #1e1e1e; color: #d4d4d4; border-radius: 8px; padding: 14px 18px;
+      max-width: 620px; font-family: monospace; font-size: 14px; line-height: 1.8;
+    }
+    .ok   { color: #4ec9b0; }
+    .warn { color: #dcdcaa; }
+    .err  { color: #f48771; }
+  </style>
+</head>
+<body>
+  <h2>Q6: addToCart() – console.log / warn / error</h2>
+  <div class="question-box">
+    <h3>Q6</h3>
+    <p>Write a function <code>addToCart(productName, quantity)</code> that:
+    <code>console.log()</code> on success, <code>console.warn()</code> if quantity is zero,
+    and <code>console.error()</code> if quantity is negative. Call all three scenarios.</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-ok"   onclick="addToCart('Redmi Note 12 Pro', 2)">✅ Valid (qty 2)</button>
+    <button class="btn-warn" onclick="addToCart('Laptop Stand', 0)">⚠️ Zero qty</button>
+    <button class="btn-err"  onclick="addToCart('USB Hub', -1)">❌ Negative qty</button>
+  </div>
+
+  <div class="console-box" id="output">
+    <span style="color:#858585;">// Click a button to call addToCart()</span>
+  </div>
+
+  <script>
+    // Q6: addToCart() uses the right console method based on quantity
+    function addToCart(productName, quantity) {
+      if (quantity < 0) {
+        const msg = `❌ Error: Cannot add "${productName}" — quantity cannot be negative (got ${quantity}).`;
+        console.error(msg);
+        log(msg, "err");
+      } else if (quantity === 0) {
+        const msg = `⚠️ Warning: Quantity for "${productName}" is 0 — nothing was added to cart.`;
+        console.warn(msg);
+        log(msg, "warn");
+      } else {
+        const msg = `✅ Success: Added ${quantity}x "${productName}" to cart.`;
+        console.log(msg);
+        log(msg, "ok");
+      }
+    }
+
+    function log(text, cls) {
+      const p = document.createElement("p");
+      p.style.margin = "4px 0";
+      p.className = cls;
+      p.textContent = text;
+      document.getElementById("output").appendChild(p);
+    }
+  </script>
+</body>
+</html>

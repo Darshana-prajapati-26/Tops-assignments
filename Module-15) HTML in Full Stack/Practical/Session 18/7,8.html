@@ -1,0 +1,111 @@
+<!--
+  Q7:
+  Write a JavaScript function addToCart(item, quantity) that accidentally throws an error
+  when quantity is 0. Set a breakpoint in the Sources tab before the error line, run the
+  function with quantity 0, and inspect item and quantity at the breakpoint.
+  Hint: Use the browser's Sources tab to pause execution and check variable values.
+
+  Q8:
+  Write a JavaScript function addToCart(item, quantity) that accidentally throws an error
+  when quantity is 0. Set a breakpoint in the Sources tab before the error line, run the
+  function with quantity 0, and inspect item and quantity at the breakpoint.
+  Hint: Use the browser's Sources tab to pause execution and check variable values.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - Breakpoint Debugging: addToCart</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #2874f0; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .card {
+      background: #fff; border-radius: 10px; padding: 18px 22px;
+      margin-bottom: 16px; border-left: 5px solid #2874f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    }
+    .card h3 { margin-top: 0; color: #2874f0; font-size: 15px; }
+    pre { background: #f4f4f4; border-radius: 6px; padding: 12px; font-size: 13px; overflow-x: auto; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+    button { padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; }
+    .run-valid { background: #2874f0; color: #fff; }
+    .run-zero  { background: #e53935; color: #fff; }
+    #output {
+      background: #1e1e1e; color: #d4d4d4; border-radius: 8px; padding: 14px;
+      font-family: monospace; font-size: 13px; line-height: 1.8; max-width: 600px;
+    }
+    .ok  { color: #4ec9b0; }
+    .err { color: #f48771; }
+  </style>
+</head>
+<body>
+  <h2>Q7 &amp; Q8: Breakpoint Debugging – addToCart()</h2>
+  <div class="question-box">
+    <h3>Q7 &amp; Q8</h3>
+    <p>Write a function <code>addToCart(item, quantity)</code> that throws an error when
+    quantity is 0. Set a breakpoint in DevTools Sources tab before the error line, run
+    with quantity 0, and inspect <code>item</code> and <code>quantity</code>.<br>
+    <em><strong>Hint:</strong> Use the browser's Sources tab (F12 → Sources).</em></p>
+  </div>
+
+  <div class="card">
+    <h3>📋 How to use breakpoints</h3>
+    <ol style="font-size:14px;line-height:1.8;color:#444;">
+      <li>Open DevTools → <strong>Sources</strong> tab</li>
+      <li>Find this HTML file in the file tree</li>
+      <li>Click the line number next to <code>if (quantity === 0)</code> to set a breakpoint 🔴</li>
+      <li>Click "Run with qty=0" below to trigger it</li>
+      <li>Execution pauses — hover over <code>item</code> and <code>quantity</code> to inspect values</li>
+      <li>Press <strong>F8</strong> to continue or <strong>F10</strong> to step over</li>
+    </ol>
+  </div>
+
+  <div class="btn-row">
+    <button class="run-valid" onclick="addToCart('Redmi Note 12 Pro', 2)">✅ Run with qty=2</button>
+    <button class="run-zero"  onclick="addToCart('Laptop Stand', 0)">🔴 Run with qty=0 (triggers error)</button>
+  </div>
+
+  <div id="output"><span style="color:#858585;">// Output will appear here</span></div>
+
+  <script>
+    // Q7 & Q8: Set a breakpoint on the line inside the if block to inspect variables
+    function addToCart(item, quantity) {
+      // 👈 Set breakpoint on the next line in DevTools Sources tab
+      if (quantity === 0) {
+        throw new Error(`Cannot add "${item}" — quantity must be greater than 0.`);
+      }
+      return `✅ Added ${quantity}x "${item}" to cart.`;
+    }
+
+    function log(text, cls) {
+      const p = document.createElement("p");
+      p.style.margin = "4px 0";
+      p.className = cls;
+      p.textContent = text;
+      document.getElementById("output").appendChild(p);
+    }
+
+    // Override button handlers to show output
+    window.addToCart = function(item, quantity) {
+      try {
+        if (quantity === 0) {
+          throw new Error(`Cannot add "${item}" — quantity must be greater than 0.`);
+        }
+        const msg = `✅ Added ${quantity}x "${item}" to cart.`;
+        console.log(msg);
+        log(msg, "ok");
+      } catch (e) {
+        console.error(e.message);
+        log("❌ Error: " + e.message, "err");
+        log("👆 Open DevTools → Sources and set a breakpoint to inspect variables.", "");
+      }
+    };
+  </script>
+</body>
+</html>

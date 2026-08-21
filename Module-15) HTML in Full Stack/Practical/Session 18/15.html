@@ -1,0 +1,83 @@
+<!--
+  Q15:
+  Copy a real error message you get from your browser console (from any of the above
+  tasks) and paste it into ChatGPT. Ask ChatGPT to explain what the error means and
+  suggest how to fix it. Write down the explanation in your own words.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q15 - ChatGPT Error Explanation (Own Words)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #fafafa; max-width: 720px; }
+    h2 { color: #10a37f; }
+    .question-box {
+      background: #fff8e1; border-left: 5px solid #f9a825;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; max-width: 680px;
+    }
+    .question-box h3 { margin: 0 0 8px; color: #e65100; font-size: 15px; }
+    .question-box p { margin: 0; font-size: 15px; line-height: 1.7; color: #333; }
+    .card { background: #fff; border-radius: 10px; padding: 18px 22px; margin-bottom: 16px; border-left: 5px solid #10a37f; box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+    .card h3 { margin-top: 0; color: #10a37f; font-size: 15px; }
+    pre { background: #1e1e1e; color: #f48771; border-radius: 6px; padding: 12px; font-size: 13px; overflow-x: auto; }
+    .explanation { background: #f0fdf4; border-left: 4px solid #10a37f; border-radius: 6px; padding: 14px 18px; font-size: 14px; line-height: 1.8; color: #333; }
+    button { padding: 10px 22px; background: #c62828; color: #fff; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; margin-bottom: 16px; }
+    button:hover { opacity: 0.85; }
+    #error-output { background: #1e1e1e; color: #f48771; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 13px; white-space: pre-wrap; max-width: 620px; }
+  </style>
+</head>
+<body>
+  <h2>Q15: ChatGPT Error Explanation – In My Own Words</h2>
+  <div class="question-box">
+    <h3>Q15</h3>
+    <p>Copy a real error message from the browser console, paste it into ChatGPT, ask for
+    an explanation and fix, then write down the explanation in <strong>your own words</strong>.</p>
+  </div>
+
+  <div class="card">
+    <h3>🔴 Generate an Error to Copy</h3>
+    <button onclick="triggerError()">Trigger TypeError – copy from Console</button>
+    <pre id="error-output">// Click the button to generate a real error</pre>
+  </div>
+
+  <div class="card">
+    <h3>💬 My Explanation in Own Words</h3>
+    <div class="explanation">
+      <p><strong>Error triggered:</strong><br>
+      <code>TypeError: Cannot read properties of undefined (reading 'name')</code></p>
+
+      <p><strong>What ChatGPT explained:</strong><br>
+      This error means JavaScript tried to access the <code>.name</code> property on something
+      that is <code>undefined</code>. It is like trying to open a drawer in a cabinet that
+      does not exist — the cabinet (<code>user</code>) was never created, so there is no drawer
+      (<code>name</code>) to open.</p>
+
+      <p><strong>How to fix it:</strong><br>
+      Always check that the variable is not <code>undefined</code> before accessing its
+      properties. Use optional chaining: <code>user?.name</code>, or a guard:
+      <code>if (user) console.log(user.name);</code></p>
+
+      <p><strong>In my own words:</strong><br>
+      The error happened because I tried to use <code>user.name</code> when <code>user</code>
+      was never assigned a value. JavaScript cannot look inside something that does not exist.
+      The simple fix is to check if the variable exists first before using it.</p>
+    </div>
+  </div>
+
+  <script>
+    // Q15: Generate a TypeError for the student to copy into ChatGPT
+    function triggerError() {
+      const out = document.getElementById("error-output");
+      try {
+        let user;
+        console.log(user.name); // triggers TypeError
+      } catch (e) {
+        console.error(e);
+        out.textContent = (e.stack || e.toString()) +
+          "\n\n// ↑ Copy this error, paste into ChatGPT, ask:\n// 'What does this error mean and how do I fix it?'";
+      }
+    }
+  </script>
+</body>
+</html>

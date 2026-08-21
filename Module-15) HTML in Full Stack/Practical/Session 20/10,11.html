@@ -1,0 +1,124 @@
+<!--
+  Q10:
+  Test all buttons and form fields in your app: click each one and enter different values,
+  then make a checklist of at least 5 common bugs (double adds, empty fields, UI glitches)
+  and describe how you would fix each.
+
+  Q11:
+  Test all buttons and form fields in your app: click each one and enter different values,
+  then make a checklist of at least 5 common bugs and describe how you would fix each.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q10 & Q11 - Bug Checklist</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th { background: #eee; text-align: left; padding: 8px 12px; font-size: 14px; border: 1px solid #ccc; }
+    td { padding: 8px 12px; font-size: 14px; border: 1px solid #ccc; vertical-align: top; }
+    tr:nth-child(even) td { background: #fafafa; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q10 &amp; Q11</h3>
+    <p>Test all buttons and form fields by clicking each and entering different values.
+    Make a checklist of at least 5 common bugs and describe how to fix each.</p>
+  </div>
+
+  <h2>Q10 &amp; Q11: Bug Checklist</h2>
+  <p>Open the browser console (F12) and click each test button below to trigger common bugs:</p>
+
+  <button onclick="testDoubleAdd()">1. Double Add</button>
+  <button onclick="testEmptySubmit()">2. Empty Submit</button>
+  <button onclick="testNullPush()">3. Null Push</button>
+  <button onclick="testCountBug()">4. Count Bug</button>
+  <button onclick="testNaN()">5. NaN Rating</button>
+  <p id="test-output" style="color:red;font-weight:bold;"></p>
+
+  <table>
+    <tr>
+      <th>#</th><th>Bug</th><th>Description</th><th>Fix</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Double Add</td>
+      <td>Clicking "Add to Cart" multiple times adds the same item more than once.</td>
+      <td>Check if item already exists in the array with <code>find()</code> or <code>some()</code> before pushing.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Empty Field Submit</td>
+      <td>Form submits even when input fields are blank.</td>
+      <td>Validate with <code>if (!value.trim())</code> and show an error message. Return early to prevent submission.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Null / Undefined Push</td>
+      <td><code>null</code> or <code>undefined</code> values get added to an array.</td>
+      <td>Add a guard: <code>if (!name || name.trim() === "") return;</code> before pushing.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Cart Count Not Updating</td>
+      <td>The displayed cart count does not change after adding or removing items.</td>
+      <td>Always update the count element after every add/remove: <code>countEl.textContent = cart.length;</code></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>NaN Rating</td>
+      <td>Parsing an empty rating field returns <code>NaN</code>, which gets stored in the array.</td>
+      <td>Use <code>isNaN(rating)</code> check and validate the range: <code>if (isNaN(rating) || rating &lt; 1 || rating &gt; 5)</code>.</td>
+    </tr>
+  </table>
+
+  <script>
+    // Q10 & Q11: Trigger each bug type and log to console
+    const out = document.getElementById("test-output");
+
+    function testDoubleAdd() {
+      const cart = [{ id: 1, name: "Laptop" }];
+      cart.push({ id: 1, name: "Laptop" }); // BUG: duplicate
+      out.textContent = "Bug 1: Double add — cart.length = " + cart.length + " (should be 1). Fix: check .some() first.";
+      console.warn("Bug 1 — double add:", cart);
+    }
+
+    function testEmptySubmit() {
+      const value = "   "; // user typed only spaces
+      if (!value.trim()) {
+        out.textContent = "Bug 2: Empty submit caught. Fix: validate with .trim() before submitting.";
+        console.warn("Bug 2 — empty field would have submitted");
+      }
+    }
+
+    function testNullPush() {
+      const arr = [];
+      const name = null;
+      arr.push(name); // BUG
+      out.textContent = "Bug 3: null pushed → arr = " + JSON.stringify(arr) + ". Fix: guard with if(!name).";
+      console.warn("Bug 3 — null push:", arr);
+    }
+
+    function testCountBug() {
+      let count = 0;
+      // developer forgot to update count
+      const cart = ["item1", "item2"];
+      // count never updated → still 0
+      out.textContent = "Bug 4: Count shows " + count + " but cart has " + cart.length + " items. Fix: set countEl.textContent = cart.length.";
+      console.warn("Bug 4 — count not updated");
+    }
+
+    function testNaN() {
+      const input = "";
+      const rating = parseFloat(input); // NaN
+      out.textContent = "Bug 5: parseFloat('') = " + rating + " (NaN). Fix: isNaN(rating) check before storing.";
+      console.warn("Bug 5 — NaN rating:", rating);
+    }
+  </script>
+</body>
+</html>
