@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M1-A1 | Section D — AI Original (Step 1)</title>
+  <style>
+    :root { --primary:#e65100; --bg:#fff8f5; }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); min-height:100vh; }
+
+    .banner {
+      background: linear-gradient(135deg,#bf360c,#e64a19,#ff7043);
+      color:#fff; padding:28px 36px 22px;
+    }
+    .banner .tag {
+      display:inline-block; background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.35);
+      font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+      padding:3px 10px; border-radius:20px; margin-bottom:10px;
+    }
+    .banner h1 { font-size:22px; font-weight:700; }
+    .banner p  { font-size:13px; opacity:.85; margin-top:5px; }
+
+    .container { max-width:700px; margin:28px auto; padding:0 20px 60px; }
+
+    /* Prompt box */
+    .prompt-box {
+      background:#fff; border-radius:12px;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      overflow:hidden; margin-bottom:20px;
+    }
+    .box-head {
+      padding:12px 18px; font-size:14px; font-weight:700;
+      display:flex; align-items:center; gap:8px; color:#fff;
+    }
+    .box-head.orange { background:#e65100; }
+    .box-head.red    { background:#c62828; }
+    .box-body { padding:18px 20px; }
+    .prompt-text {
+      background:#1e1e2e; color:#cdd6f4;
+      padding:14px 16px; border-radius:8px;
+      font-size:13px; font-family:'Consolas','Courier New',monospace;
+      line-height:1.7; white-space:pre-wrap;
+    }
+
+    /* Bug list */
+    .bug-item {
+      display:flex; gap:12px; padding:12px 0;
+      border-bottom:1px solid #f0e0d0;
+    }
+    .bug-item:last-child { border-bottom:none; }
+    .bug-num {
+      background:#c62828; color:#fff;
+      width:24px; height:24px; border-radius:50%;
+      font-size:12px; font-weight:700;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      margin-top:2px;
+    }
+    .bug-title { font-size:14px; font-weight:700; color:#c62828; margin-bottom:4px; }
+    .bug-desc  { font-size:13px; color:#555; line-height:1.65; }
+
+    /* App output area */
+    h2.section-head {
+      font-size:16px; font-weight:700; color:#333;
+      margin-bottom:12px; padding-bottom:8px;
+      border-bottom:2px solid #ffe0b2;
+    }
+    #loading  { color:#1976d2; font-size:13px; font-style:italic; margin:8px 0; }
+    #error    { color:#c62828; font-size:13px; display:none;
+                background:#ffebee; padding:10px 14px; border-radius:8px; }
+    #food-list { list-style:none; margin-top:10px; }
+    #food-list li {
+      padding:9px 14px; border:1px solid #ffe0b2;
+      border-radius:7px; margin-bottom:6px;
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:13px; background:#fff8f5;
+    }
+    #food-list li.fav { background:#fff9c4; font-weight:700; border-color:#f9a825; }
+    #food-list button { cursor:pointer; font-size:12px; padding:4px 10px;
+      border:1px solid #e65100; border-radius:6px; background:#fff3e0; color:#e65100; }
+  </style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="tag">M1-A1 · Section D · Step 1</div>
+  <h1>AI-Generated Code — Original (Unmodified)</h1>
+  <p>This is the exact output from ChatGPT. See the known bugs below and sectionD-corrected.html for the fix.</p>
+</div>
+
+<div class="container">
+
+  <!-- Prompt -->
+  <div class="prompt-box">
+    <div class="box-head orange">💬 Exact Prompt Given to ChatGPT</div>
+    <div class="box-body">
+      <div class="prompt-text">Write a JavaScript program in a single HTML file that:
+1. Fetches a list of food items from https://jsonplaceholder.typicode.com/posts
+   (treat each post title as a dish name) using fetch() and async/await.
+2. Renders the items in an HTML ul, with an 'Add to Favourites' button next to each item.
+3. Saves the user's favourite items to localStorage and re-loads and
+   highlights them correctly when the page is refreshed.
+4. Shows a loading indicator while the fetch is in progress.
+5. Displays a visible error message in the DOM if the request fails.</div>
+    </div>
+  </div>
+
+  <!-- Known Bugs -->
+  <div class="prompt-box">
+    <div class="box-head red">🐛 Known Bugs Found During Manual Testing</div>
+    <div class="box-body">
+      <div class="bug-item">
+        <div class="bug-num">1</div>
+        <div>
+          <div class="bug-title">No res.ok check</div>
+          <div class="bug-desc">The AI calls <code style="background:#eee;padding:1px 4px;border-radius:3px;">res.json()</code> immediately after fetch() without checking if the response was successful. A 404 or 500 HTTP status would still attempt to parse, and the DOM error element would never appear.</div>
+        </div>
+      </div>
+      <div class="bug-item">
+        <div class="bug-num">2</div>
+        <div>
+          <div class="bug-title">Duplicate favourites in localStorage</div>
+          <div class="bug-desc">Every click on "Add to Favourites" pushes the same title into the array again — no duplicate check. The array grows unboundedly (e.g. <code style="background:#eee;padding:1px 4px;border-radius:3px;">["Paneer","Paneer","Paneer"]</code>).</div>
+        </div>
+      </div>
+      <div class="bug-item">
+        <div class="bug-num">3</div>
+        <div>
+          <div class="bug-title">Unreliable highlight restore on reload</div>
+          <div class="bug-desc">Restore logic uses <code style="background:#eee;padding:1px 4px;border-radius:3px;">li.textContent</code> which includes the button text, so the saved title never matches and highlights are never restored after reload.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Output running -->
+  <h2 class="section-head">AI Code Output (Running Below)</h2>
+  <p id="loading">Loading food items...</p>
+  <p id="error">Failed to load items.</p>
+  <ul id="food-list"></ul>
+
+</div>
+
+<script>
+  // Indian dish names — mapped over API results (100 items cycled)
+  const INDIAN_DISHES = [
+    "Paneer Tikka","Chicken Biryani","Dal Makhani","Butter Naan","Aloo Paratha",
+    "Chole Bhature","Palak Paneer","Pav Bhaji","Masala Dosa","Idli Sambar",
+    "Veg Pulao","Mutton Rogan Josh","Fish Curry","Rajma Chawal","Kadai Paneer",
+    "Matar Paneer","Shahi Korma","Hyderabadi Biryani","Keema Pav","Tawa Chicken",
+    "Punjabi Samosa","Aloo Tikki Chaat","Papdi Chaat","Dahi Puri","Sev Puri",
+    "Poha","Upma","Misal Pav","Kachori","Dhokla",
+    "Jalebi","Gulab Jamun","Ras Malai","Kheer","Gajar Halwa",
+    "Lassi","Mango Lassi","Masala Chai","Thandai","Shrikhand",
+    "Tandoori Chicken","Seekh Kebab","Boti Kebab","Malai Tikka","Achari Tikka",
+    "Sarson da Saag","Makki di Roti","Kadhi Pakora","Besan Chilla","Moong Dal Cheela",
+    "Veg Thali","Dal Baati Churma","Laal Maas","Gatte ki Sabzi","Bajra Khichdi",
+    "Appam","Kerala Fish Curry","Prawn Masala","Crab Curry","Egg Masala",
+    "Dhaba Dal","Tadka Dal","Dum Aloo","Baingan Bharta","Shahi Paneer",
+    "Nawabi Biryani","Lucknowi Biryani","Kolkata Biryani","Kathi Roll","Egg Roll",
+    "Bhel Puri","Ragda Pattice","Vada Pav","Mysore Masala Dosa","Uttapam",
+    "Pesarattu","Bisi Bele Bath","Puliyogare","Lemon Rice","Curd Rice",
+    "Modak","Puran Poli","Sabudana Khichdi","Batata Vada","Kande Pohe",
+    "Haleem","Nihari","Paya Soup","Biryani Raita","Mirchi Salan",
+    "Phirni","Seviyan","Double Ka Meetha","Sheer Khurma","Malpua",
+    "Pani Puri","Dahi Bhalla","Aloo Chaat","Corn Bhel","Sprouts Chaat",
+    "Chicken 65","Andhra Chicken Curry","Chettinad Chicken","Pepper Fry","Gongura Mutton"
+  ];
+
+  // ── AI-Generated code — ORIGINAL, unmodified ──────────────────
+  async function loadFoodItems() {
+    const loading = document.getElementById('loading');
+    const error   = document.getElementById('error');
+    const list    = document.getElementById('food-list');
+
+    try {
+      const res   = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const posts = await res.json();  // BUG 1: no res.ok check
+
+      loading.style.display = 'none';
+
+      posts.forEach((post, i) => {
+        const dishName = INDIAN_DISHES[i % INDIAN_DISHES.length]; // use Indian name
+        const li  = document.createElement('li');
+        const btn = document.createElement('button');
+        li.textContent  = dishName;
+        btn.textContent = 'Add to Favourites';
+
+        btn.addEventListener('click', () => {
+          // BUG 2: no duplicate guard
+          const favs = JSON.parse(localStorage.getItem('favs') || '[]');
+          favs.push(dishName);
+          localStorage.setItem('favs', JSON.stringify(favs));
+          li.classList.add('fav');
+        });
+
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+
+      // BUG 3: li.textContent includes button text — match will always fail
+      const savedFavs = JSON.parse(localStorage.getItem('favs') || '[]');
+      document.querySelectorAll('#food-list li').forEach(li => {
+        if (savedFavs.includes(li.textContent)) li.classList.add('fav');
+      });
+
+    } catch (err) {
+      loading.style.display = 'none';
+      error.style.display   = 'block';
+    }
+  }
+  loadFoodItems();
+</script>
+</body>
+</html>

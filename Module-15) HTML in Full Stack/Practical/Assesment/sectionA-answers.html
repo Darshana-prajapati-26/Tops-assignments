@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M1-A1 | Section A — Concept Application</title>
+  <style>
+    :root {
+      --primary: #1a237e;
+      --accent:  #e53935;
+      --green:   #2e7d32;
+      --bg:      #f0f2f5;
+      --card:    #ffffff;
+      --border:  #e0e0e0;
+      --code-bg: #1e1e2e;
+      --code-fg: #cdd6f4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: #222;
+      padding: 0 0 60px;
+    }
+
+    /* ── Top Banner ─────────────────────────────────────── */
+    .banner {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 60%, #3949ab 100%);
+      color: #fff;
+      padding: 32px 40px 28px;
+    }
+    .banner .tag {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .banner h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .banner .meta {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      font-size: 13px; opacity: .85; margin-top: 10px;
+    }
+    .banner .meta span {
+      background: rgba(255,255,255,.12);
+      padding: 4px 12px; border-radius: 14px;
+    }
+
+    /* ── Content wrapper ────────────────────────────────── */
+    .content { max-width: 860px; margin: 32px auto; padding: 0 20px; }
+
+    /* ── Section card ───────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .card-header {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 20px;
+    }
+    .card-header .num {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 13px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-header h2 { font-size: 15px; font-weight: 600; }
+
+    .scenario-box {
+      background: #fff8e1;
+      border-left: 4px solid #f9a825;
+      padding: 12px 18px;
+      margin: 18px 18px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .scenario-box strong { color: #e65100; }
+
+    .answer-body { padding: 18px 20px 22px; }
+
+    .answer-body h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 18px 0 8px;
+      padding-left: 10px;
+      border-left: 3px solid var(--accent);
+    }
+    .answer-body h3:first-child { margin-top: 0; }
+
+    .answer-body p, .answer-body li {
+      font-size: 14px; line-height: 1.7; color: #333;
+    }
+    .answer-body ul { padding-left: 20px; margin: 6px 0; }
+    .answer-body ul li { margin: 5px 0; }
+
+    code {
+      background: #eceff1;
+      color: #b71c1c;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Consolas', 'Courier New', monospace;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 16px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+    /* Syntax tones */
+    pre .kw  { color: #cba6f7; }   /* keyword */
+    pre .fn  { color: #89dceb; }   /* function */
+    pre .str { color: #a6e3a1; }   /* string */
+    pre .num { color: #fab387; }   /* number */
+    pre .cm  { color: #6c7086; font-style: italic; } /* comment */
+
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin: 10px 0;
+    }
+    table th {
+      background: #e8eaf6; color: var(--primary);
+      text-align: left; padding: 9px 12px;
+      border: 1px solid var(--border);
+    }
+    table td { padding: 8px 12px; border: 1px solid var(--border); }
+    table tr:nth-child(even) td { background: #fafafa; }
+
+    .badge {
+      display: inline-block;
+      background: #e8f5e9; color: var(--green);
+      border: 1px solid #a5d6a7;
+      font-size: 11px; padding: 2px 8px;
+      border-radius: 10px; font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="banner">
+  <div class="tag">ReactJS &nbsp;·&nbsp; M1-A1</div>
+  <h1>Section A — Concept Application</h1>
+  <div class="meta">
+    <span>Program: ReactJS</span>
+    <span>Stack: JavaScript ES6+</span>
+    <span>Total Time: 3 Hours</span>
+    <span>6 Scenarios</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ── S1 ─────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">1</div>
+      <h2>Variable Declaration — var / let / const</h2>
+    </div>
+    <div class="scenario-box">
+      <strong>Scenario:</strong> You are building a food delivery app where each restaurant's
+      details — name, cuisine type, and minimum order value — must remain constant throughout
+      the session, but the currently selected dish should be updatable as the user browses the menu.
+    </div>
+    <div class="answer-body">
+      <h3>Answer — Code</h3>
+      <pre>
+<span class="cm">// Restaurant details stay CONSTANT throughout the session → const</span>
+<span class="kw">const</span> restaurantName  = <span class="str">"Spice Garden"</span>;
+<span class="kw">const</span> cuisineType     = <span class="str">"Indian"</span>;
+<span class="kw">const</span> minOrderValue   = <span class="num">199</span>;
+
+<span class="cm">// Currently selected dish CHANGES as the user browses → let</span>
+<span class="kw">let</span> selectedDish = <span class="str">"Paneer Tikka"</span>;
+
+selectedDish = <span class="str">"Dal Makhani"</span>;   <span class="cm">// ✔ allowed — let is reassignable</span>
+
+<span class="cm">// restaurantName = "Biryani House"; // ❌ TypeError — const cannot be reassigned</span>
+      </pre>
+
+      <h3>Why each keyword?</h3>
+      <ul>
+        <li><code>const</code> for <em>restaurantName</em>, <em>cuisineType</em>, <em>minOrderValue</em> — these must <strong>never change</strong> during the session. <code>const</code> enforces this at the language level; any accidental reassignment throws a <code>TypeError</code> immediately. It is also block-scoped, preventing leakage.</li>
+        <li><code>let</code> for <em>selectedDish</em> — the user switches dishes while browsing, so the variable <strong>must be reassignable</strong>. <code>let</code> is block-scoped (unlike <code>var</code> which is function-scoped and hoisted) and avoids the classic <code>var</code> pitfall of silent <code>undefined</code> values.</li>
+        <li><code>var</code> — <strong>never used</strong> in modern JS because of its function scope, hoisting behaviour, and re-declaration allowance, which makes bugs harder to catch.</li>
+      </ul>
+
+      <h3>Scope and Reassignment Rules</h3>
+      <table>
+        <thead><tr><th>Keyword</th><th>Scope</th><th>Hoisting</th><th>Reassignable</th><th>Redeclarable</th></tr></thead>
+        <tbody>
+          <tr><td><code>var</code></td><td>Function</td><td>Yes (undefined)</td><td>Yes</td><td>Yes — avoid</td></tr>
+          <tr><td><code>let</code></td><td>Block</td><td>Temporal Dead Zone</td><td>Yes</td><td>No</td></tr>
+          <tr><td><code>const</code></td><td>Block</td><td>Temporal Dead Zone</td><td>No</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── S2 ─────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">2</div>
+      <h2>Delivery Fee Engine — Conditional Logic</h2>
+    </div>
+    <div class="scenario-box">
+      <strong>Scenario:</strong> Orders above Rs 500 qualify for free delivery; orders between
+      Rs 200 and Rs 500 attract a Rs 40 fee; orders below Rs 200 attract a Rs 70 fee.
+      Users flagged as 'VIP' always receive free delivery regardless of order amount.
+    </div>
+    <div class="answer-body">
+      <h3>Answer — Code</h3>
+      <pre>
+<span class="kw">function</span> <span class="fn">getDeliveryFee</span>(orderAmount, userType) {
+  <span class="cm">// VIP check FIRST — overrides everything else</span>
+  <span class="kw">if</span> (userType === <span class="str">"VIP"</span>) <span class="kw">return</span> <span class="num">0</span>;
+
+  <span class="kw">if</span>      (orderAmount > <span class="num">500</span>)  <span class="kw">return</span> <span class="num">0</span>;
+  <span class="kw">else if</span> (orderAmount >= <span class="num">200</span>) <span class="kw">return</span> <span class="num">40</span>;
+  <span class="kw">else</span>                          <span class="kw">return</span> <span class="num">70</span>;
+}
+
+console.log(<span class="fn">getDeliveryFee</span>(<span class="num">600</span>, <span class="str">"regular"</span>)); <span class="cm">// 0  (above 500)</span>
+console.log(<span class="fn">getDeliveryFee</span>(<span class="num">350</span>, <span class="str">"regular"</span>)); <span class="cm">// 40 (200–500)</span>
+console.log(<span class="fn">getDeliveryFee</span>(<span class="num">150</span>, <span class="str">"regular"</span>)); <span class="cm">// 70 (below 200)</span>
+console.log(<span class="fn">getDeliveryFee</span>(<span class="num">100</span>, <span class="str">"VIP"</span>));     <span class="cm">// 0  (VIP override)</span>
+      </pre>
+
+      <h3>Why strict equality === over ==?</h3>
+      <p>We use <code>userType === "VIP"</code> because strict equality checks <strong>both value and type</strong> with no implicit coercion. With <code>==</code>, JavaScript performs type coercion — e.g. <code>0 == false</code> is <code>true</code> — which can introduce silent bugs. Since <code>userType</code> is always a string, <code>===</code> is both safer and more explicit.</p>
+
+      <h3>Why condition order matters</h3>
+      <p>The VIP check must come <strong>first</strong>. If the order-amount conditions run before the VIP check, a VIP user with a low-value order would be incorrectly charged Rs 70 before the VIP rule is ever reached. The most specific override must always gate first.</p>
+    </div>
+  </div>
+
+  <!-- ── S3 ─────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">3</div>
+      <h2>Menu Listing — for-of vs forEach</h2>
+    </div>
+    <div class="scenario-box">
+      <strong>Scenario:</strong> All available dishes are stored in a JavaScript array.
+      You need to display every dish name in the console and, separately, count how many
+      dishes are marked as vegetarian.
+    </div>
+    <div class="answer-body">
+      <h3>Answer — Code</h3>
+      <pre>
+<span class="kw">const</span> dishes = [
+  { name: <span class="str">"Paneer Tikka"</span>,    isVegetarian: <span class="kw">true</span>  },
+  { name: <span class="str">"Chicken Biryani"</span>, isVegetarian: <span class="kw">false</span> },
+  { name: <span class="str">"Dal Makhani"</span>,     isVegetarian: <span class="kw">true</span>  },
+  { name: <span class="str">"Fish Curry"</span>,      isVegetarian: <span class="kw">false</span> },
+  { name: <span class="str">"Aloo Paratha"</span>,    isVegetarian: <span class="kw">true</span>  },
+];
+
+<span class="cm">// Task 1: Display all dish names — for-of</span>
+<span class="kw">for</span> (<span class="kw">const</span> dish <span class="kw">of</span> dishes) {
+  console.log(dish.name);
+}
+
+<span class="cm">// Task 2: Count vegetarian dishes — forEach + counter</span>
+<span class="kw">let</span> vegCount = <span class="num">0</span>;
+dishes.<span class="fn">forEach</span>(dish => {
+  <span class="kw">if</span> (dish.isVegetarian) vegCount++;
+});
+console.log(<span class="str">"Vegetarian count:"</span>, vegCount); <span class="cm">// 3</span>
+      </pre>
+
+      <h3>Practical difference: for-of vs forEach</h3>
+      <table>
+        <thead><tr><th>Feature</th><th>for-of</th><th>forEach</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Language statement</td><td>Array method (callback)</td></tr>
+          <tr><td>Early exit</td><td>Yes — supports <code>break</code> / <code>continue</code></td><td>No — cannot break out</td></tr>
+          <tr><td>async/await</td><td>Works correctly with <code>await</code></td><td>Does NOT work with await inside callback</td></tr>
+          <tr><td>Works on</td><td>Any iterable (Map, Set, NodeList…)</td><td>Arrays only</td></tr>
+          <tr><td>Best for</td><td>When early exit or async iteration is needed</td><td>Clean declarative iteration, no early exit</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;">For this scenario, <strong>for-of</strong> is used for displaying names (clean, readable) and <strong>forEach</strong> for counting (declarative, no early exit needed).</p>
+    </div>
+  </div>
+
+  <!-- ── S4 ─────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">4</div>
+      <h2>Cart Module — Reusable Tax Calculation Function</h2>
+    </div>
+    <div class="scenario-box">
+      <strong>Scenario:</strong> The same tax calculation — 5% GST on food items and 18% GST
+      on beverages — must run in the cart preview, the checkout summary, and the order
+      confirmation screen.
+    </div>
+    <div class="answer-body">
+      <h3>Answer — Code (Function Declaration chosen)</h3>
+      <pre>
+<span class="cm">// Function Declaration — hoisted, clearly named, reusable anywhere</span>
+<span class="kw">function</span> <span class="fn">calculateTax</span>(price, category) {
+  <span class="kw">const</span> rate = category === <span class="str">"Beverage"</span> ? <span class="num">0.18</span> : <span class="num">0.05</span>;
+  <span class="kw">return</span> +(price * rate).<span class="fn">toFixed</span>(<span class="num">2</span>);
+}
+
+<span class="cm">// Same function used in all 3 screens:</span>
+console.log(<span class="fn">calculateTax</span>(<span class="num">200</span>, <span class="str">"Food"</span>));      <span class="cm">// 10.00 (5% GST)</span>
+console.log(<span class="fn">calculateTax</span>(<span class="num">150</span>, <span class="str">"Beverage"</span>)); <span class="cm">// 27.00 (18% GST)</span>
+      </pre>
+
+      <h3>Comparing all three function forms</h3>
+      <table>
+        <thead><tr><th>Form</th><th>Hoisted?</th><th>Syntax</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Function Declaration</strong></td><td>Yes — fully hoisted</td><td><code>function fn() {}</code></td><td>Shared utilities (our choice)</td></tr>
+          <tr><td>Function Expression</td><td>No (TDZ)</td><td><code>const fn = function() {}</code></td><td>Conditional assignment</td></tr>
+          <tr><td>Arrow Function</td><td>No (TDZ)</td><td><code>const fn = () =&gt; {}</code></td><td>Callbacks, one-liners</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;"><strong>Choice: Function Declaration</strong> — it is fully hoisted so it can be called anywhere in the file, has a clear name for readability, and is the standard pattern for shared utility functions used across multiple screens.</p>
+    </div>
+  </div>
+
+  <!-- ── S5 ─────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">5</div>
+      <h2>Place Order Button — Event Handling</h2>
+    </div>
+    <div class="scenario-box">
+      <strong>Scenario:</strong> Clicking the "Place Order" button must validate that the user
+      has selected at least one item and entered a delivery address; if validation passes it
+      should display a confirmation message without reloading the page.
+    </div>
+    <div class="answer-body">
+      <h3>Answer — Code</h3>
+      <pre>
+<span class="cm">// addEventListener — not inline onclick</span>
+document.<span class="fn">getElementById</span>(<span class="str">"placeOrderBtn"</span>)
+  .<span class="fn">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span>(event) {
+    event.<span class="fn">preventDefault</span>(); <span class="cm">// prevents page reload if inside a form</span>
+
+    <span class="kw">const</span> address = document.<span class="fn">getElementById</span>(<span class="str">"address"</span>).value.<span class="fn">trim</span>();
+    <span class="kw">const</span> cart    = <span class="fn">getCartItems</span>();
+
+    <span class="kw">if</span> (!address) {
+      document.<span class="fn">getElementById</span>(<span class="str">"error"</span>).textContent = <span class="str">"Please enter a delivery address."</span>;
+      <span class="kw">return</span>;
+    }
+    <span class="kw">if</span> (cart.length === <span class="num">0</span>) {
+      document.<span class="fn">getElementById</span>(<span class="str">"error"</span>).textContent = <span class="str">"Please add at least one item."</span>;
+      <span class="kw">return</span>;
+    }
+    document.<span class="fn">getElementById</span>(<span class="str">"confirmation"</span>).textContent = <span class="str">"Order placed successfully!"</span>;
+  });
+      </pre>
+
+      <h3>event.preventDefault() — when is it necessary?</h3>
+      <p>When the "Place Order" button is inside a <code>form</code> element, clicking it triggers the default browser form submission — causing a <strong>full page reload</strong> and wiping all state. <code>event.preventDefault()</code> cancels that default so our JS validation and UI update run instead. Without it, the confirmation message would never be seen because the page reloads immediately.</p>
+
+      <h3>Why addEventListener over inline onclick?</h3>
+      <ul>
+        <li>Separates JavaScript from HTML (clean code)</li>
+        <li>Multiple listeners can be attached to the same element</li>
+        <li>Gives access to the full <code>event</code> object</li>
+        <li>Listeners can be removed later with <code>removeEventListener</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── S6 ─────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">6</div>
+      <h2>Restaurant List — Fetch API: async/await vs .then/.catch</h2>
+    </div>
+    <div class="scenario-box">
+      <strong>Scenario:</strong> You are integrating a live restaurant list by fetching from a
+      REST API. The UI must show a "Loading…" spinner while waiting, render the results when
+      data arrives, and display a user-friendly error message if the request fails.
+    </div>
+    <div class="answer-body">
+      <h3>Answer — async/await (chosen approach)</h3>
+      <pre>
+<span class="kw">async function</span> <span class="fn">loadRestaurants</span>() {
+  <span class="kw">const</span> statusEl = document.<span class="fn">getElementById</span>(<span class="str">"status"</span>);
+  <span class="kw">const</span> listEl   = document.<span class="fn">getElementById</span>(<span class="str">"restaurant-list"</span>);
+
+  statusEl.textContent = <span class="str">"Loading..."</span>;   <span class="cm">// show spinner</span>
+
+  <span class="kw">try</span> {
+    <span class="kw">const</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">"https://api.example.com/restaurants"</span>);
+    <span class="kw">if</span> (!response.ok) <span class="kw">throw new</span> Error(`HTTP ${response.status}`);
+    <span class="kw">const</span> data = <span class="kw">await</span> response.<span class="fn">json</span>();
+
+    statusEl.textContent = <span class="str">""</span>;
+    data.<span class="fn">forEach</span>(r =&gt; {
+      <span class="kw">const</span> li = document.<span class="fn">createElement</span>(<span class="str">"li"</span>);
+      li.textContent = r.name;
+      listEl.<span class="fn">appendChild</span>(li);
+    });
+  } <span class="kw">catch</span> (error) {
+    statusEl.textContent = <span class="str">"Failed to load restaurants. Please try again."</span>;
+  }
+}
+      </pre>
+
+      <h3>Comparison</h3>
+      <table>
+        <thead><tr><th>Aspect</th><th>.then() / .catch()</th><th>async / await</th></tr></thead>
+        <tbody>
+          <tr><td>Readability</td><td>Nested callbacks / chained</td><td>Reads like synchronous code</td></tr>
+          <tr><td>Error handling</td><td>.catch() at the chain end</td><td>try/catch block — one place</td></tr>
+          <tr><td>Loading state</td><td>Set before .then(), reset inside</td><td>Set before await, reset in try block</td></tr>
+          <tr><td>Debugging</td><td>Stack traces hard to follow</td><td>Stack traces match code structure</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;"><strong>Choice: async/await</strong> — managing a loading state with two outcomes (success and failure) is much cleaner with a single <code>try/catch</code> block. The control flow is obvious, the loading indicator reset is in the right place, and the code is far easier to maintain.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

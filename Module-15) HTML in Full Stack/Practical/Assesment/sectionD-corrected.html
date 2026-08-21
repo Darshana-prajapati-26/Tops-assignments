@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M1-A1 | Section D — Corrected Version (Step 2)</title>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --blue:    #1565c0;
+      --red:     #c62828;
+      --gold:    #f9a825;
+      --bg:      #f1f8f2;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); min-height:100vh; }
+
+    /* Banner */
+    .banner {
+      background: linear-gradient(135deg, #1b5e20, #2e7d32, #43a047);
+      color:#fff; padding:28px 36px 22px;
+    }
+    .banner .tag {
+      display:inline-block; background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.35);
+      font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+      padding:3px 10px; border-radius:20px; margin-bottom:10px;
+    }
+    .banner h1 { font-size:22px; font-weight:700; }
+    .banner p  { font-size:13px; opacity:.85; margin-top:5px; }
+
+    /* Layout */
+    .container { max-width:700px; margin:28px auto; padding:0 20px 60px; }
+
+    /* Fix summary card */
+    .fix-card {
+      background:#fff; border-radius:12px;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      overflow:hidden; margin-bottom:20px;
+    }
+    .fix-head {
+      background:var(--primary); color:#fff;
+      padding:12px 18px; font-size:14px; font-weight:700;
+      display:flex; align-items:center; gap:8px;
+    }
+    .fix-body { padding:16px 20px; }
+    .fix-item {
+      display:flex; gap:12px; padding:10px 0;
+      border-bottom:1px solid #e8f5e9;
+    }
+    .fix-item:last-child { border-bottom:none; }
+    .fix-badge {
+      background:var(--primary); color:#fff;
+      font-size:11px; font-weight:700;
+      padding:2px 8px; border-radius:10px;
+      white-space:nowrap; align-self:flex-start; margin-top:2px;
+    }
+    .fix-title { font-size:14px; font-weight:700; color:#1b5e20; margin-bottom:3px; }
+    .fix-desc  { font-size:13px; color:#555; line-height:1.65; }
+    code {
+      background:#eceff1; color:#b71c1c;
+      padding:1px 5px; border-radius:3px;
+      font-size:12px; font-family:'Consolas','Courier New',monospace;
+    }
+
+    /* App card */
+    .app-card {
+      background:#fff; border-radius:12px;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      overflow:hidden;
+    }
+    .app-head {
+      background:var(--blue); color:#fff;
+      padding:12px 18px; font-size:14px; font-weight:700;
+      display:flex; align-items:center; gap:8px;
+    }
+
+    /* Loading */
+    #loading-msg {
+      display:flex; align-items:center; gap:10px;
+      background:#e8f5e9; border-radius:8px;
+      padding:10px 14px; margin:16px 20px 0;
+      color:var(--primary); font-size:13px; font-style:italic;
+    }
+    .spin {
+      width:16px; height:16px; border:2px solid #a5d6a7;
+      border-top-color:var(--primary); border-radius:50%;
+      animation:spin .6s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* Error */
+    #error-msg {
+      background:#ffebee; border-left:4px solid var(--red);
+      color:var(--red); padding:12px 16px; border-radius:8px;
+      font-size:13px; margin:16px 20px 0; display:none;
+    }
+
+    /* Food list */
+    #food-list { list-style:none; padding:14px 20px 0; }
+    #food-list li {
+      padding:11px 14px; border:1.5px solid #e0e0e0;
+      border-radius:9px; margin-bottom:8px;
+      display:flex; align-items:center; gap:10px;
+      font-size:14px; background:#fafafa;
+      transition:background .15s, border-color .15s;
+    }
+    #food-list li:hover { background:#f1f8f2; border-color:#a5d6a7; }
+    #food-list li.fav {
+      background:#fff9c4; border-color:var(--gold);
+      font-weight:600;
+    }
+
+    .title-span { flex:1; color:#333; line-height:1.4; font-size:13px; }
+
+    .fav-lbl {
+      font-size:11px; color:var(--gold); font-weight:700;
+      background:#fff8e1; padding:2px 7px; border-radius:8px;
+      border:1px solid var(--gold);
+    }
+
+    .fav-btn {
+      padding:5px 12px; font-size:12px; font-weight:600;
+      border-radius:20px; cursor:pointer; white-space:nowrap;
+      border:1.5px solid #1565c0;
+      background:#e3f2fd; color:#1565c0;
+      transition:background .15s, color .15s;
+    }
+    .fav-btn:hover       { background:#bbdefb; }
+    .fav-btn.saved       { background:#1565c0; color:#fff; border-color:#1565c0; }
+    .fav-btn.saved:hover { background:#0d47a1; }
+
+    .list-footer { padding:14px 20px; text-align:center; }
+    .list-footer small { color:#aaa; font-size:12px; }
+  </style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="tag">M1-A1 · Section D · Step 2</div>
+  <h1>Manually Corrected Version</h1>
+  <p>All 3 bugs found during testing have been fixed. Tested end-to-end including page reload.</p>
+</div>
+
+<div class="container">
+
+  <!-- Fix Summary -->
+  <div class="fix-card">
+    <div class="fix-head">✅ Bugs Fixed (Found Without AI)</div>
+    <div class="fix-body">
+
+      <div class="fix-item">
+        <span class="fix-badge">Fix 1</span>
+        <div>
+          <div class="fix-title">Added res.ok check before res.json()</div>
+          <div class="fix-desc">The original called <code>res.json()</code> even for error HTTP responses (404, 500). Added <code>if (!res.ok) throw new Error(...)</code> so all non-2xx responses fall into the catch block and show a visible DOM error message.</div>
+        </div>
+      </div>
+
+      <div class="fix-item">
+        <span class="fix-badge">Fix 2</span>
+        <div>
+          <div class="fix-title">Duplicate guard for localStorage favourites</div>
+          <div class="fix-desc">Every click was pushing the same title again. Fixed with <code>if (!favs.includes(title))</code> before pushing. Also converted the button to a toggle (add/remove) so users can unfavourite items.</div>
+        </div>
+      </div>
+
+      <div class="fix-item">
+        <span class="fix-badge">Fix 3</span>
+        <div>
+          <div class="fix-title">Reliable title matching on page reload</div>
+          <div class="fix-desc">The original matched <code>li.textContent</code> which included button text, so saved highlights were never restored. Fixed by storing the title in <code>data-title</code> on each <code>li</code> and comparing against that attribute instead.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="app-card">
+    <div class="app-head">🍕 Food Items — Favourites Tracker</div>
+
+    <!-- Loading indicator -->
+    <div id="loading-msg">
+      <div class="spin"></div>
+      Loading food items...
+    </div>
+
+    <!-- Visible DOM error — not just console.error -->
+    <div id="error-msg"></div>
+
+    <!-- Food list -->
+    <ul id="food-list"></ul>
+    <div class="list-footer">
+      <small>Favourites are saved to localStorage and restored on every page reload.</small>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const LS_KEY  = "d_foodFavourites";
+  const LIST_EL = document.getElementById("food-list");
+
+  // Indian dish names — mapped over API results (100 items cycled)
+  const INDIAN_DISHES = [
+    "Paneer Tikka","Chicken Biryani","Dal Makhani","Butter Naan","Aloo Paratha",
+    "Chole Bhature","Palak Paneer","Pav Bhaji","Masala Dosa","Idli Sambar",
+    "Veg Pulao","Mutton Rogan Josh","Fish Curry","Rajma Chawal","Kadai Paneer",
+    "Matar Paneer","Shahi Korma","Hyderabadi Biryani","Keema Pav","Tawa Chicken",
+    "Punjabi Samosa","Aloo Tikki Chaat","Papdi Chaat","Dahi Puri","Sev Puri",
+    "Poha","Upma","Misal Pav","Kachori","Dhokla",
+    "Jalebi","Gulab Jamun","Ras Malai","Kheer","Gajar Halwa",
+    "Lassi","Mango Lassi","Masala Chai","Thandai","Shrikhand",
+    "Tandoori Chicken","Seekh Kebab","Boti Kebab","Malai Tikka","Achari Tikka",
+    "Sarson da Saag","Makki di Roti","Kadhi Pakora","Besan Chilla","Moong Dal Cheela",
+    "Veg Thali","Dal Baati Churma","Laal Maas","Gatte ki Sabzi","Bajra Khichdi",
+    "Appam","Kerala Fish Curry","Prawn Masala","Crab Curry","Egg Masala",
+    "Dhaba Dal","Tadka Dal","Dum Aloo","Baingan Bharta","Shahi Paneer",
+    "Nawabi Biryani","Lucknowi Biryani","Kolkata Biryani","Kathi Roll","Egg Roll",
+    "Bhel Puri","Ragda Pattice","Vada Pav","Mysore Masala Dosa","Uttapam",
+    "Pesarattu","Bisi Bele Bath","Puliyogare","Lemon Rice","Curd Rice",
+    "Modak","Puran Poli","Sabudana Khichdi","Batata Vada","Kande Pohe",
+    "Haleem","Nihari","Paya Soup","Biryani Raita","Mirchi Salan",
+    "Phirni","Seviyan","Double Ka Meetha","Sheer Khurma","Malpua",
+    "Pani Puri","Dahi Bhalla","Aloo Chaat","Corn Bhel","Sprouts Chaat",
+    "Chicken 65","Andhra Chicken Curry","Chettinad Chicken","Pepper Fry","Gongura Mutton"
+  ];
+
+  function getSaved() {
+    return JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+  }
+  function setSaved(arr) {
+    localStorage.setItem(LS_KEY, JSON.stringify(arr));
+  }
+
+  // ── Toggle favourite ──────────────────────────────────────────
+  function toggleFav(title, li, btn) {
+    const favs = getSaved();
+    if (favs.includes(title)) {
+      setSaved(favs.filter(f => f !== title));
+      li.classList.remove("fav");
+      btn.textContent = "Add to Favourites";
+      btn.classList.remove("saved");
+      const lbl = li.querySelector(".fav-lbl");
+      if (lbl) lbl.remove();
+    } else {
+      // FIX 2: no duplicate push
+      setSaved([...favs, title]);
+      markFav(li, btn);
+    }
+  }
+
+  function markFav(li, btn) {
+    li.classList.add("fav");
+    btn.textContent = "Saved";
+    btn.classList.add("saved");
+    if (!li.querySelector(".fav-lbl")) {
+      const lbl = document.createElement("span");
+      lbl.className   = "fav-lbl";
+      lbl.textContent = "★ Fav";
+      li.insertBefore(lbl, btn);
+    }
+  }
+
+  // ── Fetch + render ────────────────────────────────────────────
+  async function loadItems() {
+    const loadEl  = document.getElementById("loading-msg");
+    const errorEl = document.getElementById("error-msg");
+
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+      // FIX 1: check res.ok
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const posts = await res.json();
+      const saved = getSaved();
+      loadEl.style.display = "none";
+
+      posts.forEach((post, i) => {
+        const dishName = INDIAN_DISHES[i % INDIAN_DISHES.length]; // Indian name
+
+        const li  = document.createElement("li");
+        const btn = document.createElement("button");
+
+        // FIX 3: store Indian dish name in data-title for reliable reload matching
+        li.dataset.title = dishName;
+
+        const span = document.createElement("span");
+        span.className   = "title-span";
+        span.textContent = dishName;
+
+        btn.className   = "fav-btn";
+        btn.textContent = "Add to Favourites";
+        btn.addEventListener("click", () => toggleFav(dishName, li, btn));
+
+        li.appendChild(span);
+        li.appendChild(btn);
+        LIST_EL.appendChild(li);
+
+        // FIX 3: match data-title on reload
+        if (saved.includes(dishName)) markFav(li, btn);
+      });
+
+    } catch (err) {
+      loadEl.style.display  = "none";
+      // FIX 1: visible DOM error
+      errorEl.style.display = "block";
+      errorEl.textContent   =
+        `Failed to load items. Check your connection and refresh. (${err.message})`;
+      console.error("Fetch error:", err);
+    }
+  }
+
+  loadItems();
+</script>
+</body>
+</html>

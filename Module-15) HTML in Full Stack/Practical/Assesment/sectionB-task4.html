@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M1-A1 | Section B · Task 4 — Order Tracker with Persistence</title>
+  <style>
+    :root {
+      --primary: #4527a0;
+      --accent:  #e53935;
+      --gold:    #f9a825;
+      --green:   #2e7d32;
+      --bg:      #f3f0fa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); min-height: 100vh; }
+
+    /* Banner */
+    .banner {
+      background: linear-gradient(135deg, #311b92, #4527a0, #7b1fa2);
+      color: #fff; padding: 28px 36px 24px;
+    }
+    .banner .tag {
+      display: inline-block;
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35);
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .banner h1 { font-size: 22px; font-weight: 700; }
+    .banner p  { font-size: 13px; opacity: .85; margin-top: 6px; }
+
+    /* Layout */
+    .container { max-width: 640px; margin: 30px auto; padding: 0 20px 60px; }
+
+    /* Card */
+    .card {
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .card-head {
+      background: var(--primary); color: #fff;
+      padding: 13px 18px; font-size: 14px; font-weight: 600;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-head .icon { font-size: 18px; }
+    .card-body { padding: 20px; }
+
+    /* Status */
+    .status-row {
+      display: flex; align-items: center; gap: 10px;
+      background: #ede7f6; border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 16px;
+    }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid #b39ddb;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #status-text { font-size: 13px; color: var(--primary); font-style: italic; }
+
+    /* Error */
+    #error-box {
+      background: #ffebee; border-left: 4px solid var(--accent);
+      color: #b71c1c; padding: 12px 16px; border-radius: 8px;
+      font-size: 13px; display: none; margin-bottom: 16px;
+    }
+
+    /* Restaurant list */
+    #restaurant-list { list-style: none; }
+    #restaurant-list li {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 14px; border: 1.5px solid #e8e0f0;
+      border-radius: 9px; margin-bottom: 8px;
+      cursor: pointer; font-size: 14px; color: #333;
+      transition: background .15s, border-color .15s, transform .1s;
+    }
+    #restaurant-list li:hover {
+      background: #ede7f6; border-color: #b39ddb; transform: translateX(3px);
+    }
+    #restaurant-list li.favourite {
+      background: #fff9c4; border-color: var(--gold);
+      font-weight: 700; color: #5d4037;
+    }
+    #restaurant-list li.favourite::after {
+      content: "★ Favourite";
+      font-size: 11px; color: var(--gold); font-weight: 600;
+      background: #fff8e1; padding: 2px 8px; border-radius: 10px;
+      border: 1px solid var(--gold);
+    }
+
+    /* Saved label */
+    #fav-info {
+      background: #e8f5e9; border: 1px solid #a5d6a7;
+      color: var(--green); padding: 10px 14px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; margin-top: 14px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="tag">M1-A1 · Section B · Task 4</div>
+  <h1>Order Tracker with Persistence</h1>
+  <p>Fetches restaurants via async/await · saves favourite to localStorage · restores on reload</p>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-head">
+      <span class="icon">🍽️</span> Restaurant List
+    </div>
+    <div class="card-body">
+
+      <!-- Loading indicator -->
+      <div class="status-row" id="status-row">
+        <div class="spinner" id="spinner"></div>
+        <span id="status-text">Loading restaurants...</span>
+      </div>
+
+      <!-- Visible DOM error — NOT just console -->
+      <div id="error-box"></div>
+
+      <!-- Clickable restaurant list -->
+      <ul id="restaurant-list"></ul>
+
+      <!-- Saved favourite confirmation -->
+      <div id="fav-info"></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const LIST_EL    = document.getElementById("restaurant-list");
+  const STATUS_ROW = document.getElementById("status-row");
+  const STATUS_TXT = document.getElementById("status-text");
+  const SPINNER    = document.getElementById("spinner");
+  const ERROR_BOX  = document.getElementById("error-box");
+  const FAV_INFO   = document.getElementById("fav-info");
+  const LS_KEY     = "favouriteRestaurant";
+
+  // Famous Indian restaurants (mapped over API results)
+  const INDIAN_RESTAURANTS = [
+    "Bukhara — New Delhi",
+    "Indian Accent — New Delhi",
+    "Karavalli — Bangalore",
+    "Trishna — Mumbai",
+    "Oh! Calcutta — Kolkata",
+    "Peshwari — ITC Hotels",
+    "Dasaprakash — Chennai",
+    "Spice Garden — Ahmedabad",
+    "Gordhan Thal — Ahmedabad",
+    "Vishalla — Ahmedabad",
+  ];
+
+  // ── fetch() with async/await ──────────────────────────────────────────────
+  async function loadRestaurants() {
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const users = await response.json();
+
+      // Hide loading
+      STATUS_ROW.style.display = "none";
+
+      // Render each entry with Indian restaurant name
+      users.forEach((user, i) => {
+        const restaurantName = INDIAN_RESTAURANTS[i % INDIAN_RESTAURANTS.length];
+        const li = document.createElement("li");
+        li.textContent  = restaurantName;
+        li.dataset.name = restaurantName;
+
+        // On click: save favourite + highlight
+        li.addEventListener("click", () => {
+          document.querySelectorAll("#restaurant-list li")
+            .forEach(el => el.classList.remove("favourite"));
+
+          li.classList.add("favourite");
+          localStorage.setItem(LS_KEY, restaurantName);
+
+          FAV_INFO.style.display = "block";
+          FAV_INFO.textContent   = `✅ "${restaurantName}" saved as favourite — persists on reload`;
+        });
+
+        LIST_EL.appendChild(li);
+      });
+
+      // Restore previously saved favourite
+      restoreFavourite();
+
+    } catch (err) {
+      // Hide spinner
+      STATUS_ROW.style.display = "none";
+
+      // Show visible DOM error — not just console
+      ERROR_BOX.style.display = "block";
+      ERROR_BOX.textContent   =
+        `⚠️ Failed to load restaurants. Please check your connection and refresh. (${err.message})`;
+
+      console.error("Fetch error:", err);
+    }
+  }
+
+  // ── Restore favourite from localStorage on page load ──────────────────────
+  function restoreFavourite() {
+    const saved = localStorage.getItem(LS_KEY);
+    if (!saved) return;
+
+    LIST_EL.querySelectorAll("li").forEach(li => {
+      if (li.dataset.name === saved) {
+        li.classList.add("favourite");
+        FAV_INFO.style.display = "block";
+        FAV_INFO.textContent   = `★ "${saved}" — restored from localStorage`;
+      }
+    });
+  }
+
+  loadRestaurants();
+</script>
+
+</body>
+</html>
