@@ -1,0 +1,60 @@
+<!--
+  Q4:
+  Build a function validateURL(url) that checks if a given URL starts with 'https://'
+  and contains at least one '.' — return true if valid, otherwise false.
+  Hint: Use startsWith() and includes() string methods.
+
+  Q5:
+  Build a function validateURL(url) that checks if a given URL starts with 'https://'
+  and contains at least one '.' — return true if valid, otherwise false.
+  Hint: Use startsWith() and includes() string methods.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q4 & Q5 - validateURL()</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    input { padding: 8px; font-size: 14px; width: 300px; }
+    button { padding: 9px 18px; font-size: 14px; margin-left: 8px; cursor: pointer; }
+    #result { font-weight: bold; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q4 &amp; Q5</h3>
+    <p>Build a function <code>validateURL(url)</code> that checks if a URL starts with
+    <code>'https://'</code> and contains at least one <code>'.'</code>. Return
+    <code>true</code> if valid, otherwise <code>false</code>.<br>
+    <em><strong>Hint:</strong> Use <code>startsWith()</code> and <code>includes()</code>.</em></p>
+  </div>
+
+  <h2>Q4 &amp; Q5: validateURL()</h2>
+
+  <input type="text" id="url-input" placeholder="Enter a URL to validate" />
+  <button onclick="check()">Validate</button>
+  <p id="result"></p>
+
+  <script>
+    // Q4 & Q5: validateURL — startsWith('https://') AND includes('.')
+    function validateURL(url) {
+      return url.startsWith("https://") && url.includes(".");
+    }
+
+    function check() {
+      const url = document.getElementById("url-input").value.trim();
+      const valid = validateURL(url);
+      const result = document.getElementById("result");
+      result.textContent = valid
+        ? "✅ Valid URL: true"
+        : "❌ Invalid URL: false";
+      result.style.color = valid ? "green" : "red";
+      console.log("validateURL(" + url + ") =", valid);
+    }
+  </script>
+</body>
+</html>

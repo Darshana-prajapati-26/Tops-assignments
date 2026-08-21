@@ -1,0 +1,87 @@
+<!--
+  Q9:
+  Write a function deletePlaylistLink(index) that removes a playlist link from your
+  'myPlaylists' array and updates LocalStorage so the link is gone on page reload.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q9 - deletePlaylistLink(index)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    input { padding: 8px; font-size: 14px; width: 80px; }
+    button { padding: 9px 18px; font-size: 14px; margin: 6px 6px 6px 0; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 12px; font-size: 13px; border-radius: 4px; white-space: pre-wrap; }
+    .err { color: red; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q9</h3>
+    <p>Write a function <code>deletePlaylistLink(index)</code> that removes a playlist
+    link from the <code>'myPlaylists'</code> array and updates LocalStorage so the link
+    is gone on page reload.</p>
+  </div>
+
+  <h2>Q9: deletePlaylistLink(index)</h2>
+
+  <button onclick="seedData()">Seed Sample Data</button>
+  <button onclick="refreshDisplay()">Refresh</button>
+
+  <h3>myPlaylists array:</h3>
+  <pre id="output">[]</pre>
+
+  <h3>Delete a Link:</h3>
+  <label>Index to delete: </label>
+  <input type="number" id="del-index" placeholder="0" min="0" />
+  <button onclick="handleDelete()">Delete</button>
+  <p id="msg" style="color:green;"></p>
+  <p class="err" id="err"></p>
+
+  <script>
+    // Q9: deletePlaylistLink — splice at index, overwrite LocalStorage
+    function deletePlaylistLink(index) {
+      const playlists = JSON.parse(localStorage.getItem("myPlaylists") || "[]");
+      if (index < 0 || index >= playlists.length) return null;
+      playlists.splice(index, 1);
+      localStorage.setItem("myPlaylists", JSON.stringify(playlists));
+      return playlists;
+    }
+
+    function handleDelete() {
+      const index = parseInt(document.getElementById("del-index").value);
+      const err   = document.getElementById("err");
+
+      if (isNaN(index)) { err.textContent = "Enter a valid index."; return; }
+      err.textContent = "";
+
+      const updated = deletePlaylistLink(index);
+      if (updated === null) { err.textContent = "Index out of range."; return; }
+
+      document.getElementById("msg").textContent = "✅ Deleted index " + index + ". LocalStorage updated.";
+      document.getElementById("output").textContent = JSON.stringify(updated, null, 2);
+    }
+
+    function refreshDisplay() {
+      const data = JSON.parse(localStorage.getItem("myPlaylists") || "[]");
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    }
+
+    function seedData() {
+      const sample = [
+        { name: "Chill Mix",     url: "https://open.spotify.com/playlist/abc" },
+        { name: "Workout Beats", url: "https://music.youtube.com/playlist?list=xyz" },
+        { name: "Late Night",    url: "https://open.spotify.com/playlist/def" }
+      ];
+      localStorage.setItem("myPlaylists", JSON.stringify(sample));
+      refreshDisplay();
+    }
+
+    refreshDisplay();
+  </script>
+</body>
+</html>

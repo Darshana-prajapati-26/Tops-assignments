@@ -1,0 +1,73 @@
+<!--
+  Q1:
+  Create a JavaScript function addPlaylistLink(linkObj) that adds a new music playlist
+  link (like Spotify or YouTube Music) to an array of social links, then saves the
+  updated array to LocalStorage under the key 'myLinks'.
+
+  Q2:
+  Create a JavaScript function addPlaylistLink(linkObj) that adds a new music playlist
+  link (like Spotify or YouTube Music) to an array of social links, then saves the
+  updated array to LocalStorage under the key 'myLinks'.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q1 & Q2 - addPlaylistLink() → LocalStorage 'myLinks'</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    input { display: block; padding: 8px; font-size: 14px; width: 280px; margin: 6px 0; }
+    button { padding: 9px 20px; font-size: 14px; margin-top: 8px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 12px; font-size: 13px; border-radius: 4px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q1 &amp; Q2</h3>
+    <p>Create a function <code>addPlaylistLink(linkObj)</code> that adds a new music
+    playlist link to an array of social links, then saves the updated array to
+    LocalStorage under the key <code>'myLinks'</code>.</p>
+  </div>
+
+  <h2>Q1 &amp; Q2: addPlaylistLink() → LocalStorage 'myLinks'</h2>
+
+  <label>Name</label>
+  <input type="text" id="link-name" placeholder="e.g. Spotify Playlist" />
+  <label>URL</label>
+  <input type="text" id="link-url" placeholder="e.g. https://open.spotify.com/..." />
+  <button onclick="handleAdd()">Add Link</button>
+  <p id="msg" style="color:green;"></p>
+
+  <h3>myLinks (LocalStorage):</h3>
+  <pre id="output">[]</pre>
+
+  <script>
+    // Q1 & Q2: addPlaylistLink — pushes to array and saves to localStorage 'myLinks'
+    function addPlaylistLink(linkObj) {
+      const existing = JSON.parse(localStorage.getItem("myLinks") || "[]");
+      existing.push(linkObj);
+      localStorage.setItem("myLinks", JSON.stringify(existing));
+      return existing;
+    }
+
+    function handleAdd() {
+      const name = document.getElementById("link-name").value.trim();
+      const url  = document.getElementById("link-url").value.trim();
+      if (!name || !url) { document.getElementById("msg").textContent = ""; return; }
+
+      const updated = addPlaylistLink({ name, url });
+      document.getElementById("msg").textContent = "✅ Link added and saved to LocalStorage.";
+      document.getElementById("output").textContent = JSON.stringify(updated, null, 2);
+      document.getElementById("link-name").value = "";
+      document.getElementById("link-url").value  = "";
+    }
+
+    // Load on page start
+    const saved = localStorage.getItem("myLinks");
+    if (saved) document.getElementById("output").textContent = saved;
+  </script>
+</body>
+</html>

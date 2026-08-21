@@ -1,0 +1,210 @@
+<!--
+  Q15:
+  Build a validateLink(url) function that checks if a playlist URL starts with 'https://'
+  and contains 'spotify.com' or 'youtube.com'. Show an error message if validation fails.
+  Constraint: Display the error message below the input field using JavaScript, not alert().
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q15 - validateLink() Playlist URL Validator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 660px; }
+
+    .question-box {
+      background: #fff8e1;
+      border-left: 5px solid #f9a825;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+    }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p  { margin: 0; font-size: 14px; }
+
+    label { display: block; margin: 16px 0 4px; font-weight: bold; font-size: 14px; }
+
+    input[type="text"] {
+      padding: 9px 12px;
+      font-size: 14px;
+      width: 360px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input.invalid { border-color: #e53935; }
+    input.valid   { border-color: #43a047; }
+
+    /* Error / success messages live here — NO alert() */
+    #url-error {
+      color: #e53935;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+    #url-success {
+      color: #2e7d32;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    button {
+      margin-top: 14px;
+      padding: 10px 22px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover { background: #1565c0; }
+
+    .test-section { margin-top: 28px; }
+    .test-section h3 { margin-bottom: 8px; }
+    .test-btn {
+      display: inline-block;
+      margin: 4px 6px 4px 0;
+      padding: 7px 14px;
+      font-size: 13px;
+      background: #eeeeee;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .test-btn:hover { background: #e0e0e0; }
+
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      font-size: 13px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="question-box">
+    <h3>Q15</h3>
+    <p>Build a <code>validateLink(url)</code> function that checks if a playlist URL
+    starts with <code>'https://'</code> and contains <code>'spotify.com'</code> or
+    <code>'youtube.com'</code>. Show an error message if validation fails.<br>
+    <em><strong>Constraint:</strong> Display the error message below the input field
+    using JavaScript — not <code>alert()</code>.</em></p>
+  </div>
+
+  <h2>Q15: validateLink() — Playlist URL Validator</h2>
+
+  <label for="playlist-url">Playlist URL</label>
+  <input
+    type="text"
+    id="playlist-url"
+    placeholder="e.g. https://open.spotify.com/playlist/..."
+    oninput="handleInput()"
+  />
+  <!-- ✅ Error / success messages appear here — constraint: no alert() -->
+  <p id="url-error"></p>
+  <p id="url-success"></p>
+
+  <button onclick="handleValidate()">Validate URL</button>
+
+  <!-- Quick-test buttons -->
+  <div class="test-section">
+    <h3>Quick Test URLs</h3>
+    <button class="test-btn" onclick="fillAndTest('https://open.spotify.com/playlist/abc')">
+      ✅ Spotify (valid)
+    </button>
+    <button class="test-btn" onclick="fillAndTest('https://music.youtube.com/playlist?list=xyz')">
+      ✅ YouTube Music (valid)
+    </button>
+    <button class="test-btn" onclick="fillAndTest('http://open.spotify.com/playlist/abc')">
+      ❌ http (no https)
+    </button>
+    <button class="test-btn" onclick="fillAndTest('https://soundcloud.com/track')">
+      ❌ Wrong platform
+    </button>
+    <button class="test-btn" onclick="fillAndTest('')">
+      ❌ Empty
+    </button>
+  </div>
+
+  <pre id="log">Console log will appear here...</pre>
+
+  <script>
+    /**
+     * Q15: validateLink(url)
+     * Returns true  if url starts with 'https://' AND contains 'spotify.com' or 'youtube.com'.
+     * Returns false otherwise.
+     * Uses startsWith() and includes() — same pattern as Q4/Q5 validateURL().
+     */
+    function validateLink(url) {
+      if (!url.startsWith("https://")) return false;
+      if (!url.includes("spotify.com") && !url.includes("youtube.com")) return false;
+      return true;
+    }
+
+    /**
+     * Reads the input, calls validateLink(), and shows the result below the input.
+     * No alert() is used — the message is injected into #url-error / #url-success.
+     */
+    function handleValidate() {
+      const inputEl   = document.getElementById("playlist-url");
+      const errorEl   = document.getElementById("url-error");
+      const successEl = document.getElementById("url-success");
+      const logEl     = document.getElementById("log");
+
+      const url = inputEl.value.trim();
+
+      // Reset
+      errorEl.textContent   = "";
+      successEl.textContent = "";
+      inputEl.classList.remove("invalid", "valid");
+
+      // Empty check
+      if (!url) {
+        errorEl.textContent = "⚠️ Please enter a playlist URL.";
+        inputEl.classList.add("invalid");
+        logEl.textContent = "validateLink(\"\") → false  (empty input)";
+        return false;
+      }
+
+      const isValid = validateLink(url);
+
+      if (!isValid) {
+        // Determine which specific rule failed for a helpful message
+        if (!url.startsWith("https://")) {
+          errorEl.textContent = "❌ URL must start with 'https://'.";
+        } else {
+          errorEl.textContent =
+            "❌ URL must contain 'spotify.com' or 'youtube.com'.";
+        }
+        inputEl.classList.add("invalid");
+        logEl.textContent = "validateLink(\"" + url + "\") → false";
+      } else {
+        successEl.textContent = "✅ Valid playlist URL!";
+        inputEl.classList.add("valid");
+        logEl.textContent = "validateLink(\"" + url + "\") → true";
+      }
+
+      return isValid;
+    }
+
+    // Clear messages while the user is typing
+    function handleInput() {
+      document.getElementById("url-error").textContent   = "";
+      document.getElementById("url-success").textContent = "";
+      document.getElementById("playlist-url").classList.remove("invalid", "valid");
+    }
+
+    // Helper for quick-test buttons
+    function fillAndTest(url) {
+      document.getElementById("playlist-url").value = url;
+      handleValidate();
+    }
+  </script>
+
+</body>
+</html>

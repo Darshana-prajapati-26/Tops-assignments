@@ -1,0 +1,165 @@
+<!--
+  Q13 & Q14:
+  Use ChatGPT or Copilot to generate a JavaScript code snippet that displays an error
+  message below a form input if the user enters an invalid Instagram profile URL, and
+  explain in 2 lines how you would integrate this snippet into your existing code.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q13 & Q14 - Instagram URL Validator (AI-Generated Snippet)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 680px; }
+
+    .question-box {
+      background: #fff8e1;
+      border-left: 5px solid #f9a825;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+    }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p  { margin: 0; font-size: 14px; }
+
+    .ai-label {
+      display: inline-block;
+      background: #e8f5e9;
+      border: 1px solid #43a047;
+      color: #2e7d32;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    label  { display: block; margin: 12px 0 4px; font-weight: bold; font-size: 14px; }
+    input  { padding: 9px 12px; font-size: 14px; width: 340px; border: 1px solid #ccc; border-radius: 4px; }
+    input.invalid { border-color: #e53935; }
+    input.valid   { border-color: #43a047; }
+
+    .error-msg {
+      color: #e53935;
+      font-size: 13px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+    .success-msg {
+      color: #2e7d32;
+      font-size: 13px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+
+    button {
+      margin-top: 14px;
+      padding: 10px 22px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover { background: #1565c0; }
+
+    .integration-note {
+      background: #f3f4f6;
+      border-left: 4px solid #1976d2;
+      padding: 12px 16px;
+      margin-top: 26px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .integration-note strong { color: #1565c0; }
+
+    code {
+      background: #eeeeee;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="question-box">
+    <h3>Q13 &amp; Q14</h3>
+    <p>Use ChatGPT or Copilot to generate a JavaScript snippet that displays an error
+    message <em>below</em> a form input when the user enters an invalid Instagram profile
+    URL. Explain in 2 lines how you would integrate this snippet into your existing code.</p>
+  </div>
+
+  <h2>Q13 &amp; Q14: Instagram URL Validator</h2>
+  <span class="ai-label">✦ AI-Generated Snippet (ChatGPT / Copilot)</span>
+
+  <label for="insta-url">Instagram Profile URL</label>
+  <input
+    type="text"
+    id="insta-url"
+    placeholder="https://www.instagram.com/username"
+    oninput="validateInstagramURL()"
+  />
+  <!-- Error / success message renders here — not via alert() -->
+  <p class="error-msg"   id="insta-error"></p>
+  <p class="success-msg" id="insta-success"></p>
+
+  <button onclick="validateInstagramURL()">Check URL</button>
+
+  <!-- ── Integration Note ─────────────────────────────────────── -->
+  <div class="integration-note">
+    <strong>Integration Explanation (2 lines):</strong><br>
+    1. Call <code>validateInstagramURL()</code> from your form's <code>submit</code> event
+       listener and <code>return false</code> if it returns <code>false</code> — this
+       prevents the form from submitting with a bad URL.<br>
+    2. Replace the hard-coded <code>id="insta-url"</code> with the actual
+       <code>id</code> of your existing URL input field, and place the
+       <code>&lt;p id="insta-error"&gt;</code> element directly below that input in
+       your HTML.
+  </div>
+
+  <script>
+    /*
+     * AI-Generated Snippet (Q13 & Q14)
+     * Validates that the entered URL is a valid Instagram profile URL.
+     * A valid Instagram profile URL must:
+     *   - Start with https://www.instagram.com/ OR https://instagram.com/
+     *   - Be followed by at least one username character (letters, digits, . or _)
+     * Displays the error message below the input — no alert() used.
+     */
+    function validateInstagramURL() {
+      const input      = document.getElementById("insta-url");
+      const errorEl    = document.getElementById("insta-error");
+      const successEl  = document.getElementById("insta-success");
+      const url        = input.value.trim();
+
+      // Reset state
+      errorEl.textContent   = "";
+      successEl.textContent = "";
+      input.classList.remove("invalid", "valid");
+
+      // Rule 1: must not be empty
+      if (!url) {
+        errorEl.textContent = "⚠️ Please enter an Instagram profile URL.";
+        input.classList.add("invalid");
+        return false;
+      }
+
+      // Rule 2: must start with the Instagram domain
+      const instagramPattern = /^https?:\/\/(www\.)?instagram\.com\/[\w.]+\/?$/i;
+
+      if (!instagramPattern.test(url)) {
+        errorEl.textContent =
+          "❌ Invalid Instagram URL. Expected format: https://www.instagram.com/username";
+        input.classList.add("invalid");
+        return false;
+      }
+
+      // Valid
+      successEl.textContent = "✅ Valid Instagram profile URL!";
+      input.classList.add("valid");
+      return true;
+    }
+  </script>
+
+</body>
+</html>

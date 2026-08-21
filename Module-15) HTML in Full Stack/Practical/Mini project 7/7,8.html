@@ -1,0 +1,60 @@
+<!--
+  Q7:
+  Implement a toggleTheme() function that switches between light and dark mode by adding
+  or removing a 'dark-mode' class on the body element, and persists the current theme in
+  LocalStorage.
+
+  Q8:
+  Implement a toggleTheme() function that switches between light and dark mode by adding
+  or removing a 'dark-mode' class on the body element, and persists the current theme in
+  LocalStorage.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q7 & Q8 - toggleTheme() with LocalStorage</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #fff; color: #000; transition: background 0.3s, color 0.3s; }
+    body.dark-mode { background: #1a1a1a; color: #fff; }
+    .question-box { background: #fff8e1; border-left: 5px solid #f9a825; padding: 12px 16px; margin-bottom: 18px; max-width: 660px; }
+    .question-box h3 { margin: 0 0 6px; color: #e65100; }
+    .question-box p { margin: 0; font-size: 14px; }
+    button { padding: 9px 20px; font-size: 14px; margin-top: 10px; cursor: pointer; }
+    #theme-status { margin-top: 10px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="question-box">
+    <h3>Q7 &amp; Q8</h3>
+    <p>Implement <code>toggleTheme()</code> that switches between light and dark mode by
+    adding/removing the <code>'dark-mode'</code> class on <code>document.body</code>, and
+    persists the current theme in LocalStorage.</p>
+  </div>
+
+  <h2>Q7 &amp; Q8: toggleTheme() with LocalStorage</h2>
+
+  <button onclick="toggleTheme()">Toggle Theme</button>
+  <p id="theme-status"></p>
+
+  <script>
+    // Q7 & Q8: toggleTheme — adds/removes 'dark-mode' class, saves to LocalStorage
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      document.getElementById("theme-status").textContent =
+        "Current theme: " + (isDark ? "🌙 Dark" : "☀️ Light") + " (saved to LocalStorage)";
+    }
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      document.getElementById("theme-status").textContent = "Current theme: 🌙 Dark (loaded from LocalStorage)";
+    } else {
+      document.getElementById("theme-status").textContent = "Current theme: ☀️ Light";
+    }
+  </script>
+</body>
+</html>
